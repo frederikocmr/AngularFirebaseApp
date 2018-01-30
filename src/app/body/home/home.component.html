@@ -1,0 +1,116 @@
+<div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" [ngClass]="{active: carousel_active === 0}" (click)="changeCarousel()"></li>
+    <li data-target="#myCarousel" data-slide-to="1" [ngClass]="{active: carousel_active === 1}" (click)="changeCarousel()"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item" [ngClass]="{active: carousel_active === 0}">
+      <img src="http://placehold.it/1300x500/fff" alt="Image" class="img-responsive animated fadeIn">
+      <div class="carousel-caption">
+        <h3>Titulo 1</h3>
+        <p>Descrição 1</p>
+      </div>
+    </div>
+
+    <div class="item" [ngClass]="{active: carousel_active === 1}">
+      <img src="//placehold.it/1300x500" alt="Image" class="img-responsive animated fadeIn">
+      <div class="carousel-caption">
+        <h3>Titulo 2</h3>
+        <p>Descrição 2</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="left carousel-control animated" role="button" data-slide="prev" (click)="changeCarousel()">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Anterior</span>
+  </a>
+  <a class="right carousel-control" role="button" data-slide="next" (click)="changeCarousel()">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Proximo</span>
+  </a>
+</div>
+<div class="alt-container"></div>
+<div class="home2">
+  <div class="jumbotron" style="background: transparent; color: #9d1e2e; text-shadow: 5px 5px 5px black;">
+    <div class="container text-center animated fadeIn">
+      <h1 class="animated zoomIn">A melhor linguiça da região</h1>
+      <p class="animated zoomIn" style=" text-shadow: 5px 5px 5px black !important;">Experimente já a nossa linguiça, compre através de nossa loja virtual e tenha a linguiça em casa, acesse já!</p>
+      <div class="text-center row">
+        <div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+            <button 
+            class="btn animated"
+            routerLink="/loja"
+            [class.pulse]="mouseOvered" 
+            (mouseover)="mouseOvered=true"
+            (mouseout)="mouseOvered=false"
+            
+            >Acessar Loja</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="first-container"></div>
+<div class="container text-center second-container">
+  <br>
+  <h2>Higiene e qualidade é a nossa marca!</h2>
+  <div class="row" style="margin-bottom: 30px;margin-bottom: 30px;">
+    <div class="col-sm-12">
+      <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. </h4>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="card ">
+        <img src="/assets/images/background/imagem_a.jpg" class="img-responsive" style="width:100%">
+        <div class="card-container card-center" style="padding-top: 5px;">
+          <p>The Troll's tongue in Hardanger, Norway</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="card ">
+        <img src="/assets/images/background/imagem_a.jpg" class="img-responsive" style="width:100%">
+        <div class="card-container card-center" style="padding-top: 5px;">
+          <p>The Troll's tongue in Hardanger, Norway</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="card ">
+        <img src="/assets/images/background/imagem_a.jpg" class="img-responsive" style="width:100%">
+        <div class="card-container card-center" style="padding-top: 5px;">
+          <p>The Troll's tongue in Hardanger, Norway</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="panel panel-default" style="width: 70%; margin-right: auto; margin-left: auto; margin-top: 30px;">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <strong>ÚLTIMAS ATUALIZAÇÕES</strong>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+    </div>
+  </div>
+
+
+  <br/>
+  <br/>
+  <br/>
+
+</div>
+<br/>

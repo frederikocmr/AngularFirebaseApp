@@ -1,0 +1,81 @@
+<div class="jumbotron">
+  <div class="container text-center">
+    <div class="img-background-logo animated swing"></div>
+  </div>
+
+  <nav class="navbar navbar-inverse" ngStickyNav stickyClass="sticky-after-play">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      
+        <div id="nav-icon1" (click)="hamb= !hamb" [class.open]="hamb">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="dropdown-content" [style.visibility]="hamb ? 'visible' : 'hidden'">
+          <a routerLink="/" (click)="hamb= !hamb">Início</a>
+          <a routerLink="/loja" (click)="hamb= !hamb">Loja</a>
+          <a routerLink="/sobre" (click)="hamb= !hamb">Sobre</a>
+          <a routerLink="/contato" (click)="hamb= !hamb">Contato</a>
+        </div>
+        <a class="navbar-brand animated" routerLink="/" [class.pulse]="mouseOvered" (mouseover)="mouseOvered=true" (mouseout)="mouseOvered=false">Linguiças Piracanjuba</a>
+        <div id="nav-icon">
+            <a routerLink="/carrinho" class="animated pulse">
+              <span class="fa fa-shopping-cart"></span>
+            </a>
+          </div>
+          <div id="nav-icon" >
+              <ng-template [ngIf]="!authService.isAuthenticated()">
+                  <a routerLink="/entrar" class="animated pulse">
+                    <span class="fa fa-user-o"></span>
+                  </a>
+              </ng-template>
+              <ng-template [ngIf]="authService.isAuthenticated()">
+                  <a  routerLink="/minha-conta"  class="animated pulse">
+                    <span class="fa fa-user"></span>
+                  </a>
+              </ng-template>
+          </div>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-left">
+          <li routerLinkActive="animated pulse active_link" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="/">Início</a>
+          </li>
+          <li routerLinkActive="animated pulse active_link">
+            <a routerLink="/loja">Loja</a>
+          </li>
+          <li routerLinkActive="animated pulse active_link">
+            <a routerLink="/sobre">Sobre</a>
+          </li>
+          <li routerLinkActive="animated pulse active_link">
+            <a routerLink="/contato">Contato</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <ng-template [ngIf]="!authService.isAuthenticated()">
+                <a routerLink="/entrar" class="animated pulse right-link">
+                  <span class="fa fa-user-o"></span>&nbsp;
+                  <span class="text-header">Entrar</span>
+                </a>
+            </ng-template>
+            <ng-template [ngIf]="authService.isAuthenticated()">
+                <a routerLink="/minha-conta"  class="animated pulse right-link">
+                  <span class="fa fa-user"></span>&nbsp;
+                  <span class="text-header">Minha Conta</span>
+                </a>
+            </ng-template>
+            
+          </li>
+          <li>
+            <a routerLink="/carrinho" class="animated pulse right-link">
+              <span class="fa fa-shopping-cart"></span>&nbsp;
+              <span class="text-header">Ver Carrinho</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

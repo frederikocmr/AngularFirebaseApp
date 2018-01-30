@@ -1,0 +1,156 @@
+.carousel-inner img {
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+    min-height:200px;
+    z-index: -1;
+    /* verificar: quando é mobile a barra do navbar está vindo só depois dessa img*/
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.carousel{
+  border-top: 2px solid #9d1e2e;
+  font-family: 'Trebuchet MS';
+}
+
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+  .carousel-caption {
+    display: none; 
+  }
+}
+
+.first-container {
+  clear: both;
+  height: 30px;
+  z-index: 12;
+  margin-top: -30px;
+  position: relative;
+  top: 0px;
+  background: url('/assets/images/complement/white_bottom.png') repeat-x left top;
+}
+
+.second-container{
+  height: 100%;
+  width: 100%;
+  margin-bottom: -20px;
+  background: url('/assets/images/complement/white_content.gif');
+  font-family: 'Frederick-Regular';
+  font-weight: bold !important;
+  color: #9d1e2e;
+}
+/* 
+.second-container img{
+  box-shadow: 1px 1px 10px 5px rgba(0,0,0,0.5);
+  border: 2px outset #9d1e2e;
+  width: 100%;
+  border-radius: 5px;
+} */
+
+.second-container .well{
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+  border: 1px dashed #9d1e2e;
+}
+
+figcaption {
+  margin-top: 10px;
+}
+
+.card{
+  box-shadow: 1px 1px 10px 5px rgba(0,0,0,0.5);
+  border: 2px solid #9d1e2e;
+  border-radius: 4px;
+  margin-top: 2px;
+}
+
+.card-container,.card-panel{
+  padding:0.01em 16px;
+  background-color: #9d1e2e;
+  color: white;
+  font-weight: normal;
+}
+.card-center .card-bar{
+  display:inline-block;
+  width:auto;
+}
+.card-bar-block.card-center .card-bar-item{
+  text-align:center
+}
+.card-center{
+  text-align:center!important
+}
+
+.home2 {
+  border-top: 1px solid #9d1e2e;
+  position: relative;
+  background: white url('/assets/images/background/bg-wood-ok.jpg') no-repeat center;
+  background-size: cover;
+  height: 100%;
+  margin-bottom: -5px;
+}
+
+jumbotron{
+  /* border-bottom: 2px solid #9d1e2e; */
+  text-shadow: 5px 5px 5px black;
+  color: #9d1e2e;
+  width: 100%;
+  background: transparent;
+  /* background: white url('/assets/images/background/about-image.PNG') no-repeat center; */
+  margin-bottom: 0px;
+}
+
+.jumbotron .container {
+  width: 100%;
+  background: black; /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient(black, transparent, transparent); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(black, transparent, transparent); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(black, transparent, transparent); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(black, transparent, transparent); /* Standard syntax */
+}
+
+.jumbotron p{
+  color: white;
+  font-size: 24px;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
+  font-family: 'Frederick-Regular';
+
+}
+
+.jumbotron h1{
+  font-size: 60px;
+  font-weight: bold !important; 
+  font-family: 'Lobster-Two-Regular' !important;
+}
+
+button {
+  font-family: 'Frederick-Regular' ;
+  font-size: 21px;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.719);
+  border: 1px solid rgba(0, 0, 0, 0.678);
+  color: #9d1e2e;
+  box-shadow: 1px 1px 10px 5px rgba(0,0,0,0.5);
+}
+
+button:hover{
+  color: #9d1e2fe8;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.alt-container {
+  clear: both;
+  height: 30px;
+  z-index: 12;
+  margin-bottom: -30px;
+  position: relative;
+  top: 0px;
+  border-top: 1px solid #ffffffe0;
+  background: url('/assets/images/complement/white_top.png') repeat-x left top;
+  
+}

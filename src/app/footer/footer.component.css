@@ -1,0 +1,48 @@
+/* Add a gray background color and some padding to the footer */
+footer {
+    background-color: #f2f2f2;
+    padding: 15px;
+    margin-bottom: 0px;
+    height: auto;
+    background: url('/assets/images/complement/back_footer2.png');
+    font-family: 'Frederick-Regular';
+    font-weight: bold;
+}
+
+span  {
+    color: #af272d;
+    text-decoration: none;
+    cursor: pointer;
+}
+a {
+    color: rgb(59, 59, 59);
+    text-decoration: none;
+}
+
+div#footer_aux {
+    clear: both;
+    height: 16px;
+    z-index: 12;
+    margin-top: -11px;
+    position: relative;
+    top: 0px;
+    background: url('/assets/images/complement/back_footer.png') repeat-x left top;
+    margin-bottom: -1px;
+}
+
+.fa {
+    font-size: 42px;
+    width: 45px;
+    margin-left: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: #af272d;
+    margin-top: -10px;
+  }
+  
+  .fa:hover {
+      opacity: 0.7;
+      color: transparent;
+      text-shadow: 0px 0px 4px #af272d;
+  }

@@ -1,0 +1,155 @@
+
+.contact{ 
+    border-top: 1px solid #9d1e2e;
+    position: relative;
+    background: white url('/assets/images/background/bg-wood-ok.jpg');
+    background-size: cover;
+    height: 100%;
+    margin-bottom: -5px;
+}
+
+.jumbotron {
+    border-top: 2px solid #9d1e2e;
+    /* border-bottom: 2px solid #9d1e2e; */
+    text-shadow: 5px 5px 5px black;
+    color: #9d1e2e;
+    width: 100%;
+    background: transparent;
+    /* background: white url('/assets/images/background/about-image.PNG') no-repeat center; */
+    margin-bottom: 0px;
+}
+
+.jumbotron .container {
+    width: 100%;
+    background: black; /* For browsers that do not support gradients */
+    background: -webkit-radial-gradient(black, transparent, transparent); /* Safari 5.1 to 6.0 */
+    background: -o-radial-gradient(black, transparent, transparent); /* For Opera 11.6 to 12.0 */
+    background: -moz-radial-gradient(black, transparent, transparent); /* For Firefox 3.6 to 15 */
+    background: radial-gradient(black, transparent, transparent); /* Standard syntax */
+}
+
+.jumbotron p{
+    color: white;
+    font-size: 24px;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
+    font-family: 'Frederick-Regular';
+
+}
+
+.jumbotron h1{
+    font-size: 60px;
+    font-weight: bold !important; 
+    font-family: 'Lobster-Two-Regular';
+}
+
+.main-content {
+    font-family: 'Frederick-Regular';
+    font-weight: bold !important; 
+    margin: 4% 4% 4% 4%;
+    color: #9d1e2e;
+    background: white;
+    height: 60%;
+    -webkit-box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.395);
+}
+
+.container-fluid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.bg-grey {
+    background: url('/assets/images/complement/white_content.gif');
+}
+
+.bg-paper {
+    background: url('/assets/images/background/texturePaper.jpg') bottom center/cover no-repeat #bcab98;
+}
+
+.googleMap{
+    border-top: 2px solid #9d1e2e;
+    margin-bottom: 0px;
+    z-index: -100;
+}
+
+.first-container {
+    clear: both;
+    height: 30px;
+    z-index: 12;
+    margin-top: -30px;
+    position: relative;
+    top: 0px;
+    background: url('/assets/images/complement/white_bottom.png') repeat-x left top;
+  }
+
+  
+.last-container {
+    clear: both;
+    height: 30px;
+    z-index: 12;
+    margin-bottom: -30px;
+    position: relative;
+    bottom: 0px;
+    background: url('/assets/images/complement/white_top.png') repeat-x left top;
+}
+
+
+.left-info{
+    
+    text-align: justify;
+}
+
+button {
+    padding: 10px 10px 10px 10px;
+    width: 50%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background: #9d1e2e;
+    border: 1px dashed green;
+}
+
+button:hover{
+    background: #9d1e31d5;
+    font-weight: bold;
+}
+
+.right-info{
+    border: 3px solid #9d1e2e;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+.card-body {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.card-header {
+    color: white;
+    background: #9d1e2e !important;
+    width: 100%;
+    padding-right: 0px;
+}
+
+.map-border{
+    clear: both;
+    height: 30px;
+    z-index: 12;
+    height: 10px;
+    position: relative;
+    top: 0px;
+    -webkit-box-shadow: 0px -8px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -8px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px -8px 5px 0px rgba(0,0,0,0.75);
+    background: url('/assets/images/background/texturePaper.jpg') repeat-x left top;
+}
+.alert {
+    padding: 0px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid #9d1e2e;
+}

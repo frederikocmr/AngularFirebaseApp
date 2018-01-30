@@ -1,0 +1,11 @@
+
+<div class="container-fluid">
+    <div class="notice notice-sm">
+        <b>{{categorySel.name}}</b> {{categorySel.description}}
+    </div>
+</div>
+<div class="container-fluid animated fadeInUp">
+  <div class="row">
+    <app-product-item *ngFor="let product of products; let i = index" [product]="product" [id]="i"></app-product-item>
+  </div>
+</div>

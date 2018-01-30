@@ -1,0 +1,88 @@
+<div class="signin-form">
+  <div class="container-fluid bg-paper  animated fadeInUp">
+    <!-- Container (Contact Section) -->
+    <div class="first-container"></div>
+    <div class="card card-container bg-grey">
+      <h2 class="text-center">
+        <span class="fa fa-user-o"></span> Indentificação
+      </h2>
+      <hr>
+      <label class="register">
+        <h5>Não tem cadastro?
+          <a routerLink="/cadastro">Cadastre-se</a>
+        </h5>
+      </label>
+      <div class="login-social">
+        <a class="btn btn-block btn-social btn-facebook" (click)="onLoginFacebook()">
+          <span class="fa fa-facebook"></span> Entrar com Facebook
+        </a>
+      </div>
+      <div class="login-social">
+        <a class="btn btn-block btn-social btn-google" (click)="onLoginGoogle()">
+          <span class="fa fa-google"></span> Entrar com Google
+        </a>
+      </div>
+      <br>
+      <hr>
+      <br>
+      <div class="tab-content">
+        <div class="tab-pane active" id="Login">
+          <form role="form" class="form-horizontal" [formGroup]="signInForm" (ngSubmit)="onSignIn()">
+
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <label for="email" class="control-label">Email</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" name="email" id="email" formControlName="email" placeholder="INSIRA O ENDEREÇO DE EMAIL" class="form-control text-uppercase">
+                  <span *ngIf="!signInForm.get('email').valid && signInForm.get('email').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um endereço de email válido!</span>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <label for="password" class="control-label">Senha</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                  </span>
+                  <input type="password" name="password" id="password" formControlName="password" placeholder="INSIRA A SENHA" class="form-control">
+                  <span *ngIf="!signInForm.get('password').valid && signInForm.get('password').touched" class="help-block alert alert-danger"
+                    role="alert">Por favor, digite uma senha válida!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- <div id="remember" class="chebox">
+              <label>
+                <input type="checkbox" value="remember-me"> Lembrar-me
+              </label>
+            </div> -->
+            <br>
+            <div>
+              <button *ngIf="!isLoading" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">ENTRAR</button>
+              <span *ngIf="!signInForm.valid || (signInForm.valid && errMsg !== '')" class="help-block alert alert-danger" role="alert"> {{errMsg}}</span>
+              <span *ngIf="isLoading" class="help-block alert alert-info text-center" role="alert">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </div>
+
+            <a (click)="forgotPassword()" class="forgot-password">
+              <h5>Esqueci minha senha</h5>
+            </a>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="last-container"></div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.panel-title{
+    font-family: 'Lobster-Two-Regular';
+    color: white;
+    font-size: 150%;
+    width: 80%;
+}
+.panel-heading{
+    background: #af272d;
+    
+}
+
+.panel-info {
+    border-color: #af272d;
+    -webkit-box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    -moz-box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    box-shadow: 0px -1px 5px 7px rgba(0,0,0,0.45);
+    background: url('/assets/images/complement/white_content.gif');
+}
+
+.btn:hover {
+    background:  #9d1e2fc9;
+}
+tr:nth-child(even) {
+    background: rgb(255, 255, 255)
+}
+.container, .container-fluid {
+    margin-top: 15px;
+}
+tr > td.order-left {
+    width: 72px !important;
+    height: 30px;
+    padding: 0 10px;
+    background-color: #eee;    
+}
+.table .order .order-body > span {
+   color: rgb(94, 94, 94);
+}
+
+.table .order .order-body span strong {
+    color: rgb(71, 71, 71);
+}
+
+.label{
+    font-family: 'Lobster-Two-Regular';
+    font-size: 100%;
+}

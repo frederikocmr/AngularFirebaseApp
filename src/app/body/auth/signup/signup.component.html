@@ -1,0 +1,164 @@
+<div class="signup-form">
+  <div class="container-fluid bg-paper  animated fadeInUp">
+    <!-- Container (Contact Section) -->
+    <div class="first-container"></div>
+    <div class="card card-container bg-grey">
+      <h2 class="text-center">
+        <span class="fa fa-vcard-o"> </span> Cadastre-se
+      </h2>
+      <hr>
+      <label class="signin">
+        <h5>Já tem um cadastro?
+          <a routerLink="/entrar">Entrar</a>
+        </h5>
+      </label>
+      <br>
+      <hr>
+      <br>
+      <div class="tab-content">
+        <div class="tab-pane active" id="Registration">
+          <form role="form" class="form-horizontal" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+            <div class="form-group">
+              <label for="name" class="cols-sm-2 control-label">Nome</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" formControlName="name" class="form-control" name="name" id="name" placeholder="INSIRA SEU NOME COMPLETO"
+                    required>
+                  <span *ngIf="!signUpForm.get('name').valid && signUpForm.get('name').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um nome válido!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="cols-sm-2 control-label">Email</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" formControlName="email" class="form-control text-lowercase" name="email" id="email" placeholder="INSIRA SEU EMAIL"
+                    required>
+                  <span *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um endereço de email válido!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="document" class="cols-sm-2 control-label">CPF/CNPJ</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" formControlName="document" class="form-control" name="document" id="document" placeholder="DIGITE SEU CPF" required>
+                  <span *ngIf="!signUpForm.get('document').valid && signUpForm.get('document').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um CPF/CNPJ válido!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="birthDate" class="cols-sm-2 control-label">Data de nascimento</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                  </span>
+                  <input type="date" formControlName="birthDate" class="form-control" name="birthDate" id="birthDate" placeholder="DIGITE SUA DATA DE NASCIMENTO" max="1979-12-31"  min="2000-01-02"
+                    required>
+                  <span *ngIf="!signUpForm.get('birthDate').valid && signUpForm.get('birthDate').touched" class="help-block alert alert-danger"
+                    role="alert">Por favor, digite uma data válida!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="gender" class="cols-sm-2 control-label">Sexo</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <!-- <span class="input-group-addon">
+                  <i class="fa fa-male fa-sm" aria-hidden="true"></i>
+                  <i class="fa fa-female fa-sm" aria-hidden="true"></i>
+                </span> -->
+                  <div class="radio">
+                    <i class="fa fa-male fa-sm" aria-hidden="true"></i>
+                    <label> &nbsp;
+                      <input type="radio" formControlName="gender" name="gender" value="m">Masculino</label>
+                    &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-female fa-sm" aria-hidden="true"></i>
+                    <label> &nbsp;
+                      <input type="radio" formControlName="gender" name="gender" value="f">Feminino</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneNumber" class="cols-sm-2 control-label">Telefone</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-mobile fa-lg" aria-hidden="true"></i>
+                  </span>
+                  <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="DIGITE SEU TELEFONE"
+                    required>
+                  <span *ngIf="!signUpForm.get('phoneNumber').valid && signUpForm.get('phoneNumber').touched" class="help-block alert alert-danger"
+                    role="alert">Por favor, digite um phoneNumber válido!</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="cols-sm-2 control-label">Senha</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+                  </span>
+                  <input type="password" formControlName="password" class="form-control" name="password" id="password" placeholder="INSIRA SUA NOVA SENHA"
+                    required>
+                  <span *ngIf="!signUpForm.get('password').valid && signUpForm.get('password').touched" class="help-block alert alert-danger"
+                    role="alert">Por favor, digite uma senha válida, com no mínimo 6 caracteres.</span>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmedPassword" class="cols-sm-2 control-label">Confirme a senha</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </span>
+                  <input type="password" formControlName="confirmedPassword" class="form-control" name="confirmedPassword" id="confirmedPassword"
+                    placeholder="CONFIRME SUA NOVA SENHA" required>
+                  <span *ngIf="!signUpForm.get('confirmedPassword').valid && signUpForm.get('confirmedPassword').touched" class="help-block alert alert-danger"
+                    role="alert">Senha inválida ou não confere.</span>
+
+                </div>
+              </div>
+            </div>
+            <br>
+            <div>
+              <button *ngIf="!isLoading" class="btn btn-lg btn-primary btn-block btn-signup" type="submit">CADASTRAR</button>
+              <span *ngIf="!signUpForm.valid  || (signUpForm.valid && errMsg != '')" class="help-block alert alert-danger" role="alert"> {{errMsg}}</span>
+              <span *ngIf="isLoading" class="help-block alert alert-info text-center" role="alert">
+                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+                <span class="sr-only">Loading...</span>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="last-container"></div>
+  </div>
+</div>

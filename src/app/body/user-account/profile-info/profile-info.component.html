@@ -1,0 +1,60 @@
+
+  <div  class="panel panel-info animated fadeIn">
+    <div class="panel-heading">
+      <h3 class="panel-title">Meus Dados</h3>
+    </div>
+    <div *ngIf="auth.user | async as user" class="panel-body">
+      <div class="row">
+
+        <div class=" col-md-12 col-lg-12 ">
+          <table class="table table-user-information">
+            <thead>
+
+              <td style="width:40%"></td>
+              <td style="width:60%"></td>
+
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Nome Completo:</td>
+                <td>{{user.displayName}}</td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td>{{user.email}}</td>
+              </tr>
+              <tr>
+                <td>CPF/CNPJ:</td>
+                <td>{{user.document}}</td>
+              </tr>
+
+
+              <tr>
+                <td>Data de Nascimento:</td>
+                <td>{{user.birthDate | date:'dd/MM/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td>Sexo:</td>
+                <td>{{(user.gender == 'm' || 'male' ? 'Masculino' : 'Feminino')}} </td>
+              </tr>
+              <tr>
+                <td>Telefone:</td>
+                <td>{{user.phoneNumber}}</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+
+      <a href="edit.html" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
+        <i class="fa fa-edit"></i>&nbsp; Editar
+      </a>
+
+
+    </div>
+
+  </div>

@@ -1,0 +1,35 @@
+<div id='footer_aux'></div>
+<footer class="container-fluid text-center">
+  <span 
+  (click)="rowUp()"
+  [class.wobble]="!mouseOvered" 
+  (mouseover)="mouseOvered=true"
+  (mouseout)="mouseOvered=false"
+  class="glyphicon glyphicon-chevron-up animated" 
+  title="Voltar para o topo da pagina"></span>
+  <div class="row">
+    <div class="col-sm-4">
+        <p>Desenvolvido por<br><a href="https://www.linkedin.com/in/frederikocmr/"> Frederiko C. M. Ribeiro</a></p>
+    </div>
+    <div class="col-sm-4">
+      <p>© 2017 Linguiças Piracanjuba <br> Todos os Direitos Reservados. </p>
+    </div>
+    <div class="col-sm-4">
+      <a
+      target="_blank" 
+      href="https://www.facebook.com/linguicapiracanjuba" 
+      class="fa fa-facebook-square"  
+      title="Facebook"></a>
+      <a 
+      target="_blank"
+      href="https://www.instagram.com/linguicaspiracanjuba" 
+      class="fa fa-instagram"
+      title="Instagram"></a>
+      <a 
+      target="_blank"
+      href="https://goo.gl/K7XQVj" 
+      class="fa fa-map-marker"
+      title="Google Maps"></a>
+    </div>
+  </div>
+</footer>

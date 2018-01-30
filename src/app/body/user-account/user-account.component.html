@@ -1,0 +1,26 @@
+<div class="user-acc">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 toppad">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <h3 class="header-title">Minha Conta</h3>
+            <button class="btn btn-primary btn-block" routerLink="dados" routerLinkActive="active-btn" >
+              <i class="fa fa-address-card pull-left"></i>&nbsp;MEUS DADOS</button>
+            <button class="btn btn-info btn-block" routerLink="enderecos"  routerLinkActive="active-btn">
+              <i class="fa fa-map-signs pull-left"></i>&nbsp;ENDEREÇOS</button>
+            <button class="btn btn-success btn-block" routerLink="pedidos"  routerLinkActive="active-btn">
+              <i class="fa fa-shopping-bag pull-left"></i>&nbsp;PEDIDOS</button>
+            <hr>
+            <button class="btn btn-danger btn-block" (click)="onLogOut()">
+              <i class="fa fa-sign-out fa-lg pull-left"></i>&nbsp;SAIR</button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7  toppad">
+        <router-outlet></router-outlet>
+
+      </div>
+    </div>
+  </div>
+</div>

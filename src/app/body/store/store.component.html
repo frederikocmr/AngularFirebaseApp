@@ -1,0 +1,38 @@
+<div class="loja">
+  <div class="jumbotron">
+    <div class="container text-center">
+      <h1 class="animated zoomIn">Loja Online</h1>
+      <p class="animated zoomIn">Compre aqui nossos produtos e tenha tudo entregue na sua casa!</p>
+    </div>
+  </div>
+  <div class="main-content">
+
+    <div class="container-fluid bg-paper">
+      <!-- Container (Contact Section) -->
+      <div class="container-fluid text-center top-text">
+        <h3 class="margin">
+          <strong>Delivery em Goiânia e Região</strong>
+        </h3>
+        <p>Texto da loja este é a loja, sed do eiusmod tempor incididunt ut labore et dolore magna
+          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div class="first-container"></div>
+      <div class="container-fluid bg-grey">
+        <div class="container-fluid tipos">
+          <div align="center" class="fond animated">
+            <div style="width:100%;">
+              <div class="row animated" (click)="onCategoryClick()">
+                <app-category *ngFor="let cat of categories; let i = index" [cat]="cat" [id]="i" [categoryClicked]="categoryClicked" [categoryClickedHide]="categoryClickedHide"></app-category>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+      <div class="last-container"></div>
+    </div>
+  </div>
+</div>
