@@ -2,7 +2,7 @@
 .navbar {
     margin-bottom: 0px;
     border-radius: 5px;
-    width: 80%;
+    width: 70%;
     background: #af272d;
     background: -webkit-linear-gradient( #af272d,  #af2730ea); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient( #af272d, #af2730ea); /* For Opera 11.1 to 12.0 */
@@ -24,6 +24,7 @@
 }
 
 .navbar-brand {
+    display: none;
     font-size: 24px;
     text-decoration: underline;
     text-decoration-color: rgb(0, 70, 16);
@@ -74,6 +75,9 @@
 
 .sticky-after-play {
     width: 100%;
+}
+.sticky-after-play .navbar-brand {
+    display: inherit;
 }
 
 /* dropdown */
