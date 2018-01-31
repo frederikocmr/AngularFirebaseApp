@@ -37,11 +37,41 @@ export class UserAccountService {
             uid: this.aUser.uid,
             email: form.email,
             displayName: form.displayName,
-            photoURL: this.aUser.photoURL,
+            photoURL: (this.aUser.photoURL ? this.aUser.photoURL : ''),
             phoneNumber: form.phoneNumber,
             document: form.document,
             birthDate: form.birthDate,
             gender: form.gender
+        };
+
+        userRef.update(data).
+            then(() => {
+                // update successful (document exists)
+            })
+            .catch((error) => {
+                // (document does not exists)
+                userRef.set(data);
+            });
+    }
+
+    updateUserAddress(form) {
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.aUser.uid}`);
+        const data: User = {
+            uid: this.aUser.uid,
+            email: this.aUser.email,
+            displayName: this.aUser.displayName,
+            adresses: [{
+                personName: form.personName,
+                type: form.type,
+                postalCode: form.postalCode,
+                addressLine: form.addressLine,
+                number: form.number,
+                complement: form.complement,
+                reference: form.reference,
+                district: form.district,
+                city: form.city,
+                state: form.state
+            }]
         };
 
         userRef.update(data).

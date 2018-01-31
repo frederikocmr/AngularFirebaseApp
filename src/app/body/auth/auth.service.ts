@@ -149,7 +149,19 @@ export class AuthService {
                 phoneNumber: form.phoneNumber,
                 document: form.document,
                 birthDate: form.birthDate,
-                gender: form.gender
+                gender: form.gender,
+                adresses: [{
+                    personName: '',
+                    type: '',
+                    postalCode: 0,
+                    addressLine: '',
+                    number: '',
+                    complement: '',
+                    reference: '',
+                    district: '',
+                    city: '',
+                    state: ''
+                }]
             };
         } else {
             data = {
@@ -157,7 +169,19 @@ export class AuthService {
                 email: user.email,
                 displayName: user.displayName,
                 photoURL: user.photoURL,
-                gender: (user.gender === 'male' ? 'm' : (user.gender === 'female' ? 'f' : ''))
+                gender: (user.gender === 'male' ? 'm' : (user.gender === 'female' ? 'f' : '')),
+                adresses: [{
+                    personName: '',
+                    type: '',
+                    postalCode: 0,
+                    addressLine: '',
+                    number: '',
+                    complement: '',
+                    reference: '',
+                    district: '',
+                    city: '',
+                    state: ''
+                }]
             };
         }
 

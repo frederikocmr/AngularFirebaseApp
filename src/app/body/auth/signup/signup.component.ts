@@ -34,11 +34,12 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.signUpForm = new FormGroup(
       {
         'email': new FormControl(null, [Validators.required, Validators.email]),
-        'name': new FormControl(null, [Validators.required]),
-        'document': new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(14)]),
+        'name': new FormControl(null, [Validators.required, Validators.pattern('^[A-zÀ-ÿ ]+$')]),
+        'document': new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(14),
+        Validators.pattern('^[0-9]+$')]),
         'birthDate': new FormControl(null, [Validators.required]),
         'gender': new FormControl('m', [Validators.required]),
-        'phoneNumber': new FormControl(null, [Validators.required]),
+        'phoneNumber': new FormControl(null, [Validators.required, Validators.pattern('^[0-9 )(-]+$')]),
         'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
         'confirmedPassword': new FormControl(null, [Validators.required, Validators.minLength(6)])
       }

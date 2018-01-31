@@ -1,71 +1,231 @@
-<div class="panel panel-info animated fadeIn">
-  <div class="panel-heading">
-    <h3 class="panel-title">Meus Endereços</h3>
-    <a data-original-title="Novo" data-toggle="tooltip" type="button" class="btn btn-success pull-right">
-      <i class="fa fa-plus-square-o"></i>&nbsp; Novo Endereço
-    </a>
-  </div>
-  <div class="panel-body">
-    <div class="row">
+<div *ngIf="editMode; then editAddr else infos"></div>
 
-      <div class=" col-md-12 col-lg-12 ">
-        <table class="table table-user-information">
-          <thead>
-            <td style="width:40%; color: #af272d;">Endereço #1</td>
-            <td style="width:60%"></td>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Nome do Destinatário:</td>
-              <td>Antony</td>
-            </tr>
-            <tr>
-              <td>Tipo endereço:</td>
-              <td>Apartamento</td>
-            </tr>
-            <tr>
-              <td>CEP:</td>
-              <td>0112241988</td>
-            </tr>
-            <tr>
-              <td>Endereço:</td>
-              <td>Rua x</td>
-            </tr>
-            <tr>
-              <td>Número:</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Complemento:</td>
-              <td>Ap 123 </td>
-            </tr>
-            <tr>
-              <td>Referência:</td>
-              <td>lado bar</td>
-            </tr>
-            <tr>
-              <td>Bairro:</td>
-              <td>Setor X</td>
-            </tr>
-            <tr>
-              <td>Cidade:</td>
-              <td>Gyn</td>
-            </tr>
-            <tr>
-              <td>Estado:</td>
-              <td>Goiás</td>
-            </tr>
-          </tbody>
-        </table>
+<ng-template #infos>
+  <div class="panel panel-info animated fadeIn">
+    <div class="panel-heading">
+      <h3 class="panel-title">Meu Endereço</h3>
+      <!-- <a data-original-title="Novo" data-toggle="tooltip" type="button" class="btn btn-success pull-right">
+        <i class="fa fa-plus-square-o"></i>&nbsp; Novo Endereço
+      </a> -->
+    </div>
+    <div *ngIf="auth.user | async as user" class="panel-body">
+      <div *ngFor="let ad of user.adresses; let i = index" class="row">
+
+        <div class=" col-md-12 col-lg-12 ">
+          <table class="table table-user-information">
+            <thead>
+              <td style="width:40%; color: #af272d;">Endereço #{{i+1}}</td>
+              <td style="width:60%"></td>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nome do Destinatário:</td>
+                <td>{{ad.personName}}</td>
+              </tr>
+              <tr>
+                <td>Tipo endereço:</td>
+                <td>{{ad.type}}</td>
+              </tr>
+              <tr>
+                <td>CEP:</td>
+                <td>{{ad.postalCode}}</td>
+              </tr>
+              <tr>
+                <td>Endereço:</td>
+                <td>{{ad.addressLine}}</td>
+              </tr>
+              <tr>
+                <td>Número:</td>
+                <td>{{ad.number}}</td>
+              </tr>
+              <tr>
+                <td>Complemento:</td>
+                <td>{{ad.complement}}</td>
+              </tr>
+              <tr>
+                <td>Referência:</td>
+                <td>{{ad.reference}}</td>
+              </tr>
+              <tr>
+                <td>Bairro/Setor:</td>
+                <td>{{ad.district}}</td>
+              </tr>
+              <tr>
+                <td>Cidade:</td>
+                <td>{{ad.city}}</td>
+              </tr>
+              <tr>
+                <td>Estado:</td>
+                <td>{{ad.state}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+    <div class="panel-footer">
+      <span *ngIf="(successMsg != '')" class="help-block alert alert-info text-uppercase text-center" role="info">
+        {{successMsg}}
+      </span>
+      <br>
+      <a (click)="onEdit()" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
+        <i class="fa fa-edit"></i>&nbsp; Editar
+      </a>
+    </div>
   </div>
-  <div class="panel-footer">
+</ng-template>
 
-    <a data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
-      <i class="fa fa-edit"></i>&nbsp; Editar
-    </a>
 
+<ng-template #editAddr>
+  <div class="panel panel-info animated fadeIn">
+    <div class="panel-heading">
+      <h3 class="panel-title">Editar Meu Endereço</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class=" col-md-12 col-lg-12 ">
+          <form role="form" class="form-horizontal" [formGroup]="editAddrForm" (ngSubmit)="onEditDone()">
+            <table class="table table-user-information">
+              <thead>
+                <td style="width:40%"></td>
+                <td style="width:60%"></td>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nome do Destinatário:</td>
+                  <td>
+                    <input type="text" formControlName="personName" class="form-control" name="personName" id="personName" placeholder="INSIRA O NOME DO DESTINATÁRIO"
+                      required>
+                    <span *ngIf="!editAddrForm.get('personName').valid && editAddrForm.get('personName').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um nome válido!</span>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tipo endereço:</td>
+                  <td>
+                    <input type="text" formControlName="type" class="form-control" name="type" id="type" placeholder="CASA, APARTAMENTO..." required>
+                    <span *ngIf="!editAddrForm.get('type').valid && editAddrForm.get('type').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um tipo de endereço válido!</span>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>CEP:</td>
+                  <td>
+                    <input type="text" formControlName="postalCode" class="form-control" name="postalCode" id="postalCode" placeholder="INSIRA O CEP"
+                      required>
+                    <span *ngIf="!editAddrForm.get('postalCode').valid && editAddrForm.get('postalCode').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um CEP válido!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Endereço:</td>
+                  <td>
+                    <input type="text" formControlName="addressLine" class="form-control" name="addressLine" id="addressLine" placeholder=" RUA, AVENIDA..."
+                      required>
+                    <span *ngIf="!editAddrForm.get('addressLine').valid && editAddrForm.get('addressLine').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um endereço válido!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Número:</td>
+                  <td>
+                    <input type="number" formControlName="number" class="form-control" name="number" id="number" placeholder="INSIRA O NÚMERO DA RESIDÊNCIA"
+                      required>
+                    <span *ngIf="!editAddrForm.get('number').valid && editAddrForm.get('number').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um número válido ou deixe o valor em
+                      <strong>0</strong> caso não tenha.</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Complemento:</td>
+                  <td>
+                    <input type="text" formControlName="complement" class="form-control" name="complement" id="complement" placeholder="INSIRA UM COMPLEMENTO"
+                      required>
+                    <span *ngIf="!editAddrForm.get('complement').valid && editAddrForm.get('complement').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um complemento válido!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Referência:</td>
+                  <td>
+                    <input type="text" formControlName="reference" class="form-control" name="reference" id="reference" placeholder="INSIRA UMA REFERÊNCIA"
+                      required>
+                    <span *ngIf="!editAddrForm.get('reference').valid && editAddrForm.get('reference').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite uma referência válida!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Bairro/Setor:</td>
+                  <td>
+                    <input type="text" formControlName="district" class="form-control" name="district" id="district" placeholder="INSIRA UM BAIRRO VÁLIDO"
+                      required>
+                    <span *ngIf="!editAddrForm.get('district').valid && editAddrForm.get('district').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um bairro válido!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Cidade:</td>
+                  <td>
+                    <input type="text" formControlName="city" class="form-control" name="city" id="city" placeholder="INSIRA UMA CIDADE" required>
+                    <span *ngIf="!editAddrForm.get('city').valid && editAddrForm.get('city').touched" class="help-block alert alert-danger" role="alert">Por favor, digite uma cidade válida!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Estado:</td>
+                  <td>
+                    <select formControlName="state" class="form-control text-uppercase" name="state" id="state" required>
+                      <option value="AC">Acre</option>
+                      <option value="AL">Alagoas</option>
+                      <option value="AP">Amapá</option>
+                      <option value="AM">Amazonas</option>
+                      <option value="BA">Bahia</option>
+                      <option value="CE">Ceará</option>
+                      <option value="DF">Distrito Federal</option>
+                      <option value="ES">Espírito Santo</option>
+                      <option value="GO">Goiás</option>
+                      <option value="MA">Maranhão</option>
+                      <option value="MT">Mato Grosso</option>
+                      <option value="MS">Mato Grosso do Sul</option>
+                      <option value="MG">Minas Gerais</option>
+                      <option value="PA">Pará</option>
+                      <option value="PB">Paraíba</option>
+                      <option value="PR">Paraná</option>
+                      <option value="PE">Pernambuco</option>
+                      <option value="PI">Piauí</option>
+                      <option value="RJ">Rio de Janeiro</option>
+                      <option value="RN">Rio Grande do Norte</option>
+                      <option value="RS">Rio Grande do Sul</option>
+                      <option value="RO">Rondônia</option>
+                      <option value="RR">Roraima</option>
+                      <option value="SC">Santa Catarina</option>
+                      <option value="SP">São Paulo</option>
+                      <option value="SE">Sergipe</option>
+                      <option value="TO">Tocantins</option>
+                    </select>
+                    <span *ngIf="!editAddrForm.get('state').valid && editAddrForm.get('state').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, selecione um estado!</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pull-right">
+              <button data-original-title="Editar" data-toggle="tooltip" type="submit" class="btn btn-save">
+                <i class="fa fa-edit"></i>&nbsp; Salvar
+              </button>
+              <span *ngIf="!editAddrForm.valid  || (editAddrForm.valid && errMsg != '')" class="help-block alert alert-danger" role="alert">
+                {{errMsg}}
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+
+      <a (click)="onLeaveEdit()" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
+        <i class="fa fa-edit"></i>&nbsp; Voltar
+      </a>
+    </div>
   </div>
-
-</div>
+</ng-template>

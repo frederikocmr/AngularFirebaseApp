@@ -26,11 +26,12 @@ export class ProfileInfoComponent implements OnInit {
     this.editInfoForm = new FormGroup(
       {
         'email': new FormControl(null, [Validators.required, Validators.email]),
-        'displayName': new FormControl(null, [Validators.required, , Validators.minLength(3)]),
-        'document': new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(14)]),
+        'displayName': new FormControl(null, [Validators.required, , Validators.minLength(3), Validators.pattern('^[A-zÀ-ÿ ]+$')]),
+        'document': new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(14),
+        Validators.pattern('^[0-9]+$')]),
         'birthDate': new FormControl(null, [Validators.required]),
         'gender': new FormControl(null, [Validators.required]),
-        'phoneNumber': new FormControl(null, [Validators.required, Validators.minLength(8)])
+        'phoneNumber': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.pattern('^[0-9 )(-]+$')])
       }
     );
   }
@@ -49,6 +50,7 @@ export class ProfileInfoComponent implements OnInit {
 
   onLeaveEdit() {
     this.editMode = false;
+    this.successMsg = '';
   }
 
   onEditDone() {

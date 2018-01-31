@@ -7,4 +7,16 @@ export interface User {
     document?: number;
     birthDate?: Date;
     gender?: string;
+    adresses?: {
+        personName: string,
+        type: string,
+        postalCode: number,
+        addressLine: string,
+        number: string,
+        complement: string,
+        reference: string,
+        district: string,
+        city: string,
+        state: string
+    }[];
 }

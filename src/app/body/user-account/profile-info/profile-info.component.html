@@ -84,7 +84,7 @@
                 <tr>
                   <td>Email:</td>
                   <td>
-                    <input type="text" formControlName="email" class="form-control" name="email" id="email" placeholder="INSIRA SEU EMAIL" required>
+                    <input type="text" formControlName="email" class="form-control" name="email" id="email" placeholder="INSIRA SEU EMAIL" readonly>
                     <span *ngIf="!editInfoForm.get('email').valid && editInfoForm.get('email').touched" class="help-block alert alert-danger"
                       role="alert">Por favor, digite um endereço de email válido!</span>
 
