@@ -40,7 +40,7 @@
                   <span class="input-group-addon">
                     <i class="fa fa-envelope fa" aria-hidden="true"></i>
                   </span>
-                  <input type="text" formControlName="email" class="form-control text-lowercase" name="email" id="email" placeholder="INSIRA SEU EMAIL"
+                  <input type="text" formControlName="email" class="form-control" name="email" id="email" placeholder="INSIRA SEU EMAIL"
                     required>
                   <span *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um endereço de email válido!</span>
 

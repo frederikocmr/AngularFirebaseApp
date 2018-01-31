@@ -67,3 +67,8 @@ hr {
     margin: 0 auto 0;
     background: url('/assets/images/complement/white_content.gif');
 }
+
+.container {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

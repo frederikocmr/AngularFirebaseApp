@@ -42,11 +42,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartSubscription = this.cartService.cartChanged.subscribe(
       cart => {
         this.cart = cart;
+        this.getCartOn();
       }
     );
     this.cartService.fecthCart();
 
-    // this.getCartOn();
+    
   }
   ngOnDestroy() {
     if (this.cartSubscription) {

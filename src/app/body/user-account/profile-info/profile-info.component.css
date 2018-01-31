@@ -25,8 +25,8 @@
     -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
-    -webkit-transition: 2s; /* Safari */
-    transition: 2s;
+    -webkit-transition: 1s; /* Safari */
+    transition: 1s;
 }
 
 .btn:hover {

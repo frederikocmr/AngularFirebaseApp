@@ -36,6 +36,7 @@ import { AuthGuard } from './body/auth/auth-guard.service';
 
 import { CartService } from './shared/services/cart.service';
 import { UIService } from './shared/services/UI.service';
+import { UserAccountService } from './body/user-account/user-account.service';
 
 import { UserAccountComponent } from './body/user-account/user-account.component';
 import { ProfileInfoComponent } from './body/user-account/profile-info/profile-info.component';
@@ -78,7 +79,7 @@ import { OrdersComponent } from './body/user-account/orders/orders.component';
     ModalModule
     // FacebookModule.forRoot()
   ],
-  providers: [CartService, AuthService, AuthGuard, UIService],
+  providers: [CartService, AuthService, AuthGuard, UIService, UserAccountService],
   bootstrap: [AppComponent]
 })
 
