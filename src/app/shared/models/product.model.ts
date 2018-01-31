@@ -8,7 +8,16 @@ export class Product {
     public img: string;
     public categoryPath: string;
 
-    constructor(id: number, name: string, description: string, value: number,value2: number, measure: string, img: string, categoryPath: string) {
+    constructor(
+        id: number,
+        name: string,
+        description: string,
+        value: number,
+        value2: number,
+        measure: string,
+        img: string,
+        categoryPath: string) {
+
         this.id = id;
         this.name = name;
         this.description = description;

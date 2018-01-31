@@ -1,33 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 import { AuthService } from '../auth/auth.service';
-
+import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class UserAccountService {
-    private userId: string;
+    public aUser: User;
     private userSubs: Subscription;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private afs: AngularFirestore) { }
 
     initUserListener() {
-        if (this.authService.user && !this.userSubs) {
-            this.userSubs = this.authService.user.subscribe(
-                (user) => {
-                    this.userId = user.uid;
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-        }
+
+        this.userSubs = this.authService.user.subscribe(
+            (user) => {
+                this.aUser = user;
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+
     }
 
     destroyUserListener() {
         if (this.userSubs) {
             this.userSubs.unsubscribe();
         }
+    }
+
+    updateUserData(form) {
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.aUser.uid}`);
+        const data: User = {
+            uid: this.aUser.uid,
+            email: form.email,
+            displayName: form.displayName,
+            photoURL: this.aUser.photoURL,
+            phoneNumber: form.phoneNumber,
+            document: form.document,
+            birthDate: form.birthDate,
+            gender: form.gender
+        };
+
+        userRef.update(data).
+            then(() => {
+                // update successful (document exists)
+            })
+            .catch((error) => {
+                // (document does not exists)
+                userRef.set(data);
+            });
     }
 
 }

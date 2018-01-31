@@ -10,19 +10,9 @@ import 'rxjs/add/operator/switchMap';
 
 import { CartService } from '../../shared/services/cart.service';
 import { UIService } from '../../shared/services/UI.service';
+import { User } from '../../shared/interfaces/user.interface';
 
 // verificar erros / codigos em: https://firebase.google.com/docs/auth/admin/errors?hl=en
-
-interface User {
-    uid: string;
-    email: string;
-    photoURL?: string;
-    displayName?: string;
-    phoneNumber?: string;
-    document?: number;
-    birthDate?: Date;
-    gender?: string;
-}
 
 @Injectable()
 export class AuthService {
@@ -37,13 +27,13 @@ export class AuthService {
         private uiService: UIService
     ) {
         this.user = this.afAuth.authState
-        .switchMap(user => {
-          if (user) {
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-          } else {
-            return Observable.of(null);
-          }
-        });
+            .switchMap(user => {
+                if (user) {
+                    return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+                } else {
+                    return Observable.of(null);
+                }
+            });
     }
 
     initAuthListener() {
@@ -150,17 +140,36 @@ export class AuthService {
 
     private updateUserData(user, form?) {
         const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-        const data: User = {
-            uid: user.uid,
-            email: user.email,
-            displayName: (form ? form.name : user.displayName),
-            photoURL: user.photoURL,
-            phoneNumber: (form ? form.phoneNumber : user.phoneNumber),
-            document: (form ? form.document : ''),
-            birthDate: (form ? form.birthDate : ''),
-            gender: (form ? form.gender : user.gender)
-        };
-        return userRef.set(data);
+        let data: User;
+        if (form) {
+            data = {
+                uid: user.uid,
+                email: form.email,
+                displayName: form.name,
+                phoneNumber: form.phoneNumber,
+                document: form.document,
+                birthDate: form.birthDate,
+                gender: form.gender
+            };
+        } else {
+            data = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+                gender: (user.gender === 'male' ? 'm' : (user.gender === 'female' ? 'f' : ''))
+            };
+        }
+
+        userRef.update(data).
+            then(() => {
+                // update successful (document exists)
+            })
+            .catch((error) => {
+                // (document does not exists)
+                userRef.set(data);
+            });
+
     }
 
     logOut() {

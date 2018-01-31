@@ -1,20 +1,18 @@
+<div *ngIf="editMode; then editInfos else infos"></div>
 
-  <div  class="panel panel-info animated fadeIn">
+<ng-template #infos>
+  <div class="panel panel-info animated fadeIn">
     <div class="panel-heading">
       <h3 class="panel-title">Meus Dados</h3>
     </div>
     <div *ngIf="auth.user | async as user" class="panel-body">
       <div class="row">
-
         <div class=" col-md-12 col-lg-12 ">
           <table class="table table-user-information">
             <thead>
-
               <td style="width:40%"></td>
               <td style="width:60%"></td>
-
             </thead>
-
             <tbody>
               <tr>
                 <td>Nome Completo:</td>
@@ -28,8 +26,6 @@
                 <td>CPF/CNPJ:</td>
                 <td>{{user.document}}</td>
               </tr>
-
-
               <tr>
                 <td>Data de Nascimento:</td>
                 <td>{{user.birthDate | date:'dd/MM/yyyy'}}</td>
@@ -42,19 +38,118 @@
                 <td>Telefone:</td>
                 <td>{{user.phoneNumber}}</td>
               </tr>
-
             </tbody>
           </table>
         </div>
       </div>
     </div>
     <div class="panel-footer">
-
-      <a href="edit.html" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
+      <span *ngIf="(successMsg != '')" class="help-block alert alert-info text-uppercase text-center" role="info">
+        {{successMsg}}
+      </span>
+      <br>
+      <a (click)="onEdit()" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
         <i class="fa fa-edit"></i>&nbsp; Editar
       </a>
-
-
     </div>
-
   </div>
+
+</ng-template>
+
+<ng-template #editInfos>
+  <div class="panel panel-info animated fadeIn">
+    <div class="panel-heading">
+      <h3 class="panel-title">Editar Meus Dados</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class=" col-md-12 col-lg-12 ">
+          <form role="form" class="form-horizontal" [formGroup]="editInfoForm" (ngSubmit)="onEditDone()">
+            <table class="table table-user-information">
+              <thead>
+                <td style="width:40%"></td>
+                <td style="width:60%"></td>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nome Completo:</td>
+                  <td>
+                    <input type="text" formControlName="displayName" class="form-control" name="displayName" id="displayName" placeholder="INSIRA SEU NOME COMPLETO"
+                      required>
+                    <span *ngIf="!editInfoForm.get('displayName').valid && editInfoForm.get('displayName').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um nome válido!</span>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>
+                    <input type="text" formControlName="email" class="form-control" name="email" id="email" placeholder="INSIRA SEU EMAIL" required>
+                    <span *ngIf="!editInfoForm.get('email').valid && editInfoForm.get('email').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um endereço de email válido!</span>
+
+                  </td>
+                </tr>
+                <tr>
+                  <td>CPF/CNPJ:</td>
+                  <td>
+                    <input type="text" formControlName="document" class="form-control" name="document" id="document" placeholder="DIGITE SEU CPF"
+                      required>
+                    <span *ngIf="!editInfoForm.get('document').valid && editInfoForm.get('document').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um CPF/CNPJ válido!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Data de Nascimento:</td>
+                  <td>
+                    <input type="date" formControlName="birthDate" class="form-control" name="birthDate" id="birthDate" placeholder="DIGITE SUA DATA DE NASCIMENTO"
+                      max="1979-12-31" min="2000-01-02" required>
+                    <span *ngIf="!editInfoForm.get('birthDate').valid && editInfoForm.get('birthDate').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite uma data válida!</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sexo:</td>
+                  <td>
+                    <div class="radio">
+                      <i class="fa fa-male fa-sm" aria-hidden="true"></i>
+                      <label> &nbsp;
+                        <input type="radio" formControlName="gender" name="gender" value="m">Masculino</label>
+                      &nbsp;&nbsp;&nbsp;
+                      <i class="fa fa-female fa-sm" aria-hidden="true"></i>
+                      <label> &nbsp;
+                        <input type="radio" formControlName="gender" name="gender" value="f">Feminino</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Telefone:</td>
+                  <td>
+                    <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="DIGITE SEU TELEFONE"
+                      required>
+                    <span *ngIf="!editInfoForm.get('phoneNumber').valid && editInfoForm.get('phoneNumber').touched" class="help-block alert alert-danger"
+                      role="alert">Por favor, digite um número válido!</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pull-right">
+              <button data-original-title="Editar" data-toggle="tooltip" type="submit" class="btn btn-save">
+                <i class="fa fa-edit"></i>&nbsp; Salvar
+              </button>
+              <span *ngIf="!editInfoForm.valid  || (editInfoForm.valid && errMsg != '')" class="help-block alert alert-danger" role="alert">
+                {{errMsg}}
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+
+      <a (click)="onLeaveEdit()" data-original-title="Editar" data-toggle="tooltip" type="button" class="btn btn-warning">
+        <i class="fa fa-edit"></i>&nbsp; Voltar
+      </a>
+    </div>
+  </div>
+</ng-template>

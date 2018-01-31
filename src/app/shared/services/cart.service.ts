@@ -36,7 +36,7 @@ export class CartService {
                 this.uiService.loadingStateChanged.next(false);
             }, error => {
                 this.uiService.loadingStateChanged.next(false);
-                alert('Ocorreu um erro ao carregar o carrinho, por favor, contate o suporte! ERRO:' + error);
+                console.log('Ocorreu um erro ao carregar o carrinho, por favor, contate o suporte! ERRO:' + error);
             }));
     }
 
