@@ -21,7 +21,7 @@ export class UserAccountComponent implements OnInit {
 
   ngOnInit() {
     this.userAccService.initUserListener();
-    this.router.navigate(['dados'], { relativeTo: this.route });
+    // this.router.navigate(['dados'], { relativeTo: this.route });
   }
 
   onLogOut() {

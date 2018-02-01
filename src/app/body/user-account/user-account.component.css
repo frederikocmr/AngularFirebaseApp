@@ -37,6 +37,8 @@
 }
 
 .user-acc {
+    overflow-x: hidden;
+    min-height: 700px;
     border-top: 3px solid #9d1e2e;
     position: relative;
     background: white url('/assets/images/background/bg-wood-ok.jpg');

@@ -19,6 +19,7 @@ export class AddressesComponent implements OnInit {
   constructor(private userAccService: UserAccountService, public auth: AuthService) { }
 
   ngOnInit() {
+
     this.editAddrForm = new FormGroup(
       {
         'personName': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[A-zÀ-ÿ ]+$')]),
@@ -39,13 +40,12 @@ export class AddressesComponent implements OnInit {
 
   onEdit() {
     this.editMode = true;
-    console.log(this.userAccService.aUser.adresses[0]);
     this.editAddrForm.setValue({
       'personName': (this.userAccService.aUser.adresses[0].personName ? this.userAccService.aUser.adresses[0].personName : ''),
       'type': (this.userAccService.aUser.adresses[0].type ? this.userAccService.aUser.adresses[0].type : ''),
-      'postalCode': (this.userAccService.aUser.adresses[0].postalCode ? this.userAccService.aUser.adresses[0].postalCode : '0'),
+      'postalCode': (this.userAccService.aUser.adresses[0].postalCode ? this.userAccService.aUser.adresses[0].postalCode : ''),
       'addressLine': (this.userAccService.aUser.adresses[0].addressLine ? this.userAccService.aUser.adresses[0].addressLine : ''),
-      'number': (this.userAccService.aUser.adresses[0].number ? this.userAccService.aUser.adresses[0].number : ''),
+      'number': (this.userAccService.aUser.adresses[0].number ? this.userAccService.aUser.adresses[0].number : '0'),
       'complement': (this.userAccService.aUser.adresses[0].complement ? this.userAccService.aUser.adresses[0].complement : ''),
       'reference': (this.userAccService.aUser.adresses[0].reference ? this.userAccService.aUser.adresses[0].reference : ''),
       'district': (this.userAccService.aUser.adresses[0].district ? this.userAccService.aUser.adresses[0].district : ''),

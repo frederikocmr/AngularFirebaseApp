@@ -1,4 +1,4 @@
-<div *ngIf="editMode; then editAddr else infos"></div>
+<div *ngIf="!editMode; then infos else editAddr"></div>
 
 <ng-template #infos>
   <div class="panel panel-info animated fadeIn">
@@ -77,7 +77,7 @@
 
 
 <ng-template #editAddr>
-  <div class="panel panel-info animated fadeIn">
+  <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title">Editar Meu Endereço</h3>
     </div>

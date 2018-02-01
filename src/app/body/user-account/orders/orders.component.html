@@ -7,53 +7,32 @@
 
       <div class=" col-md-12 col-lg-12 ">
 
-        <table id="tableOrders" class="table table-hover table-striped ">
+        <table *ngIf="auth.user | async as user" id="tableOrders" class="table table-hover table-striped ">
           <tbody>
-              <tr class="order">
-                  <td class="order-left">
-                    <h4>#102</h4>
-                    <h4>Status:</h4>
-                    <span class="label label-info">Em trânsito</span>
-                  </td>
-                  <td class="order-body">
-                    <h4 class="order-heading font-yellow text-bold"> Linguiça (1kg), Banha de Porco (2un)</h4>
-                    <span>
-                      <strong>Endereço de Entrega:</strong>
-                      Rua X, Qd. 71 - St. A, Gyn - GO
-                    </span>
-                    <br>
-                    <span>
-                      <strong>Total Pago:</strong>
-                      R$ 9.450,00
-                    </span>
-                    <br>
-                    <span class="hidden-xs">
-                      <strong>Método de Pagamento:</strong>
-                      Cartão de Crédito
-                    </span>
-                  </td>
-                </tr>
-            <tr class="order">
+            <tr *ngFor="let order of user.orders; let i = index" class="order">
               <td class="order-left">
-                <h4>#102</h4>
+                <h4>#{{i+1}}</h4>
                 <h4>Status:</h4>
-                <span class="label label-success">Entregue</span>
+                <span class="label" [class.label-warning]="(order.status == 1)" [class.label-info]="(order.status == 2)" [class.label-success]="(order.status == 3)"
+                  [class.label-danger]="(order.status == 4)">
+                  {{(order.status == 1 ? 'Processando' : (order.status == 2 ? 'Em trânsito' : (order.status == 3 ? 'Entregue': 'Cancelado')))}}
+                </span>
               </td>
               <td class="order-body">
-                <h4 class="order-heading font-yellow text-bold"> Linguiça (3kg)</h4>
+                <h4 class="order-heading font-yellow text-bold"> {{order.itens}}</h4>
                 <span>
                   <strong>Endereço de Entrega:</strong>
-                  Rua X, Qd. 71 - St. A, Gyn - GO
+                  {{order.address}}
                 </span>
                 <br>
                 <span>
                   <strong>Total Pago:</strong>
-                  R$ 19,00
+                  {{order.paidValue}}
                 </span>
                 <br>
                 <span class="hidden-xs">
                   <strong>Método de Pagamento:</strong>
-                  Dinheiro
+                  {{order.paymentMethod}}
                 </span>
               </td>
             </tr>
