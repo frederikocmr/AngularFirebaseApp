@@ -1,32 +1,29 @@
-<div class="col-xs-12  col-sm-6 col-md-6 col-lg-4">
-  <span class="thumbnail">
-    <img src="{{product.img}}" alt="Imagem do produto">
-    <h4>{{product.name}}</h4>
-    <p>{{product.description}}</p>
-    <hr class="line">
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="price right">
-          <label class="price-currency">R$</label>
-          {{product.value}},<label class="price-rest">{{(product.value2 < 10 ? ('0' + product.value2) : product.value2)}}
-            <label class="measure">/{{product.measure}}</label>
-          </label>
-        </p>
-      </div>
-      <div class="col-xs-12">
+<div *ngIf="product.categoryPath == category" class=" animated fadeIn col-xs-12  col-sm-6 col-md-6 col-lg-4">
+    <span class="thumbnail">
+        <img src="{{product.img}}" alt="Imagem do produto">
+        <h4>{{product.name}}</h4>
+        <p>{{product.description}}</p>
+        <hr class="line">
         <div class="row">
-          <div class=" col-xs-12 col-sm-6">
-            <button class="btn btn-sm btn-info fa fa-minus" (click)="removeItem()"></button>
-            <label class="btn btn-quantity">{{quantity}}</label>
-            <button class="btn btn-sm btn-success fa fa-plus" (click)="addItem()"></button>
-          </div>
-          <div class=" col-xs-12 col-sm-6 ">
-            <button class="btn btn-block btn-buy" (click)="addToCart()">COMPRAR</button>
-          </div>
+            <div class="col-xs-12">
+                <p class="price right">
+                    <label class="price-currency">{{product.price | currency:'BRL'}} / {{product.measure}}</label>
+                </p>
+            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class=" col-xs-12 col-sm-6">
+                        <button class="btn btn-sm btn-info fa fa-minus" (click)="removeItem()"></button>
+                        <label class="btn btn-quantity">{{quantity}}</label>
+                        <button class="btn btn-sm btn-success fa fa-plus" (click)="addItem()"></button>
+                    </div>
+                    <div class=" col-xs-12 col-sm-6 ">
+                        <button class="btn btn-block btn-buy" (click)="addToCart()">COMPRAR</button>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-        
-     
-      </div>
-    </div>
-  </span>
+    </span>
 </div>

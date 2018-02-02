@@ -1,0 +1,47 @@
+[
+    {
+        "id": "9aa113b4-1e4e-4cde-bf9d-8358fc78ea4f",
+        "price": 3.50,
+        "name": "Greens",
+        "description": "Looking for simple, clean and green? Four of the most nutrient dense",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "tipo3"
+    },
+    {
+        "id": "bdcbe438-ac85-4acf-8949-5627fd5b57df",
+        "price": 2.75,
+        "name": "Citrus",
+        "description": "This enzyme rich juice is filled with phytonutrients and bromelin ",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "tipo1"
+    },
+    {
+        "id": "58552daa-30f6-46fa-a808-f1a1d7667561",
+        "price": 3,
+        "name": "Roots",
+        "description": "Beets help your body to release stomach acid which aids digestion!",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "tipo2"
+    },
+    {
+        "id": "d4666802-fd84-476f-9eea-c8dd29cfb633",
+        "price": 1.99,
+        "name": "Orange",
+        "description": "Orange juice with a twist to boost you health! Two nutritional powe",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "tipo1"
+    },
+    {
+        "id": "7ef3b9dd-5a95-4415-af37-6871d6ff0262",
+        "price": 2.50,
+        "name": "Coconut",
+        "description": "Cinnamon lovers - this is your blend! Two nutritional powerhouses ",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "tipo3"
+    }
+]

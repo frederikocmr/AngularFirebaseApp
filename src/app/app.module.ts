@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
@@ -42,6 +43,10 @@ import { UserAccountComponent } from './body/user-account/user-account.component
 import { ProfileInfoComponent } from './body/user-account/profile-info/profile-info.component';
 import { AddressesComponent } from './body/user-account/addresses/addresses.component';
 import { OrdersComponent } from './body/user-account/orders/orders.component';
+import { ProductService } from './shared/services/product.service';
+
+import { LocalStorageServie, StorageService } from './shared/services/storage.service';
+import { DeliveryOptionsDataService } from './shared/services/delivery-options.service';
 
 
 
@@ -76,10 +81,26 @@ import { OrdersComponent } from './body/user-account/orders/orders.component';
     AngularFireAuthModule,
     StickyNavModule,
     AppRoutingModule,
+    HttpModule,
     ModalModule
     // FacebookModule.forRoot()
   ],
-  providers: [CartService, AuthService, AuthGuard, UIService, UserAccountService],
+  providers: [
+    CartService,
+    AuthService,
+    AuthGuard,
+    UIService,
+    UserAccountService,
+    ProductService,
+    DeliveryOptionsDataService,
+    LocalStorageServie,
+    { provide: StorageService, useClass: LocalStorageServie },
+    {
+      deps: [StorageService, ProductService, DeliveryOptionsDataService],
+      provide: CartService,
+      useClass: CartService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 

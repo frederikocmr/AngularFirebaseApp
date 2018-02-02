@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     { path: 'contato', component: ContactComponent },
     { path: 'entrar', component: SigninComponent },
     { path: 'cadastro', component: SignupComponent },
-    { path: 'carrinho', component: CartComponent, canActivate: [AuthGuard] },
+    { path: 'carrinho', component: CartComponent },
     {
         path: 'minha-conta', component: UserAccountComponent, canActivate: [AuthGuard],
         children: [

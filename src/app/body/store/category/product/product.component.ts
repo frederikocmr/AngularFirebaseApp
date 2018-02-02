@@ -1,50 +1,68 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Subscription } from 'rxjs';
 import { Product } from '../../../../shared/models/product.model';
-import { Category } from '../../../../shared/models/category.model';
 import { ProductService } from '../../../../shared/services/product.service';
+import { CartService } from '../../../../shared/services/cart.service';
+import { Category } from '../../../../shared/models/category.model';
 import { CategoryService } from '../../../../shared/services/category.service';
+
 
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
-  providers: [ProductService, CategoryService]
+  styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit, OnDestroy {
-  products: Product[];
   categorySel: Category;
   category = '';
-  paramsSubscription: Subscription;
+  private paramsSubscription: Subscription;
+  public products: Observable<Product[]>;
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService) { }
+  public constructor(
+    private productsService: ProductService,
+    private shoppingCartService: CartService,
+    private route: ActivatedRoute,
+    private categoryService: CategoryService) {
+  }
 
-  ngOnInit() {
-    // verificar se a categoria é válida, se nao for mostra pagina inexistente
-    // adicionar animação toda vez em qe mudar de categoria...
+  public addProductToCart(itemData: { product: Product, quantity: number }): void {
+    this.shoppingCartService.addItem(itemData.product, itemData.quantity);
+    alert('Item adicionado com sucesso ao carrinho!');
+  }
+
+  // public removeProductFromCart(product: Product): void {
+  //   this.shoppingCartService.addItem(product, -1);
+  // }
+
+  public productInCart(product: Product): boolean {
+    return Observable.create((obs: Observer<boolean>) => {
+      const sub = this.shoppingCartService
+        .get()
+        .subscribe((cart) => {
+          obs.next(cart.items.some((i) => i.productId === product.id));
+          obs.complete();
+        });
+      sub.unsubscribe();
+    });
+  }
+
+  public ngOnInit(): void {
     this.category = this.route.snapshot.params['category'];
     this.paramsSubscription = this.route.params.subscribe(
       (params: Params) => {
         this.category = params['category'];
-        // (depois) fazer testes no card quando é mobile
-        // inserir total de produtos para cada categoria
-        // toda vez que trocar a category, inserir animação nos itens do produtos de fade
-        this.products = this.productService.getProductsByCategory(this.category);
         this.categorySel = this.categoryService.getCategoryByPath(this.category);
-      }
-    );
-
-
+      });
+    this.products = this.productsService.all();
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this.paramsSubscription) {
       this.paramsSubscription.unsubscribe();
     }
-
   }
 
 }

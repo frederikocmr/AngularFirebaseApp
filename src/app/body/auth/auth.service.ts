@@ -45,7 +45,6 @@ export class AuthService {
                     );
                 } else {
                     this.token = null;
-                    this.cartService.cancelSubscriptions();
                 }
             }
         );

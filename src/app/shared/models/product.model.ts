@@ -1,30 +1,19 @@
 export class Product {
-    public id: number;
+    public id: string;
     public name: string;
     public description: string;
-    public value: number;
-    public value2: number;
+    public price: number;
     public measure: string;
     public img: string;
     public categoryPath: string;
 
-    constructor(
-        id: number,
-        name: string,
-        description: string,
-        value: number,
-        value2: number,
-        measure: string,
-        img: string,
-        categoryPath: string) {
-
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.value = value;
-        this.value2 = value2;
-        this.img = img;
-        this.categoryPath = categoryPath;
-        this.measure = measure;
+    public updateFrom(src: Product): void {
+        this.id = src.id;
+        this.name = src.name;
+        this.description = src.description;
+        this.price = src.price;
+        this.img = src.img;
+        this.categoryPath = src.categoryPath;
+        this.measure = src.measure;
     }
 }

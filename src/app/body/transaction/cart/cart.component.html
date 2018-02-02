@@ -13,7 +13,7 @@
           <i class="fa fa-angle-left"></i> Ir para a Loja
         </a>
         <td>
-          <a (click)="getCartOn()" class="btn btn-success btn-block">FINALIZAR
+          <a class="btn btn-success btn-block">FINALIZAR
             <i class="fa fa-angle-right"></i>
           </a>
         </td>
@@ -24,7 +24,7 @@
           <span class="sr-only">Loading...</span>
         </span>
       </div>
-      <table id="cart" class="table table-hover table-condensed" *ngIf="!vazio && !isLoading">
+      <table id="cart" class="table table-hover table-condensed">
         <thead>
           <tr>
             <th style="width:50%">Produto</th>
@@ -34,53 +34,55 @@
             <th style="width:10%"></th>
           </tr>
         </thead>
-        <tbody *ngIf="cart != undefined">
+        <tbody>
           <!-- produto -->
-          <tr  *ngFor="let prod of cart[0].itens; let i = index">
+          <tr *ngFor="let item of cartItems">
             <td data-th="Product">
               <div class="row">
                 <div class="col-sm-2 hidden-xs">
-                  <img src="{{prod.product.img}}" alt="..." class="img-responsive" />
+                  <img src="{{item.product.img}}" alt="..." class="img-responsive" />
                 </div>
                 <div class="col-sm-10">
-                  <h4 class="nomargin">{{prod.product.name}}</h4>
-                  <p>{{prod.product.description}}</p>
+                  <h4 class="nomargin">{{item.product.name}}</h4>
+                  <p>{{item.product.description}}</p>
                 </div>
               </div>
             </td>
             <td data-th="Price">
-              R$ {{prod.product.value}},{{(prod.product.value2 < 10 ? ( '0' + prod.product.value2) : prod.product.value2)}} / {{prod.product.measure}}</td>
-                <td data-th="Quantity">
-                    <button class="btn btn-sm fa fa-minus" (click)="(prod.quantity > 1 ? prod.quantity=prod.quantity-1 : prod.quantity=prod.quantity); calculateTotal();"></button>
-                    <button class="btn btn-sm fa fa-plus" (click)="prod.quantity=prod.quantity+1; calculateTotal()"></button>
+              {{item.product.price | currency:'BRL'}}
+            </td>
+            <td data-th="Quantity">
+              <button class="btn btn-sm fa fa-minus"></button>
+              <button class="btn btn-sm fa fa-plus"></button>
 
-                    <input type="text" readonly class="quantity form-control text-center" [value]="prod.quantity">
-                </td>
-                <td data-th="Subtotal" class="text-center">R$ {{((prod.product.value + (prod.product.value2 / 100)) * prod.quantity).toFixed(2)}}</td>
-                <td class="actions" data-th="">
+              <input type="text" readonly class="quantity form-control text-center" [value]="item.quantity">
+            </td>
+            <td data-th="Subtotal" class="text-center">{{item.totalCost | currency:'BRL'}}</td>
+            <td class="actions" data-th="">
 
-                  <button class="btn btn-danger" (click)="myModal.open()">
-                    <i class="fa fa-trash-o"></i> Remover
-                  </button>
-                </td>
+              <button class="btn btn-danger" (click)="myModal.open()">
+                <i class="fa fa-trash-o"></i> Remover
+              </button>
+            </td>
           </tr>
           <!-- fim produto -->
         </tbody>
         <tfoot>
           <tr class="visible-xs">
             <td class="total-rs text-center">
-              <strong >TOTAL: R$ {{total}}</strong>
+              <strong>TOTAL:{{(cart | async).grossTotal | currency:'BRL'}}</strong>
             </td>
           </tr>
           <tr>
             <td>
               <a routerLink="/loja" class="btn btn-default">
-                <i class="fa fa-angle-left"></i> <strong>CONTINUAR COMPRANDO</strong>
+                <i class="fa fa-angle-left"></i>
+                <strong>CONTINUAR COMPRANDO</strong>
               </a>
             </td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="total-rs hidden-xs text-center">
-              <strong>TOTAL: R$ {{total}}</strong>
+              <strong>TOTAL: {{(cart | async).grossTotal | currency:'BRL'}}</strong>
             </td>
             <td>
               <a (click)="getCartOn()" class="btn btn-success btn-block">FINALIZAR
@@ -93,20 +95,25 @@
     </div>
     <div class="last-container"></div>
   </div>
-
   <div class="row">
-    <modal #myModal >
-      <modal-header >
+    <modal #myModal>
+      <modal-header>
         <h1>Remover do Carrinho</h1>
       </modal-header>
       <modal-content>
-        <h4><strong>Você tem certeza que deseja remover este produto?</strong></h4>
+        <h4>
+          <strong>Você tem certeza que deseja remover este produto?</strong>
+        </h4>
       </modal-content>
       <modal-footer>
-        <button type="button" class="btn btn-default" (click)="myModal.close();"><strong>Cancelar</strong></button>
-        <button type="button" class="btn btn-danger" (click)="onRemoveItem(1);myModal.close();"><strong>Confirmar</strong></button>
+        <button type="button" class="btn btn-default" (click)="myModal.close();">
+          <strong>Cancelar</strong>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="onRemoveItem(1);myModal.close();">
+          <strong>Confirmar</strong>
+        </button>
       </modal-footer>
     </modal>
   </div>
-  
+
 </div>

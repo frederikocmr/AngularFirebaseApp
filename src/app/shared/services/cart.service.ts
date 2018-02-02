@@ -1,127 +1,111 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
-import { Cart } from '../models/cart.model';
+import { StorageService } from './storage.service';
 import { Product } from '../models/product.model';
-import { UIService } from './UI.service';
+import { ProductService } from './product.service';
+import { ShoppingCart } from '../models/cart.model';
+import { DeliveryOption } from '../models/delivery-option.model';
+import { DeliveryOptionsDataService } from './delivery-options.service';
+import { CartItem } from '../models/cart-item.model';
 
+const CART_KEY = 'cart';
 
 @Injectable()
 export class CartService {
+    private storage: Storage;
+    private subscriptionObservable: Observable<ShoppingCart>;
+    private subscribers: Array<Observer<ShoppingCart>> = new Array<Observer<ShoppingCart>>();
+    private products: Product[];
+    private deliveryOptions: DeliveryOption[];
 
-    cartChanged = new Subject<Cart[]>();
-    private cart: Cart[] = [];
-    private fbSubs: Subscription[] = [];
+    public constructor(
+        private storageService: StorageService,
+        private productService: ProductService,
+        private deliveryOptionsService: DeliveryOptionsDataService) {
+        this.storage = this.storageService.get();
+        this.productService.all().subscribe((products) => this.products = products);
+        this.deliveryOptionsService.all().subscribe((options) => this.deliveryOptions = options);
 
-    constructor(private db: AngularFirestore, private uiService: UIService) { }
-
-    fecthCart() {
-        this.uiService.loadingStateChanged.next(true);
-
-        this.fbSubs.push(this.db
-            .collection('cart-1')
-            .snapshotChanges()
-            .map(docArray => {
-                return docArray.map(doc => {
-                    return {
-                        itens: doc.payload.doc.data().itens
-                    };
-                });
-            })
-            .subscribe((carts: Cart[]) => {
-                this.cart = carts;
-                this.cartChanged.next([...this.cart]);
-                this.uiService.loadingStateChanged.next(false);
-            }, error => {
-                this.uiService.loadingStateChanged.next(false);
-                console.log('Ocorreu um erro ao carregar o carrinho, por favor, contate o suporte! ERRO:' + error);
-            }));
+        this.subscriptionObservable = new Observable<ShoppingCart>((observer: Observer<ShoppingCart>) => {
+            this.subscribers.push(observer);
+            observer.next(this.retrieve());
+            return () => {
+                this.subscribers = this.subscribers.filter((obs) => obs !== observer);
+            };
+        });
     }
 
-    cancelSubscriptions() {
-        if (this.fbSubs) {
-            this.fbSubs.forEach(
-                sub => sub.unsubscribe()
-            );
+    public get(): Observable<ShoppingCart> {
+        return this.subscriptionObservable;
+    }
+
+    public addItem(product: Product, quantity: number): void {
+        const cart = this.retrieve();
+        let item = cart.items.find((p) => p.productId === product.id);
+        if (item === undefined) {
+            item = new CartItem();
+            item.productId = product.id;
+            cart.items.push(item);
         }
 
+        item.quantity += quantity;
+        cart.items = cart.items.filter((cartItem) => cartItem.quantity > 0);
+        if (cart.items.length === 0) {
+            cart.deliveryOptionId = undefined;
+        }
+
+        this.calculateCart(cart);
+        this.save(cart);
+        this.dispatch(cart);
     }
 
-    // private cart: Cart[] =
-    //     [
-    //         new Cart(
-    //             1,
-    //             [{
-    //                 product: new Product(
-    //                     1,
-    //                     'Produto 1',
-    //                     'Produto descricao',
-    //                     10,
-    //                     10,
-    //                     'kg',
-    //                     'http://placehold.it/500x400',
-    //                     'tipo1'),
-    //                 quantity: 3
-    //             },
-    //             {
-    //                 product: new Product(
-    //                     1,
-    //                     'Produto 1',
-    //                     'Produto descricao',
-    //                     10,
-    //                     22,
-    //                     'kg',
-    //                     'http://placehold.it/500x400',
-    //                     'tipo1'),
-    //                 quantity: 1
-    //             }],
-    //             1
-    //         )
-    //     ];
-
-
-    // // carregar de cookies e firebase conta
-    // // fazer testes carrinho com id e sem id, cheio e vazio
-
-    // addCart(cart: Cart) {
-
-    //     // checa para ver se existe um carrrinho para aquela pessoa
-    //     // se nao existir, cria um. Se existir, adiciona o objeto Produto e Quantidade no mesmo
-    //     this.cart.push(cart);
-    // }
-
-    // addToCart(prod: Product, qty: number, userId: number) {
-    //     if (this.getCartByUser(userId) !== undefined) {
-    //         this.getCartIdByUser(userId);
-    //     }
-
-    // }
-
-    getCart() {
-        return this.cart.slice;
+    public empty(): void {
+        const newCart = new ShoppingCart();
+        this.save(newCart);
+        this.dispatch(newCart);
     }
 
-    // getCartByUser(value: number) {
-    //     if (this.cart) {
-    //         let result: Cart[];
-    //         result = this.cart.filter(function (o) { return o.userId === value; });
+    public setDeliveryOption(deliveryOption: DeliveryOption): void {
+        const cart = this.retrieve();
+        cart.deliveryOptionId = deliveryOption.id;
+        this.calculateCart(cart);
+        this.save(cart);
+        this.dispatch(cart);
+    }
 
-    //         return result.slice()[0];
-    //     } else {
-    //         return undefined;
-    //     }
-    // }
+    private calculateCart(cart: ShoppingCart): void {
+        cart.itemsTotal = cart.items
+            .map((item) => item.quantity * this.products.find((p) => p.id === item.productId).price)
+            .reduce((previous, current) => previous + current, 0);
+        cart.deliveryTotal = cart.deliveryOptionId ?
+            this.deliveryOptions.find((x) => x.id === cart.deliveryOptionId).price :
+            0;
+        cart.grossTotal = cart.itemsTotal + cart.deliveryTotal;
+    }
 
-    // getCartIdByUser(value: number) {
+    private retrieve(): ShoppingCart {
+        const cart = new ShoppingCart();
+        const storedCart = this.storage.getItem(CART_KEY);
+        if (storedCart) {
+            cart.updateFrom(JSON.parse(storedCart));
+        }
 
-    //     let result: Cart[];
-    //     let resultObj: Cart;
-    //     result = this.cart.filter(function (o) { return o.userId === value; });
-    //     resultObj = result.slice()[0];
+        return cart;
+    }
 
-    //     return resultObj.id;
-    // }
+    private save(cart: ShoppingCart): void {
+        this.storage.setItem(CART_KEY, JSON.stringify(cart));
+    }
 
+    private dispatch(cart: ShoppingCart): void {
+        this.subscribers
+            .forEach((sub) => {
+                try {
+                    sub.next(cart);
+                } catch (e) {
+                    // we want all subscribers to get the update even if one errors.
+                }
+            });
+    }
 }
