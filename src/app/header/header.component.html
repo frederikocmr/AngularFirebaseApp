@@ -15,14 +15,20 @@
         <div class="dropdown-content" [style.visibility]="hamb ? 'visible' : 'hidden'">
           <a routerLink="/" (click)="hamb= !hamb">Início</a>
           <a routerLink="/loja" (click)="hamb= !hamb">Loja</a>
-          <a routerLink="/cardapio" (click)="hamb= !hamb">Cardápio</a>
+          <!-- <a routerLink="/cardapio" (click)="hamb= !hamb">Cardápio</a> -->
           <a routerLink="/sobre" (click)="hamb= !hamb">Sobre</a>
           <a routerLink="/contato" (click)="hamb= !hamb">Contato</a>
         </div>
         <a class="navbar-brand animated" routerLink="/" [class.pulse]="mouseOvered" (mouseover)="mouseOvered=true" (mouseout)="mouseOvered=false">Linguiças Piracanjuba</a>
         <div id="nav-icon">
           <a routerLink="/carrinho" class="animated pulse">
-            <span class="fa fa-shopping-cart"></span>
+            <span class="fa-stack" style="display: inline; line-height: 0; vertical-align: 0;">
+              <span class="fa fa-shopping-cart"></span>
+              <strong class="quantity-icon fa-stack-1x">
+                {{itemCount > 0 ? itemCount : '' }}
+              </strong>
+            </span>
+
           </a>
         </div>
         <div id="nav-icon">
@@ -46,9 +52,9 @@
           <li routerLinkActive="animated pulse active_link">
             <a routerLink="/loja">Loja</a>
           </li>
-          <li routerLinkActive="animated pulse active_link">
+          <!-- <li routerLinkActive="animated pulse active_link">
             <a routerLink="/cardapio">Cardápio</a>
-          </li>
+          </li> -->
           <li routerLinkActive="animated pulse active_link">
             <a routerLink="/sobre">Sobre</a>
           </li>
@@ -74,7 +80,14 @@
           </li>
           <li>
             <a routerLink="/carrinho" class="animated pulse right-link">
-              <span class="fa fa-shopping-cart"></span>&nbsp;
+
+              <span class="fa-stack" style="display: inline; line-height: 0; vertical-align: 0;">
+                <span class="fa fa-shopping-cart"></span>
+                <strong class="quantity-icon fa-stack-1x">
+                  {{itemCount > 0 ? itemCount : '' }}
+                </strong>
+              </span>
+              &nbsp;
               <span class="text-header">Ver Carrinho</span>
             </a>
           </li>

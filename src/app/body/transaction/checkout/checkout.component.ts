@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
+import { ShoppingCart } from '../../../shared/models/cart.model';
 import { CartItem } from '../../../shared/models/cart-item.model';
 import { Product } from '../../../shared/models/product.model';
-import { ShoppingCart } from '../../../shared/models/cart.model';
-import { ProductService } from '../../../shared/services/product.service';
-import { CartService } from '../../../shared/services/cart.service';
+import { DeliveryOption } from '../../../shared/models/delivery-option.model';
 
+import { DeliveryOptionsDataService } from '../../../shared/services/delivery-options.service';
+import { CartService } from '../../../shared/services/cart.service';
+import { ProductService } from '../../../shared/services/product.service';
 
 interface ICartItemWithProduct extends CartItem {
   product: Product;
@@ -14,28 +16,25 @@ interface ICartItemWithProduct extends CartItem {
 }
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: 'app-checkout',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.css']
 })
-export class CartComponent implements OnInit, OnDestroy {
+export class CheckoutComponent implements OnInit, OnDestroy {
+  public deliveryOptions: Observable<DeliveryOption[]>;
   public cart: Observable<ShoppingCart>;
   public cartItems: ICartItemWithProduct[];
   public itemCount: number;
-  public productToBeRemoved: Product;
-
   private products: Product[];
   private cartSubscription: Subscription;
 
-  public constructor(private productsService: ProductService,
-    private shoppingCartService: CartService) {
-  }
-
-  public emptyCart(): void {
-    this.shoppingCartService.empty();
-  }
+  constructor(
+    private productsService: ProductService,
+    private deliveryOptionService: DeliveryOptionsDataService,
+    private shoppingCartService: CartService) { }
 
   public ngOnInit(): void {
+    this.deliveryOptions = this.deliveryOptionService.all();
     this.cart = this.shoppingCartService.get();
     this.cartSubscription = this.cart.subscribe((cart) => {
       this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
@@ -54,31 +53,14 @@ export class CartComponent implements OnInit, OnDestroy {
     });
   }
 
-  public addProductToCart(product: Product): void {
-    this.shoppingCartService.addItem(product, 1);
-  }
-
-  public removeProductFromCart(product: Product, quantity: number): void {
-    if (quantity > 1) {
-      this.shoppingCartService.addItem(product, -1);
-    }
-  }
-
-  public setProductToBeRemoved(product: Product): void {
-    this.productToBeRemoved = product;
-  }
-
-  public removeAllProductFromCart(): void {
-
-    this.shoppingCartService.addItem(this.productToBeRemoved, -999);
-    this.productToBeRemoved = undefined;
-
-  }
-
   public ngOnDestroy(): void {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
     }
+  }
+
+  public setDeliveryOption(option: DeliveryOption): void {
+    this.shoppingCartService.setDeliveryOption(option);
   }
 
 }

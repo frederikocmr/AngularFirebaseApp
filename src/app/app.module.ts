@@ -34,6 +34,7 @@ import { CartComponent } from './body/transaction/cart/cart.component';
 
 import { AuthService } from './body/auth/auth.service';
 import { AuthGuard } from './body/auth/auth-guard.service';
+import { TransactionRouteGuard } from './body/transaction/transaction-guard.service';
 
 import { CartService } from './shared/services/cart.service';
 import { UIService } from './shared/services/UI.service';
@@ -47,6 +48,7 @@ import { ProductService } from './shared/services/product.service';
 
 import { LocalStorageServie, StorageService } from './shared/services/storage.service';
 import { DeliveryOptionsDataService } from './shared/services/delivery-options.service';
+import { CheckoutComponent } from './body/transaction/checkout/checkout.component';
 
 
 
@@ -71,7 +73,8 @@ import { DeliveryOptionsDataService } from './shared/services/delivery-options.s
     UserAccountComponent,
     ProfileInfoComponent,
     AddressesComponent,
-    OrdersComponent
+    OrdersComponent,
+    CheckoutComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -89,6 +92,7 @@ import { DeliveryOptionsDataService } from './shared/services/delivery-options.s
     CartService,
     AuthService,
     AuthGuard,
+    TransactionRouteGuard,
     UIService,
     UserAccountService,
     ProductService,

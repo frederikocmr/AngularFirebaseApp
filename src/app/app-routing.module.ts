@@ -13,13 +13,11 @@ import { ProfileInfoComponent } from './body/user-account/profile-info/profile-i
 import { AddressesComponent } from './body/user-account/addresses/addresses.component';
 import { OrdersComponent } from './body/user-account/orders/orders.component';
 import { UserAccountComponent } from './body/user-account/user-account.component';
-
+import { CheckoutComponent } from './body/transaction/checkout/checkout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthGuard } from './body/auth/auth-guard.service';
-
-
-
+import { TransactionRouteGuard } from './body/transaction/transaction-guard.service';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -43,7 +41,7 @@ const appRoutes: Routes = [
             { path: 'pedidos', component: OrdersComponent },
         ]
     },
-
+    { path: 'checkout', component: CheckoutComponent, canActivate: [TransactionRouteGuard] },
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: 'not-found' }
 ];

@@ -191,6 +191,13 @@ box-shadow:         2px 2px 14px 0px rgba(50, 50, 50, 0.75);
     cursor: pointer;
   }
 
+  .quantity-icon {
+    top: 0;
+    font-size: 90%;
+    color: #c6c6c6;
+    text-shadow: 1px 0px 10px black;
+  }
+
 @media (min-width: 760px) {
     .img-background-logo{
         background-image: url('/assets/images/complement/logo-ok2.png'); 
@@ -208,6 +215,9 @@ box-shadow:         2px 2px 14px 0px rgba(50, 50, 50, 0.75);
         display: inherit;
     }
     #nav-icon {
+        display: inherit;
+    }
+    .navbar-brand {
         display: inherit;
     }
     .dropdown-content {

@@ -30,12 +30,8 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   public addProductToCart(itemData: { product: Product, quantity: number }): void {
     this.shoppingCartService.addItem(itemData.product, itemData.quantity);
-    alert('Item adicionado com sucesso ao carrinho!');
+    alert('Item adicionado ao carrinho com sucesso!\nItem: "' + itemData.product.name + '" \nQuantidade: ' + itemData.quantity);
   }
-
-  // public removeProductFromCart(product: Product): void {
-  //   this.shoppingCartService.addItem(product, -1);
-  // }
 
   public productInCart(product: Product): boolean {
     return Observable.create((obs: Observer<boolean>) => {

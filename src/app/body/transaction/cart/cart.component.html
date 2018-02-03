@@ -13,7 +13,7 @@
           <i class="fa fa-angle-left"></i> Ir para a Loja
         </a>
         <td>
-          <a class="btn btn-success btn-block">FINALIZAR
+          <a routerLink="/checkout" class="btn btn-success btn-block">FINALIZAR
             <i class="fa fa-angle-right"></i>
           </a>
         </td>
@@ -24,7 +24,7 @@
           <span class="sr-only">Loading...</span>
         </span>
       </div>
-      <table id="cart" class="table table-hover table-condensed">
+      <table *ngIf="itemCount > 0" id="cart" class="table table-hover table-condensed">
         <thead>
           <tr>
             <th style="width:50%">Produto</th>
@@ -49,18 +49,18 @@
               </div>
             </td>
             <td data-th="Price">
-              {{item.product.price | currency:'BRL'}}
+              R$ {{item.product.price | number:'1.2-2'}} / {{item.product.measure}}
             </td>
             <td data-th="Quantity">
-              <button class="btn btn-sm fa fa-minus"></button>
-              <button class="btn btn-sm fa fa-plus"></button>
+              <button class="btn btn-sm fa fa-minus" (click)="removeProductFromCart(item.product, item.quantity)" [attr.disabled]="item.quantity === 1 ? true : null"></button>
+              <button class="btn btn-sm fa fa-plus" (click)="addProductToCart(item.product)"></button>
 
               <input type="text" readonly class="quantity form-control text-center" [value]="item.quantity">
             </td>
-            <td data-th="Subtotal" class="text-center">{{item.totalCost | currency:'BRL'}}</td>
+            <td data-th="Subtotal" class="text-center">R$ {{item.totalCost | number:'1.2-2'}}</td>
             <td class="actions" data-th="">
 
-              <button class="btn btn-danger" (click)="myModal.open()">
+              <button class="btn btn-danger" (click)="myModal.open(); setProductToBeRemoved(item.product);">
                 <i class="fa fa-trash-o"></i> Remover
               </button>
             </td>
@@ -70,7 +70,8 @@
         <tfoot>
           <tr class="visible-xs">
             <td class="total-rs text-center">
-              <strong>TOTAL:{{(cart | async).grossTotal | currency:'BRL'}}</strong>
+              <strong>
+                <span class="order-total">Total ({{itemCount}} itens):</span> R$ {{(cart | async).itemsTotal | number:'1.2-2'}}</strong>
             </td>
           </tr>
           <tr>
@@ -82,16 +83,26 @@
             </td>
             <td colspan="2" class="hidden-xs"></td>
             <td class="total-rs hidden-xs text-center">
-              <strong>TOTAL: {{(cart | async).grossTotal | currency:'BRL'}}</strong>
+              <strong>
+                <span class="order-total">Total ({{itemCount}} itens):</span> R$ {{(cart | async).itemsTotal | number:'1.2-2'}}</strong>
             </td>
             <td>
-              <a (click)="getCartOn()" class="btn btn-success btn-block">FINALIZAR
+              <a routerLink="/checkout" class="btn btn-success btn-block" [attr.disabled]="itemCount === 0 ? true : null">FINALIZAR
                 <i class="fa fa-angle-right"></i>
               </a>
             </td>
           </tr>
         </tfoot>
       </table>
+      <div *ngIf="itemCount <= 0">
+        <div class="alert alert-danger">
+          <p>Carrinho vazio!</p>
+        </div>
+        <a routerLink="/loja" class="btn btn-default">
+          <i class="fa fa-angle-left fa-lg"></i>
+          <strong>IR PARA A LOJA</strong>
+        </a>
+      </div>
     </div>
     <div class="last-container"></div>
   </div>
@@ -109,7 +120,7 @@
         <button type="button" class="btn btn-default" (click)="myModal.close();">
           <strong>Cancelar</strong>
         </button>
-        <button type="button" class="btn btn-danger" (click)="onRemoveItem(1);myModal.close();">
+        <button type="button" class="btn btn-danger" (click)="removeAllProductFromCart();myModal.close();">
           <strong>Confirmar</strong>
         </button>
       </modal-footer>
