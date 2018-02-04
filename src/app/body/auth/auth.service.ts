@@ -16,7 +16,7 @@ import { User } from '../../shared/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
-    token: string;
+    private token: string;
     user: Observable<User>;
 
     constructor(
@@ -168,8 +168,17 @@ export class AuthService {
                 email: user.email,
                 displayName: user.displayName,
                 photoURL: user.photoURL,
-                gender: (user.gender === 'male' ? 'm' : (user.gender === 'female' ? 'f' : '')),
-                adresses: [{
+                gender: (user.gender === 'male' ? 'm' : (user.gender === 'female' ? 'f' : ''))
+            };
+        }
+
+        userRef.update(data).
+            then(() => {
+                // update successful (document exists)
+            })
+            .catch((error) => {
+                // (document does not exists)
+                data.adresses = [{
                     personName: '',
                     type: '',
                     postalCode: 0,
@@ -180,16 +189,7 @@ export class AuthService {
                     district: '',
                     city: '',
                     state: ''
-                }]
-            };
-        }
-
-        userRef.update(data).
-            then(() => {
-                // update successful (document exists)
-            })
-            .catch((error) => {
-                // (document does not exists)
+                }];
                 userRef.set(data);
             });
 

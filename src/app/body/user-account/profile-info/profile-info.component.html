@@ -1,3 +1,8 @@
+<div [style.display]="!openedMode ? 'none' : 'inherit'" class="help-block alert alert-danger text-center" role="alert">
+  <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  <span class="sr-only">Carregando...</span>
+</div>
+
 <div *ngIf="editMode; then editInfos else infos"></div>
 
 <ng-template #infos>

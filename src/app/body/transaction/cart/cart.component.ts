@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 
 import { CartItem } from '../../../shared/models/cart-item.model';
@@ -6,13 +7,14 @@ import { Product } from '../../../shared/models/product.model';
 import { ShoppingCart } from '../../../shared/models/cart.model';
 import { ProductService } from '../../../shared/services/product.service';
 import { CartService } from '../../../shared/services/cart.service';
+import { AuthService } from '../../auth/auth.service';
 
 
 interface ICartItemWithProduct extends CartItem {
   product: Product;
   totalCost: number;
 }
-
+// Mostrar msg caso usuário não esteja logado...
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -27,8 +29,12 @@ export class CartComponent implements OnInit, OnDestroy {
   private products: Product[];
   private cartSubscription: Subscription;
 
+  @ViewChild('myModal2') myModal2;
+
   public constructor(private productsService: ProductService,
-    private shoppingCartService: CartService) {
+    private shoppingCartService: CartService,
+    private authService: AuthService,
+    private router: Router) {
   }
 
   public emptyCart(): void {
@@ -73,6 +79,14 @@ export class CartComponent implements OnInit, OnDestroy {
     this.shoppingCartService.addItem(this.productToBeRemoved, -999);
     this.productToBeRemoved = undefined;
 
+  }
+
+  public toCheckout(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/checkout']);
+    } else {
+      this.myModal2.open();
+    }
   }
 
   public ngOnDestroy(): void {

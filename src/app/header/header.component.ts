@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { AuthService } from '../body/auth/auth.service';
@@ -10,7 +10,7 @@ import { ShoppingCart } from '../shared/models/cart.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   hamb = false;
   public cart: Observable<ShoppingCart>;
   private cartSubscription: Subscription;
@@ -21,8 +21,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.cart = this.shoppingCartService.get();
     this.cartSubscription = this.cart.subscribe((cart) => {
-      this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+      setTimeout(() => {
+        this.itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+      }, 500);
     });
+
+  }
+
+  ngOnDestroy() {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
   }
 
 }

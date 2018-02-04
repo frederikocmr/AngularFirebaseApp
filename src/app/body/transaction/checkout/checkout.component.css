@@ -75,6 +75,25 @@ hr{
 .delivery-list{
     border-top: 1px solid rgba(163, 163, 163, 0.493);
 }
+.total-itens{
+    color: #9d1e2e;
+    font-weight: bold;
+}
+
+.warn-payment{
+    font-size: 12px;
+}
+
+.btn{
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75) !important;
+    -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75) !important;
+    box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75) !important;
+}
+
+h1 {
+    font-weight: bold;
+    font-family: 'Lobster-Two-Regular';
+}
 /* modal */
 
 .modalDialog {
@@ -107,6 +126,7 @@ hr{
     background: -webkit-linear-gradient(#fff, #999);
     background: -o-linear-gradient(#fff, #999);
 }
+
 .close {
     background: #606061;
     color: #FFFFFF;

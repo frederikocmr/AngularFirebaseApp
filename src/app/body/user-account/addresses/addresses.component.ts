@@ -11,10 +11,11 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./addresses.component.css']
 })
 export class AddressesComponent implements OnInit {
-  editMode = false;
-  editAddrForm: FormGroup;
-  errMsg = '';
-  successMsg = '';
+  public editMode = false;
+  public openedMode = false;
+  public editAddrForm: FormGroup;
+  public errMsg = '';
+  public successMsg = '';
 
   constructor(private userAccService: UserAccountService, public auth: AuthService) { }
 
@@ -45,7 +46,7 @@ export class AddressesComponent implements OnInit {
       'type': (this.userAccService.aUser.adresses[0].type ? this.userAccService.aUser.adresses[0].type : ''),
       'postalCode': (this.userAccService.aUser.adresses[0].postalCode ? this.userAccService.aUser.adresses[0].postalCode : ''),
       'addressLine': (this.userAccService.aUser.adresses[0].addressLine ? this.userAccService.aUser.adresses[0].addressLine : ''),
-      'number': (this.userAccService.aUser.adresses[0].number ? this.userAccService.aUser.adresses[0].number : '0'),
+      'number': (this.userAccService.aUser.adresses[0].number ? this.userAccService.aUser.adresses[0].number : ''),
       'complement': (this.userAccService.aUser.adresses[0].complement ? this.userAccService.aUser.adresses[0].complement : ''),
       'reference': (this.userAccService.aUser.adresses[0].reference ? this.userAccService.aUser.adresses[0].reference : ''),
       'district': (this.userAccService.aUser.adresses[0].district ? this.userAccService.aUser.adresses[0].district : ''),

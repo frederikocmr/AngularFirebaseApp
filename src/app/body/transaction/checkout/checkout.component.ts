@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { ShoppingCart } from '../../../shared/models/cart.model';
@@ -9,6 +9,8 @@ import { DeliveryOption } from '../../../shared/models/delivery-option.model';
 import { DeliveryOptionsDataService } from '../../../shared/services/delivery-options.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { ProductService } from '../../../shared/services/product.service';
+import { AuthService } from '../../auth/auth.service';
+import { User } from '../../../shared/interfaces/user.interface';
 
 interface ICartItemWithProduct extends CartItem {
   product: Product;
@@ -28,12 +30,52 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   private products: Product[];
   private cartSubscription: Subscription;
 
+  @ViewChild('myModal') myModal;
+
+  public adressLine: string;
+  public contactName: string;
+  private userSubs: Subscription;
+  public validInfo: boolean;
+  public optionChecked = false;
+
+
   constructor(
     private productsService: ProductService,
     private deliveryOptionService: DeliveryOptionsDataService,
-    private shoppingCartService: CartService) { }
+    private shoppingCartService: CartService,
+    private authService: AuthService) { }
 
   public ngOnInit(): void {
+    this.userSubs = this.authService.user.subscribe(
+      (user) => {
+        if (user.adresses[0].postalCode !== 0) {
+          this.validInfo = true;
+
+          const address = user.adresses[0];
+          this.contactName = address.personName;
+
+          this.adressLine = address.addressLine + ', ' +
+            address.complement + ', ' +
+            address.type + ', nº ' +
+            address.number + ', ' +
+            address.district + ', ' +
+            address.city + ' - ' +
+            address.state + ' * CEP: ' +
+            address.postalCode;
+
+        } else {
+          this.validInfo = false;
+          this.adressLine = 'Nenhum endereço cadastrado!';
+          this.contactName = 'Nenhum contato cadastrado!';
+        }
+
+
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
     this.deliveryOptions = this.deliveryOptionService.all();
     this.cart = this.shoppingCartService.get();
     this.cartSubscription = this.cart.subscribe((cart) => {
@@ -50,6 +92,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             };
           });
       });
+
+      if (cart.deliveryOptionId) {
+        this.optionChecked = true;
+      }
     });
   }
 
@@ -57,10 +103,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     if (this.cartSubscription) {
       this.cartSubscription.unsubscribe();
     }
+    if (this.userSubs) {
+      this.userSubs.unsubscribe();
+    }
   }
 
   public setDeliveryOption(option: DeliveryOption): void {
     this.shoppingCartService.setDeliveryOption(option);
+    this.optionChecked = true;
+  }
+
+  public openModal(): void {
+    if (this.optionChecked) {
+      this.myModal.open();
+    } else {
+      alert('É necessário escolher um método de entrega antes de continuar');
+    }
   }
 
 }

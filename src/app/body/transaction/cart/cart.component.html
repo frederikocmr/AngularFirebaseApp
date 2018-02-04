@@ -87,7 +87,7 @@
                 <span class="order-total">Total ({{itemCount}} itens):</span> R$ {{(cart | async).itemsTotal | number:'1.2-2'}}</strong>
             </td>
             <td>
-              <a routerLink="/checkout" class="btn btn-success btn-block" [attr.disabled]="itemCount === 0 ? true : null">FINALIZAR
+              <a (click)="toCheckout();" class="btn btn-success btn-block" [attr.disabled]="itemCount === 0 ? true : null">FINALIZAR
                 <i class="fa fa-angle-right"></i>
               </a>
             </td>
@@ -118,10 +118,28 @@
       </modal-content>
       <modal-footer>
         <button type="button" class="btn btn-default" (click)="myModal.close();">
-          <strong>Cancelar</strong>
+          <strong>CANCELAR</strong>
         </button>
         <button type="button" class="btn btn-danger" (click)="removeAllProductFromCart();myModal.close();">
-          <strong>Confirmar</strong>
+          <strong>CONFIRMAR</strong>
+        </button>
+      </modal-footer>
+    </modal>
+    <modal #myModal2>
+      <modal-header>
+        <h1>Usuário não está logado!</h1>
+      </modal-header>
+      <modal-content>
+        <h4>
+          <strong>Para continuar, você precisa fazer login.</strong>
+        </h4>
+      </modal-content>
+      <modal-footer>
+        <button type="button" class="btn btn-default" (click)="myModal2.close();">
+          <strong>CANCELAR</strong>
+        </button>
+        <button type="button" class="btn btn-primary" routerLink="/entrar">
+          <strong>FAZER LOGIN</strong>
         </button>
       </modal-footer>
     </modal>

@@ -13,11 +13,11 @@ import { User } from '../../../shared/interfaces/user.interface';
   styleUrls: ['./profile-info.component.css']
 })
 export class ProfileInfoComponent implements OnInit {
-
-  editMode = false;
-  editInfoForm: FormGroup;
-  errMsg = '';
-  successMsg = '';
+  public openedMode = false;
+  public editMode = false;
+  public editInfoForm: FormGroup;
+  public errMsg = '';
+  public successMsg = '';
 
   constructor(private userAccService: UserAccountService, public auth: AuthService) { }
 

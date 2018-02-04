@@ -8,11 +8,15 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-
+  public noOrder = true;
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
 
   }
 
+  public hasOrder(): boolean {
+    this.noOrder = false;
+    return true;
+  }
 }

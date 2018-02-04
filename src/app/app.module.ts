@@ -31,6 +31,8 @@ import { ProductItemComponent } from './body/store/category/product/product-item
 import { SigninComponent } from './body/auth/signin/signin.component';
 import { SignupComponent } from './body/auth/signup/signup.component';
 import { CartComponent } from './body/transaction/cart/cart.component';
+import { CheckoutComponent } from './body/transaction/checkout/checkout.component';
+import { OrderConfirmationComponent } from './body/transaction/order-confirmation/order-confirmation.component';
 
 import { AuthService } from './body/auth/auth.service';
 import { AuthGuard } from './body/auth/auth-guard.service';
@@ -48,7 +50,6 @@ import { ProductService } from './shared/services/product.service';
 
 import { LocalStorageServie, StorageService } from './shared/services/storage.service';
 import { DeliveryOptionsDataService } from './shared/services/delivery-options.service';
-import { CheckoutComponent } from './body/transaction/checkout/checkout.component';
 
 
 
@@ -74,7 +75,8 @@ import { CheckoutComponent } from './body/transaction/checkout/checkout.componen
     ProfileInfoComponent,
     AddressesComponent,
     OrdersComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderConfirmationComponent
   ],
   imports: [
     ReactiveFormsModule,

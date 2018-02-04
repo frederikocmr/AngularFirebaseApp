@@ -6,10 +6,13 @@
     <div class="row">
 
       <div class=" col-md-12 col-lg-12 ">
-
+        <div [style.display]="!noOrder ? 'none' : 'inherit'" class="help-block alert alert-danger text-center" role="alert">
+          <span>Nenhum pedido encontrado...</span>
+        </div>
         <table *ngIf="auth.user | async as user" id="tableOrders" class="table table-hover table-striped ">
           <tbody>
             <tr *ngFor="let order of user.orders; let i = index" class="order">
+              <span *ngIf="hasOrder()"> </span>
               <td class="order-left">
                 <h4>#{{i+1}}</h4>
                 <h4>Status:</h4>

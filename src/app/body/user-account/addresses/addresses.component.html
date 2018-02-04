@@ -1,3 +1,8 @@
+<div [style.display]="!openedMode ? 'none' : 'inherit'" class="help-block alert alert-danger text-center" role="alert">
+  <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+  <span class="sr-only">Carregando...</span>
+</div>
+
 <div *ngIf="!editMode; then infos else editAddr"></div>
 
 <ng-template #infos>
@@ -140,7 +145,7 @@
                 <tr>
                   <td>Complemento:</td>
                   <td>
-                    <input type="text" formControlName="complement" class="form-control" name="complement" id="complement" placeholder="INSIRA UM COMPLEMENTO"
+                    <input type="text" formControlName="complement" class="form-control" name="complement" id="complement" placeholder="Nº APARTAMENTO, COR DA CASA..."
                       required>
                     <span *ngIf="!editAddrForm.get('complement').valid && editAddrForm.get('complement').touched" class="help-block alert alert-danger"
                       role="alert">Por favor, digite um complemento válido!</span>
@@ -149,7 +154,7 @@
                 <tr>
                   <td>Referência:</td>
                   <td>
-                    <input type="text" formControlName="reference" class="form-control" name="reference" id="reference" placeholder="INSIRA UMA REFERÊNCIA"
+                    <input type="text" formControlName="reference" class="form-control" name="reference" id="reference" placeholder="AO LADO DE, PERTO DE..."
                       required>
                     <span *ngIf="!editAddrForm.get('reference').valid && editAddrForm.get('reference').touched" class="help-block alert alert-danger"
                       role="alert">Por favor, digite uma referência válida!</span>
@@ -158,7 +163,7 @@
                 <tr>
                   <td>Bairro/Setor:</td>
                   <td>
-                    <input type="text" formControlName="district" class="form-control" name="district" id="district" placeholder="INSIRA UM BAIRRO VÁLIDO"
+                    <input type="text" formControlName="district" class="form-control" name="district" id="district" placeholder="INSIRA UM BAIRRO/SETOR"
                       required>
                     <span *ngIf="!editAddrForm.get('district').valid && editAddrForm.get('district').touched" class="help-block alert alert-danger"
                       role="alert">Por favor, digite um bairro válido!</span>

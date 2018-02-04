@@ -14,14 +14,12 @@ export class UserAccountComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
     private userAccService: UserAccountService
   ) { }
 
   ngOnInit() {
     this.userAccService.initUserListener();
-    // this.router.navigate(['dados'], { relativeTo: this.route });
+    console.log('abriu user-account');
   }
 
   onLogOut() {

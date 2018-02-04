@@ -25,7 +25,7 @@ export class TransactionRouteGuard implements CanActivate {
             if (toReturn && this.authService.isAuthenticated()) {
                 toReturn = true;
             } else {
-                alert('O usuário precisa estar logado para continuar!');
+                // alert('O usuário precisa estar logado para continuar!');
                 this.router.navigate(['/carrinho']);
                 toReturn = false;
             }

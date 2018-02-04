@@ -1,21 +1,87 @@
 <div class="checkout">
   <div class="container-fluid bg-paper  animated fadeInDown">
 
+    <!-- 
+
+ 
+
+
+
+ SALVAR DADOS DO CHECKOUT NO BANCO DE DADOS;
+
+ VERIFICAR INTEGRIDADE DAS FUNCIONALIDADES;
+
+ CADASTRAR "ESCREVA PARA NÓS" NO BANCO DE DADOS;
+
+ CRIAR TRIGGERS PARA ENVIAR EMAIL QUANDO:
+  - USUÁRIO CRIA NOVA CONTA
+  - CONFIRMAÇÃO NO CHECKOUT
+  - CADASTRO NO FORM DO CONTATO
+  - MUDANÇA DE STATUS DA ENTREGA -->
+
+
+
+
+
     <div class="first-container"></div>
     <div class="container-fluid bg-grey">
       <h2 class="text-center">Finalizar Compra</h2>
+      <br>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="alert alert-danger ">
+            AVISO: Atualmente estamos fazendo entrega somente na região de Goiânia
+          </span>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <br>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h4>Endereço de Entrega</h4>
+          <p [class.alert]="!validInfo" [class.alert-danger]="!validInfo">{{adressLine}}
+            <span *ngIf="!validInfo">
+              <a [routerLink]="['/minha-conta', 'enderecos']">Clique aqui</a> para cadastrar um novo endereço!</span>
+
+          </p>
+
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h4>Contato para Entrega</h4>
+          <p [class.alert]="!validInfo" [class.alert-danger]="!validInfo">{{contactName}}</p>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <h4>Metodo de Pagamento</h4>
+          <select class="form-control">
+            <option>Dinheiro</option>
+            <option>Cartão - Crédito</option>
+            <option>Cartão - Débito</option>
+          </select>
+          <label class="warn-payment">* O pagamento será feito no local de entrega.</label>
+        </div>
+      </div>
+      <br>
       <hr>
       <br>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6">
           <h4>Produtos Selecionados</h4>
-
-
-
-
-
-
-
+          <div class="row" *ngFor="let item of cartItems">
+            <div class="col-xs-6">
+              {{item.product.name}}
+            </div>
+            <div class="col-xs-6">
+              R$ {{item.product.price | number:'1.2-2'}} x {{item.quantity}} ({{item.product.measure}}) = R$ {{item.totalCost | number:'1.2-2'}}
+            </div>
+          </div>
+          <br>
+          <hr>
+          <div class="row total-itens">
+            <div class="col-xs-6 col-xs-offset-6">
+              Total: R$ {{(cart | async).itemsTotal | number:'1.2-2'}}
+            </div>
+          </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6">
           <h4>Opções de Entrega</h4>
@@ -34,21 +100,30 @@
             <div class="col-xs-12">
               <p>{{option.description}}</p>
             </div>
-
           </div>
         </div>
       </div>
       <hr>
       <br>
+      <br>
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6">
-
+        <div class="col-xs-12 col-sm-4 col-md-5">
+          <a routerLink="/carrinho" class="btn btn-default">
+            <i class="fa fa-angle-left"></i>
+            <strong>VOLTAR AO CARRINHO</strong>
+          </a>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6">
-          <h4>
+        <div class="col-xs-12 col-sm-4 col-md-3 ">
+          <h4 class="pull-right">
             Total do Pedido:&nbsp;
             <span class="order-total">R$ {{(cart | async).grossTotal | number:'1.2-2'}}</span>
           </h4>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <a class="btn btn-primary pull-right" (click)="openModal();">
+            <i class="fa fa-check fa-lg pull-right" style="margin-top: 3px;"></i>
+            <strong>CONCLUIR PEDIDO</strong>
+          </a>
         </div>
       </div>
 
@@ -59,19 +134,47 @@
   <div class="row">
     <modal #myModal>
       <modal-header>
-        <h1>Remover do Carrinho</h1>
+        <h1>Informações Importantes</h1>
       </modal-header>
       <modal-content>
-        <h4>
-          <strong>Você tem certeza que deseja remover este produto?</strong>
-        </h4>
+        <div *ngIf="validInfo">
+          <h4 style="font-family: 'Frederick-Regular' ;">
+            <strong>
+              * Atualmente, as entregas serão feitas apenas as sextas feiras, e somente na região de Goiânia.
+            </strong>
+          </h4>
+          <h4 style="font-family: 'Frederick-Regular' ;">
+            <strong>
+              ** O pagamento será feito no local de entrega.
+            </strong>
+          </h4>
+          <h4 style="font-family: 'Frederick-Regular' ;">
+            <strong>
+              Caso tenha alguma dúvida, entre em contato conosco clicando
+              <a routerLink="/contato">aqui</a>.
+            </strong>
+          </h4>
+        </div>
+        <div *ngIf="!validInfo">
+          <h4 style="font-family: 'Frederick-Regular' ;">
+            <strong>
+              Você não cadastrou nenhum endereço, vá para a página
+              <a [routerLink]="['/minha-conta', 'enderecos']">Minha Conta</a> e cadastre seu endereço na aba Endereço.
+
+            </strong>
+          </h4>
+        </div>
+
       </modal-content>
       <modal-footer>
         <button type="button" class="btn btn-default" (click)="myModal.close();">
-          <strong>Cancelar</strong>
+          <strong>CANCELAR</strong>
         </button>
-        <button type="button" class="btn btn-danger" (click)="removeAllProductFromCart();myModal.close();">
-          <strong>Confirmar</strong>
+        <button *ngIf="validInfo" type="button" class="btn btn-danger" (click)="myModal.close();" routerLink="/checkout-sucesso">
+          <strong>CONFIRMAR COMPRA</strong>
+        </button>
+        <button *ngIf="!validInfo" type="button" class="btn btn-danger" (click)="myModal.close();" [routerLink]="['/minha-conta', 'enderecos']">
+          <strong>EDITAR MEU ENDEREÇO</strong>
         </button>
       </modal-footer>
     </modal>

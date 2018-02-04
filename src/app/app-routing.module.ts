@@ -14,6 +14,7 @@ import { AddressesComponent } from './body/user-account/addresses/addresses.comp
 import { OrdersComponent } from './body/user-account/orders/orders.component';
 import { UserAccountComponent } from './body/user-account/user-account.component';
 import { CheckoutComponent } from './body/transaction/checkout/checkout.component';
+import { OrderConfirmationComponent } from './body/transaction/order-confirmation/order-confirmation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { AuthGuard } from './body/auth/auth-guard.service';
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
         ]
     },
     { path: 'checkout', component: CheckoutComponent, canActivate: [TransactionRouteGuard] },
+    { path: 'checkout-sucesso', component: OrderConfirmationComponent, canActivate: [TransactionRouteGuard] },
     { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: 'not-found' }
 ];
