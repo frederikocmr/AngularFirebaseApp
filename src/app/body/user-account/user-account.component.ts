@@ -19,7 +19,6 @@ export class UserAccountComponent implements OnInit {
 
   ngOnInit() {
     this.userAccService.initUserListener();
-    console.log('abriu user-account');
   }
 
   onLogOut() {

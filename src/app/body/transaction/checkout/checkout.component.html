@@ -2,22 +2,21 @@
   <div class="container-fluid bg-paper  animated fadeInDown">
 
     <!-- 
-
- 
-
-
-
- SALVAR DADOS DO CHECKOUT NO BANCO DE DADOS;
-
- VERIFICAR INTEGRIDADE DAS FUNCIONALIDADES;
-
  CADASTRAR "ESCREVA PARA NÓS" NO BANCO DE DADOS;
 
  CRIAR TRIGGERS PARA ENVIAR EMAIL QUANDO:
-  - USUÁRIO CRIA NOVA CONTA
-  - CONFIRMAÇÃO NO CHECKOUT
-  - CADASTRO NO FORM DO CONTATO
-  - MUDANÇA DE STATUS DA ENTREGA -->
+  - USUÁRIO CRIA NOVA CONTA (envio usuario, bem vindo)
+  - CONFIRMAÇÃO NO CHECKOUT (envio para usuario e admin)
+  - CADASTRO NO FORM DO CONTATO (envio admin)
+  - MUDANÇA DE STATUS DA ENTREGA  (envio usuario)
+  
+  VERIFICAR INTEGRIDADE DAS FUNCIONALIDADES; 
+
+  ALTERAR FOTOS E TEXTOS.
+
+  IMPLEMENTAR RECUPERAÇÃO DE SENHA E VERIFICACAO DE EMAIL AO CADASTRAR (MSG SE NAO VERIFICADO)
+-->
+
 
 
 
@@ -52,13 +51,15 @@
           <p [class.alert]="!validInfo" [class.alert-danger]="!validInfo">{{contactName}}</p>
         </div>
         <div class="col-xs-12 col-sm-3">
-          <h4>Metodo de Pagamento</h4>
-          <select class="form-control">
-            <option>Dinheiro</option>
-            <option>Cartão - Crédito</option>
-            <option>Cartão - Débito</option>
-          </select>
-          <label class="warn-payment">* O pagamento será feito no local de entrega.</label>
+          <form [formGroup]="checkoutForm">
+            <h4>Metodo de Pagamento</h4>
+            <select formControlName="payment_option" class="form-control">
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Credito">Cartão - Crédito</option>
+              <option value="Debito">Cartão - Débito</option>
+            </select>
+            <label class="warn-payment">* O pagamento será feito no local de entrega.</label>
+          </form>
         </div>
       </div>
       <br>

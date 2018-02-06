@@ -50,8 +50,7 @@ import { ProductService } from './shared/services/product.service';
 
 import { LocalStorageServie, StorageService } from './shared/services/storage.service';
 import { DeliveryOptionsDataService } from './shared/services/delivery-options.service';
-
-
+import { TransactionService } from './body/transaction/transaction.service';
 
 
 @NgModule({
@@ -99,6 +98,7 @@ import { DeliveryOptionsDataService } from './shared/services/delivery-options.s
     UserAccountService,
     ProductService,
     DeliveryOptionsDataService,
+    TransactionService,
     LocalStorageServie,
     { provide: StorageService, useClass: LocalStorageServie },
     {

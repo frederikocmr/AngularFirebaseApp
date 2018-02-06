@@ -29,13 +29,23 @@
                 </span>
                 <br>
                 <span>
-                  <strong>Total Pago:</strong>
-                  {{order.paidValue}}
+                  <strong>Valor Total:</strong>
+                  R$ {{order.paidValue}}
+                </span>
+                <br>
+                <span>
+                  <strong>Data do Pedido:</strong>
+                  {{order.date | date:'dd/MM/yyyy'}}
                 </span>
                 <br>
                 <span class="hidden-xs">
                   <strong>Método de Pagamento:</strong>
                   {{order.paymentMethod}}
+                </span>
+                <br>
+                <span class="hidden-xs">
+                  <strong>Método de Entrega:</strong>
+                  {{order.deliveryOption}}
                 </span>
               </td>
             </tr>
