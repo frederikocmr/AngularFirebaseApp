@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-
+  public mouseOvered: boolean;
   constructor() { }
 
   ngOnInit() {
   }
 
-  rowUp(){
+  rowUp() {
     window.scrollTo(0, 0);
   }
 

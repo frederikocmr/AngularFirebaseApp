@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Product } from '../../../../shared/models/product.model';

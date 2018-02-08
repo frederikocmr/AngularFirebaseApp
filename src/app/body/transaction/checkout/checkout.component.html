@@ -5,7 +5,7 @@
  CADASTRAR "ESCREVA PARA NÓS" NO BANCO DE DADOS;
 
  CRIAR TRIGGERS PARA ENVIAR EMAIL QUANDO:
-  - USUÁRIO CRIA NOVA CONTA (envio usuario, bem vindo)
+  - USUÁRIO CRIA NOVA CONTA (envio usuario, bem vindo) ok
   - CONFIRMAÇÃO NO CHECKOUT (envio para usuario e admin)
   - CADASTRO NO FORM DO CONTATO (envio admin)
   - MUDANÇA DE STATUS DA ENTREGA  (envio usuario)
@@ -14,13 +14,9 @@
 
   ALTERAR FOTOS E TEXTOS.
 
-  IMPLEMENTAR RECUPERAÇÃO DE SENHA E VERIFICACAO DE EMAIL AO CADASTRAR (MSG SE NAO VERIFICADO)
+  IMPLEMENTAR RECUPERAÇÃO DE SENHA E 
+  VERIFICACAO DE EMAIL AO CADASTRAR (MSG SE NAO VERIFICADO)
 -->
-
-
-
-
-
 
     <div class="first-container"></div>
     <div class="container-fluid bg-grey">
@@ -42,9 +38,7 @@
           <p [class.alert]="!validInfo" [class.alert-danger]="!validInfo">{{adressLine}}
             <span *ngIf="!validInfo">
               <a [routerLink]="['/minha-conta', 'enderecos']">Clique aqui</a> para cadastrar um novo endereço!</span>
-
           </p>
-
         </div>
         <div class="col-xs-12 col-sm-3">
           <h4>Contato para Entrega</h4>

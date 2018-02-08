@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 import { CartService } from '../../shared/services/cart.service';
 import { AuthService } from '../auth/auth.service';

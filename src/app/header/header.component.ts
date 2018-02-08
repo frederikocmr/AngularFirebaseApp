@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from '../body/auth/auth.service';
 import { CartService } from '../shared/services/cart.service';
@@ -11,12 +12,13 @@ import { ShoppingCart } from '../shared/models/cart.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  hamb = false;
+  public hamb = false;
+  public mouseOvered: boolean;
   public cart: Observable<ShoppingCart>;
   private cartSubscription: Subscription;
   public itemCount: number;
 
-  constructor(private authService: AuthService, private shoppingCartService: CartService) { }
+  constructor(public authService: AuthService, private shoppingCartService: CartService) { }
 
   ngOnInit() {
     this.cart = this.shoppingCartService.get();

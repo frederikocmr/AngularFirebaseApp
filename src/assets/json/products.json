@@ -20,8 +20,8 @@
     {
         "id": "58552daa-30f6-46fa-a808-f1a1d7667561",
         "price": 3,
-        "name": "Roots",
-        "description": "Beets help your body to release stomach acid which aids digestion!",
+        "name": "Nome do Produto",
+        "description": "Aqui ficará a descrição do produto.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
         "categoryPath": "tipo2"

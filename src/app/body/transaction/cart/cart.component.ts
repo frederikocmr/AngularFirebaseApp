@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import { CartItem } from '../../../shared/models/cart-item.model';
 import { Product } from '../../../shared/models/product.model';
@@ -22,6 +23,8 @@ interface ICartItemWithProduct extends CartItem {
 })
 export class CartComponent implements OnInit, OnDestroy {
   public cart: Observable<ShoppingCart>;
+  public vazio;
+  public isLoading;
   public cartItems: ICartItemWithProduct[];
   public itemCount: number;
   public productToBeRemoved: Product;

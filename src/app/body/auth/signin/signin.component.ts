@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+
 
 import { AuthService } from '../auth.service';
 import { UIService } from '../../../shared/services/UI.service';

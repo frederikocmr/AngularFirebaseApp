@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import { ShoppingCart } from '../../../shared/models/cart.model';
 import { CartItem } from '../../../shared/models/cart-item.model';
