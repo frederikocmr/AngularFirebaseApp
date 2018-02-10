@@ -43,51 +43,54 @@ export class TransactionService {
                 const dateS = new Date();
                 const address = this.user.adresses[0];
 
+                const valuesToInsert = {
+                    address: address.addressLine + ', ' +
+                        address.complement + ', ' +
+                        address.type + ', nº ' +
+                        address.number + ', ' +
+                        address.district + ', ' +
+                        address.city + ' - ' +
+                        address.state + ' / CEP: ' +
+                        address.postalCode,
+                    contactName: this.user.adresses[0].personName,
+                    deliveryOption: this.deliveryOpt,
+                    itens: this.itensString,
+                    paidValue: grossTotal,
+                    paymentMethod: this.paymentMethod,
+                    date: dateS.toISOString(),
+                    status: '1'
+                };
+
                 if (valuesRef.data().orders !== undefined) {
                     ordersArray = valuesRef.data().orders;
-                    ordersArray.push(
-                        {
-                            address: address.addressLine + ', ' +
-                                address.complement + ', ' +
-                                address.type + ', nº ' +
-                                address.number + ', ' +
-                                address.district + ', ' +
-                                address.city + ' - ' +
-                                address.state + ' / CEP: ' +
-                                address.postalCode,
-                            contactName: this.user.adresses[0].personName,
-                            deliveryOption: this.deliveryOpt,
-                            itens: this.itensString,
-                            paidValue: grossTotal,
-                            paymentMethod: this.paymentMethod,
-                            date: dateS.toISOString(),
-                            status: '1'
-                        }
-                    );
+                    ordersArray.push(valuesToInsert);
                 } else {
-                    ordersArray = [
-                        {
-                            address: address.addressLine + ', ' +
-                                address.complement + ', ' +
-                                address.type + ', nº ' +
-                                address.number + ', ' +
-                                address.district + ', ' +
-                                address.city + ' - ' +
-                                address.state + ' / CEP: ' +
-                                address.postalCode,
-                            contactName: this.user.adresses[0].personName,
-                            deliveryOption: this.deliveryOpt,
-                            itens: this.itensString,
-                            paidValue: grossTotal,
-                            paymentMethod: this.paymentMethod,
-                            date: dateS.toISOString(),
-                            status: '1'
-                        }
-                    ];
+                    ordersArray = [valuesToInsert];
                 }
-
+                this.createNewOrderDocument(valuesToInsert);
                 transaction.update(ordersRefs, { orders: ordersArray });
             });
         });
+    }
+
+
+    private createNewOrderDocument(values): void {
+        const dateNow = Date.now();
+        const uniqueKey = this.user.uid + '-' + dateNow;
+
+        values.email = this.user.email;
+        values.document = (this.user.document ? this.user.document : 'Sem registro');
+        values.id = dateNow;
+
+        const ordersRefs = this.fb.firestore().collection('orders').doc(uniqueKey);
+
+        ordersRefs.set(values).
+            then(() => {
+                // update successful (document exists)
+            })
+            .catch((error) => {
+                // (document does not exists)
+                console.log(error);
+            });
     }
 }

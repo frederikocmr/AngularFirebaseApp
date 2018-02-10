@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { ContactService } from './contact.service';
+
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  styleUrls: ['./contact.component.css'],
+  providers: [ContactService]
 })
 export class ContactComponent implements OnInit {
-  contactForm: FormGroup;
-  errMsg = '';
+  public contactForm: FormGroup;
+  public errMsg = '';
 
-  constructor() { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
     window.scrollTo(0, 0);
@@ -19,16 +22,18 @@ export class ContactComponent implements OnInit {
       {
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'name': new FormControl(null, [Validators.required, Validators.pattern('^[A-zÀ-ÿ ]+$')]),
-        'sel1': new FormControl('1', [Validators.required]),
-        'message': new FormControl(null, [Validators.required, Validators.minLength(10), Validators.pattern('^[A-zÀ-ÿ ]+$')])
+        'type': new FormControl('elogio', [Validators.required]),
+        'message': new FormControl(null, [Validators.required, Validators.minLength(5), Validators.pattern('^[A-zÀ-ÿ ?,.!:]+$')])
       }
     );
   }
 
   onSubmitContact() {
     if (this.contactForm.valid && this.contactForm.touched) {
-
-      console.log(this.contactForm);
+      this.contactService.checkUserData(this.contactForm.value);
+      this.contactForm.reset();
+      this.contactForm.get('type').setValue('elogio');
+      this.errMsg = '';
     } else {
       this.errMsg = 'Por favor, verifique os dados e tente novamente!';
     }

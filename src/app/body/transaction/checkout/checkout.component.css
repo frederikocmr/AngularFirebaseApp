@@ -94,6 +94,10 @@ h1 {
     font-weight: bold;
     font-family: 'Lobster-Two-Regular';
 }
+
+.delivery_option_div {
+    cursor: pointer;
+}
 /* modal */
 
 .modalDialog {

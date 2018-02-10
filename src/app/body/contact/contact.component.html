@@ -120,8 +120,7 @@
                                                 <i class="fa fa-user text-primary" style="color:#9d1e2e;"></i>
                                             </div>
                                             <input type="text" formControlName="name" class="form-control" id="name" placeholder="Digite aqui seu nome...">
-                                            <span *ngIf="!contactForm.get('name').valid && contactForm.get('name').touched" class="help-block alert alert-danger"
-                                            role="alert">Nome inválido.</span>
+                                            <span *ngIf="!contactForm.get('name').valid && contactForm.get('name').touched" class="help-block alert alert-danger" role="alert">Nome inválido.</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -131,8 +130,7 @@
                                                 <i class="fa fa-envelope text-primary" style="color:#9d1e2e;"></i>
                                             </div>
                                             <input type="text" formControlName="email" class="form-control" id="email" placeholder="Digite aqui seu email...">
-                                            <span *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched" class="help-block alert alert-danger"
-                                            role="alert">Email inválido.</span>
+                                            <span *ngIf="!contactForm.get('email').valid && contactForm.get('email').touched" class="help-block alert alert-danger" role="alert">Email inválido.</span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -141,12 +139,12 @@
                                             <div class="input-group-addon bg-light">
                                                 <i class="fa fa-tag prefix text-primary" style="color:#9d1e2e;"></i>
                                             </div>
-                                            <select class="form-control" formControlName="sel1" id="sel1">
-                                                <option value="1">Elogio</option>
-                                                <option value="2">Dúvida</option>
-                                                <option value="3">Reclamação</option>
-                                                <option value="4">Sugestão</option>
-                                                <option value="5">Outro</option>
+                                            <select class="form-control" formControlName="type" id="type">
+                                                <option value="elogio">Elogio</option>
+                                                <option value="duvida">Dúvida</option>
+                                                <option value="reclamacao">Reclamação</option>
+                                                <option value="sugestao">Sugestão</option>
+                                                <option value="outro">Outro</option>
                                             </select>
                                         </div>
                                     </div>
@@ -158,7 +156,7 @@
                                             </div>
                                             <textarea class="form-control" formControlName="message" id="message" placeholder="Digite aqui sua mensagem..."></textarea>
                                             <span *ngIf="!contactForm.get('message').valid && contactForm.get('message').touched" class="help-block alert alert-danger"
-                                            role="alert">Mensagem inválida ou muito pequena, mínimo de 15 caracteres.</span>
+                                                role="alert">Mensagem com caracteres inválidos ou muito pequena, mínimo de 5 caracteres.</span>
                                         </div>
                                     </div>
                                     <div class="text-center">

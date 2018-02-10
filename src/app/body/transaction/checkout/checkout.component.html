@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-xs-12 text-center">
           <span class="alert alert-danger ">
-            AVISO: Atualmente estamos fazendo entrega somente na região de Goiânia
+            AVISO: Atualmente estamos fazendo entrega somente em Goiânia e região.
           </span>
         </div>
       </div>
@@ -83,11 +83,11 @@
 
           <div class="row delivery-list" *ngFor="let option of deliveryOptions | async">
             <div class="col-xs-1">
-              <input type="radio" name="delivery_option" id="{{option.name}}" [checked]="option.id === (cart | async).deliveryOptionId"
+              <input class="delivery_option_div" type="radio" name="delivery_option" id="{{option.name}}" [checked]="option.id === (cart | async).deliveryOptionId"
                 (click)="setDeliveryOption(option)">
             </div>
             <div class="col-xs-9">
-              <label for="{{option.name}}" (click)="setDeliveryOption(option)">{{option.name}}</label>
+              <label class="delivery_option_div" for="{{option.name}}" (click)="setDeliveryOption(option)">{{option.name}}</label>
             </div>
             <div class="col-xs-2">
               <p>R$ {{option.price | number:'1.2-2'}}</p>
