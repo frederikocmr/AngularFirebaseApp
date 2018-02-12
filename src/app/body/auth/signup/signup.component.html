@@ -151,7 +151,7 @@
             <div>
               <button *ngIf="!isLoading" class="btn btn-lg btn-primary btn-block btn-signup" type="submit">CADASTRAR</button>
               <span *ngIf="!signUpForm.valid  || (signUpForm.valid && errMsg != '')" class="help-block alert alert-danger" role="alert">
-              {{errMsg}}</span>
+                {{errMsg}}</span>
               <span *ngIf="isLoading" class="help-block alert alert-info text-center" role="alert">
                 <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
                 <span class="sr-only">Loading...</span>

@@ -195,6 +195,17 @@ export class AuthService {
 
     }
 
+    recoverPassword(email: string) {
+        let msg = '';
+        this.afAuth.auth.sendPasswordResetEmail(email).then((ok) => {
+            msg = 'Mensagem de recuperação de senha enviada para o email "' + email + '" com sucesso!';
+            alert(msg);
+        }).catch((error) => {
+            msg = error.message;
+            alert((error.code === 'auth/user-not-found' ? 'Usuário não encontrado para este email!' : msg));
+        });
+    }
+
     logOut() {
         this.afAuth.auth.signOut().then(() => {
             this.router.navigate(['/entrar']);

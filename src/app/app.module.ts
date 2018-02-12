@@ -51,6 +51,7 @@ import { ProductService } from './shared/services/product.service';
 import { LocalStorageServie, StorageService } from './shared/services/storage.service';
 import { DeliveryOptionsDataService } from './shared/services/delivery-options.service';
 import { TransactionService } from './body/transaction/transaction.service';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { TransactionService } from './body/transaction/transaction.service';
     AddressesComponent,
     OrdersComponent,
     CheckoutComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     ReactiveFormsModule,

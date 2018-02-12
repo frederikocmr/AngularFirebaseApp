@@ -48,16 +48,25 @@ p{
     box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 }
 .btn-buy{
-    font-size: 90% ;
+    margin-top: 10px;
+    font-size: 100% ;
     color: white ;    
     background:#9d1e2f ;
+    opacity:0.90;
+}
+.btn-to-cart{
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 90% ;
+    color: white ;    
+    background:#922836;
     opacity:0.90;
 }
 .btn-quantity{
     font-weight: bold;
 }
 
-.btn-buy:hover{
+.btn:hover{
     opacity:1.00;
     box-shadow: 1px 2px 3px rgba(0,0,0,.625);
     font-weight: bold;

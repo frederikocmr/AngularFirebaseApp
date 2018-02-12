@@ -77,7 +77,11 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   forgotPassword() {
-    alert('Funcionalidade indisponível no momento! Contate o suporte.');
+    if (this.signInForm.get('email').valid) {
+      this.auth.recoverPassword(this.signInForm.get('email').value);
+    } else {
+      alert('É necessário digitar um email para enviarmos a confirmação!');
+    }
   }
 
   onLoginGoogle() {

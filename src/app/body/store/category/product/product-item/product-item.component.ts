@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Product } from '../../../../../shared/models/product.model';
@@ -17,7 +17,7 @@ export class ProductItemComponent implements OnInit, OnDestroy {
   category: string;
   quantity = 0;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.category = this.route.snapshot.params['category'];
@@ -43,7 +43,7 @@ export class ProductItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  addToCart() {
+  addToCart(toCart: boolean) {
     if (this.quantity > 0) {
       this.productAdded.emit({
         product: this.product,
@@ -51,6 +51,10 @@ export class ProductItemComponent implements OnInit, OnDestroy {
       });
 
       this.quantity = 0;
+
+      if (toCart) {
+        this.router.navigate(['/carrinho']);
+      }
 
     } else {
       alert('É necessário selecionar a quantidade que deseja adicionar!');

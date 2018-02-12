@@ -17,6 +17,16 @@
     background: url('/assets/images/complement/white_content.gif');
 }
 
+.cancelOrder {
+    margin-top: 20px;
+    font-family: 'Lobster-Two-Regular';
+    font-size: 100%;
+}
+.cancelOrder:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 .btn:hover {
     background:  #9d1e2fc9;
 }

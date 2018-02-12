@@ -19,4 +19,8 @@ export class OrdersComponent implements OnInit {
     this.noOrder = false;
     return true;
   }
+
+  public cancelOrder(order) {
+    console.log(order);
+  }
 }

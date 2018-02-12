@@ -55,12 +55,39 @@ export class SignupComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkPasswords(): boolean {
+    if (this.signUpForm.get('password').value === this.signUpForm.get('confirmedPassword').value) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getAge(dateString) {
+    const today = new Date();
+    const birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
   onSignUp() {
     if (this.signUpForm.valid && this.signUpForm.touched) {
       this.errMsg = '';
-
-      this.authService.signUpUser(this.signUpForm.value);
-
+      if (this.checkPasswords()) {
+        if (this.getAge(this.signUpForm.get('birthDate').value) >= 18 && this.getAge(this.signUpForm.get('birthDate').value) <= 100) {
+          this.authService.signUpUser(this.signUpForm.value);
+        } else {
+          this.errMsg = 'ERRO: Data de nascimento inválida para cadastro do usuário. Ps.: Serão aceito somente usuários maiores de idade.';
+        }
+      } else {
+        this.signUpForm.get('confirmedPassword').reset();
+        this.signUpForm.get('confirmedPassword').markAsTouched();
+        this.errMsg = 'ERRO: As senhas não estão iguais! Confirme novamente a senha.';
+      }
     } else {
       this.errMsg = 'Por favor, verifique os dados e tente novamente!';
     }
