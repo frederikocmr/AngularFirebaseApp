@@ -1,11 +1,11 @@
 <div class="col-xs-12 col-sm-4 col-md-4">
   <div class="style_prevu_kit">
-    <div class="card animated" (click)="onCategoryClick()" [class.fadeOutUp]="categoryClicked" [style.display]="categoryClickedHide ? 'none' : 'inherit'">
+    <div class="card animated" (click)="onCategoryClick()" [style.display]="categoryClickedHide ? 'none' : 'inherit'">
       <img src="{{cat.img}}">
       <h1>{{cat.name}}</h1>
       <p>{{cat.description}}</p>
     </div>
-    <div class="minicard animated" (click)="onCategoryClickMini()" [class.fadeIn]="categoryClicked" [style.display]="categoryClickedHide ? 'inherit' : 'none'"
+    <div class="minicard animated" (click)="onCategoryClickMini()" [class.fadeInUp]="categoryClicked" [style.display]="categoryClickedHide ? 'inherit' : 'none'"
       [class.selected]="categorySelected">
       <h1>{{cat.name}}</h1>
     </div>

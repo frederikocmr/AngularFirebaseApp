@@ -20,6 +20,12 @@ hr{
     /* margin-top: 20px; */
 }
 
+.privacy-policy {
+    font-size: 40%;
+    text-align: center;
+    color:#a0a0a0;
+}
+
 .container-fluid{
     margin-top: 40px;
     margin-bottom: 40px;

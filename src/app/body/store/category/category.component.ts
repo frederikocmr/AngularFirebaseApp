@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, Params, NavigationEnd } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 import { Category } from '../../../shared/models/category.model';
@@ -9,14 +9,13 @@ import { Category } from '../../../shared/models/category.model';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
   @Input() cat: Category;
   @Input() id: number;
 
-  @Input() categoryClicked: boolean;
-  @Input() categoryClickedHide: boolean;
+  categoryClicked: boolean;
+  categoryClickedHide: boolean;
 
-  handleRoute: any;
   paramsSubscription: Subscription;
   actualCategory: string;
   categorySelected = false;
@@ -27,41 +26,67 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.checkRoute();
+
+    if (this.route.firstChild) {
+      this.categoryClicked = true;
+      this.categoryClickedHide = true;
+
+      if (this.route.snapshot.firstChild.params['category'] === this.cat.path) {
+        this.categorySelected = true;
+      } else {
+        this.categorySelected = false;
+      }
+
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSubscription) {
+      this.paramsSubscription.unsubscribe();
+    }
   }
 
   onCategoryClick() {
-    this.handleRoute = setInterval(() => this.onRouteChange(), 500);
+    this.onRouteChange();
   }
 
   onRouteChange() {
     this.router.navigate(['/loja', this.cat.path]);
-    clearInterval(this.handleRoute);
   }
 
   onCategoryClickMini() {
     this.onRouteChange();
     this.checkRoute();
-
   }
 
   checkRoute() {
-    if (this.route.firstChild) {
-      if (!this.subscribed) {
-        this.actualCategory = this.route.snapshot.firstChild.params['category'];
-        this.paramsSubscription = this.route.firstChild.params.subscribe(
-          (params: Params) => {
-            // porem nao funciona quando nao tem nenhuma category, fazer funcionar quaando clica desde incio /loja...
-            this.actualCategory = params['category'];
-            if (this.actualCategory === this.cat.path) {
-              this.categorySelected = true;
+    if (!this.subscribed) {
+      this.paramsSubscription = this.router.events.subscribe(
+        (val) => {
+          if (val instanceof NavigationEnd) {
+            this.actualCategory = (val.url.split('/'))[2];
+            if (this.actualCategory) {
+
+              this.categoryClicked = true;
+              this.categoryClickedHide = true;
+
+              if (this.actualCategory === this.cat.path) {
+                this.categorySelected = true;
+              } else {
+                this.categorySelected = false;
+              }
+
             } else {
-              this.categorySelected = false;
+              // clicou no /loja
+              this.categoryClicked = false;
+              this.categoryClickedHide = false;
             }
-            this.subscribed = true;
           }
-        );
-      }
+          this.subscribed = true;
+        }, (error) => {
+          console.log('err paramsSubscription');
+        }
+      );
     }
   }
-
 }

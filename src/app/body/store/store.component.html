@@ -13,17 +13,17 @@
         <h3 class="margin">
           <strong>Delivery em Goiânia e Região</strong>
         </h3>
-        <p>Texto da loja este é a loja, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <p>Texto da loja este é a loja, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
       </div>
       <div class="first-container"></div>
       <div class="container-fluid bg-grey">
         <div class="container-fluid tipos">
-          <div align="center" class="fond animated">
+          <div align="center" class="fond">
             <div style="width:100%;">
-              <div class="row animated" (click)="onCategoryClick()">
-                <app-category *ngFor="let cat of categories; let i = index" [cat]="cat" [id]="i" [categoryClicked]="categoryClicked" [categoryClickedHide]="categoryClickedHide"></app-category>
+              <div class="row">
+                <app-category *ngFor="let cat of categories; let i = index" [cat]="cat" [id]="i"></app-category>
               </div>
             </div>
           </div>

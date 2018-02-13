@@ -64,8 +64,6 @@ export class AuthService {
             }, 1300);
 
         }).catch(error => {
-            //  console.log(error);
-            // alert(error.message);
             this.uiService.errorMsgStateChanged.next(error.message);
             this.uiService.loadingStateChanged.next(false);
         });
@@ -84,8 +82,6 @@ export class AuthService {
                 this.router.navigate(['/minha-conta']);
             }, 1300);
         }).catch(error => {
-            //  console.log(error);
-            // alert(error.message);
             this.uiService.errorMsgStateChanged.next(error.message);
             this.uiService.loadingStateChanged.next(false);
         });
@@ -95,7 +91,7 @@ export class AuthService {
     getToken() {
         firebase.auth().currentUser.getIdToken()
             .then(
-            (token: string) => this.token = token
+                (token: string) => this.token = token
             ).catch(error => {
                 console.log(error);
             });
@@ -212,19 +208,3 @@ export class AuthService {
         });
     }
 }
-
-/*
-You can of course improve this app even more. Some ideas:
-
-1 -> Check if a token is present at application startup (check the localStorage manually or use the Firebase SDK
-    to do so - just make sure that you somehow wait for the SDK to finish its initialization)
-2 ok -> Redirect the user if he want to access a protected route (right now, nothing happens)
-    - inject the router and call this.router.navigate(...) to do so
-3 -> Redirect the user on logout so that he's not able to stay on pages which are reserved for authenticated users
-    - you can simply inject the router and call this.router.navigate(...) in the logout() method
-
-
-    https://www.udemy.com/the-complete-guide-to-angular-2/learn/v4/questions/2418294
-
-    https://www.udemy.com/the-complete-guide-to-angular-2/learn/v4/questions/2772818
-*/

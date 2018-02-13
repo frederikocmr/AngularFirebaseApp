@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Product } from '../../../../shared/models/product.model';
 import { ProductService } from '../../../../shared/services/product.service';
@@ -28,6 +28,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     private productsService: ProductService,
     private shoppingCartService: CartService,
     private route: ActivatedRoute,
+    private router: Router,
     private categoryService: CategoryService) {
   }
 
@@ -53,7 +54,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.paramsSubscription = this.route.params.subscribe(
       (params: Params) => {
         this.category = params['category'];
-        this.categorySel = this.categoryService.getCategoryByPath(this.category);
+        const categoryTemp = this.categoryService.getCategoryByPath(this.category);
+        if (categoryTemp) {
+          this.categorySel = categoryTemp;
+        } else {
+          this.router.navigate(['/not-found']);
+        }
       });
     this.products = this.productsService.all();
   }

@@ -87,6 +87,7 @@ hr {
 
 .bg-grey {
     background: url('/assets/images/complement/white_content.gif') white;
+    min-height: 776px;
 }
 
 .bg-paper {
