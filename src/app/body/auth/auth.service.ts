@@ -59,9 +59,6 @@ export class AuthService {
             this.updateUserData(result, form);
             this.uiService.errorMsgStateChanged.next('');
             this.uiService.loadingStateChanged.next(false);
-            setTimeout(() => {
-                this.router.navigate(['/minha-conta']);
-            }, 1300);
 
         }).catch(error => {
             this.uiService.errorMsgStateChanged.next(error.message);
@@ -78,9 +75,6 @@ export class AuthService {
         ).then(result => {
             this.uiService.errorMsgStateChanged.next('');
             this.uiService.loadingStateChanged.next(false);
-            setTimeout(() => {
-                this.router.navigate(['/minha-conta']);
-            }, 1300);
         }).catch(error => {
             this.uiService.errorMsgStateChanged.next(error.message);
             this.uiService.loadingStateChanged.next(false);
@@ -124,9 +118,7 @@ export class AuthService {
                 this.updateUserData(credential.user);
                 this.uiService.errorMsgStateChanged.next('');
                 this.uiService.loadingStateChanged.next(false);
-                setTimeout(() => {
-                    this.router.navigate(['/minha-conta']);
-                }, 1300);
+
             }).catch(error => {
                 this.uiService.errorMsgStateChanged.next(error.message);
                 this.uiService.loadingStateChanged.next(false);
@@ -189,6 +181,7 @@ export class AuthService {
                 userRef.set(data);
             });
 
+        this.router.navigate(['/']);
     }
 
     recoverPassword(email: string) {

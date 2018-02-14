@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { FirebaseApp } from 'angularfire2';
 
 import { AuthService } from '../auth/auth.service';
 import { User } from '../../shared/interfaces/user.interface';
@@ -10,7 +11,7 @@ export class UserAccountService {
     public aUser: User;
     private userSubs: Subscription;
 
-    constructor(private authService: AuthService, private afs: AngularFirestore) { }
+    constructor(private authService: AuthService, private afs: AngularFirestore, private fb: FirebaseApp) { }
 
     initUserListener() {
 
@@ -82,6 +83,60 @@ export class UserAccountService {
                 // (document does not exists)
                 userRef.set(data);
             });
+    }
+
+
+    public cancelOrder(order): void {
+        const uniqueKey = this.aUser.uid + '-' + order.id;
+
+        // para a collection orders
+
+        const ordersRefs = this.afs.collection('orders').doc(uniqueKey);
+        ordersRefs.update({ status: 4 }).then(() => { }).catch((error) => { });
+
+        // para a o array orders que estao na collection users
+
+        const docRef = this.fb.firestore().collection('users').doc(this.aUser.uid);
+        const docRefSave = this.fb.firestore().collection('users').doc(this.aUser.uid);
+
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                const docData = doc.data().orders;
+                let i = docData.length;
+
+                while (i--) {
+                    if (order.id === docData[i].id) {
+                        docData[i].status = '4';
+                        break;
+                    }
+                }
+
+                console.log(docData);
+
+
+                docRefSave.update({
+                    orders: docData
+                }).
+                    then(() => {
+                        // update successful (document exists)
+                        alert('Status alterado com sucesso!');
+                    })
+                    .catch((error) => {
+                        // (document does not exists)
+                        console.log(error);
+
+                    });
+
+
+            } else {
+                alert('Erro, tente novamente mais tarde ou contate o suporte!');
+            }
+        }).catch(function (error) {
+            alert('Erro. Tente novamente mais tarde ou contate o suporte!');
+        });
+
+        // Melhorar: Criar uma subcolection dentro da collection users
     }
 
 }

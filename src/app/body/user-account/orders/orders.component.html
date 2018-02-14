@@ -14,14 +14,14 @@
             <tr *ngFor="let order of user.orders; let i = index" class="order">
               <span *ngIf="hasOrder()"> </span>
               <td class="order-left">
-                <h4>#{{i+1}}</h4>
+                <h4>#{{order.id}}</h4>
                 <h4>Status:</h4>
                 <span class="label" [class.label-warning]="(order.status == 1)" [class.label-info]="(order.status == 2)" [class.label-success]="(order.status == 3)"
                   [class.label-danger]="(order.status == 4)">
                   {{(order.status == 1 ? 'Processando' : (order.status == 2 ? 'Em trânsito' : (order.status == 3 ? 'Entregue': 'Cancelado')))}}
                 </span>
 
-                <button class="label label-default cancelOrder" (click)="cancelOrder(order)">
+                <button *ngIf="(order.status != 4)" class="btn btn-link cancelOrder" (click)="onCancelOrder(order)">
                   Cancelar Pedido
                 </button>
               </td>
@@ -63,3 +63,21 @@
   </div>
 
 </div>
+<modal #myModal>
+  <modal-header>
+    <h1>Cancelar Pedido</h1>
+  </modal-header>
+  <modal-content>
+    <h4>
+      Você tem certeza em que deseja cancelar este pedido?
+    </h4>
+  </modal-content>
+  <modal-footer>
+    <button type="button" class="btn btn-default" (click)="myModal.close();cancelOrder(false);">
+      <strong>VOLTAR</strong>
+    </button>
+    <button type="button" class="btn btn-danger" (click)="myModal.close();cancelOrder(true);">
+      <strong>CONFIRMAR</strong>
+    </button>
+  </modal-footer>
+</modal>

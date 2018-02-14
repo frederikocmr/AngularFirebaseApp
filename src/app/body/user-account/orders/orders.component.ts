@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AuthService } from '../../auth/auth.service';
+import { UserAccountService } from '../user-account.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,8 +9,11 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
+  orderToCancel: any;
   public noOrder = true;
-  constructor(public auth: AuthService) { }
+  @ViewChild('myModal') myModal;
+
+  constructor(public auth: AuthService, private userService: UserAccountService) { }
 
   ngOnInit() {
 
@@ -20,7 +24,16 @@ export class OrdersComponent implements OnInit {
     return true;
   }
 
-  public cancelOrder(order) {
-    console.log(order);
+  public onCancelOrder(order) {
+    this.orderToCancel = order;
+    this.myModal.open();
+  }
+
+  public cancelOrder(cancel: boolean) {
+    if (cancel) {
+      this.userService.cancelOrder(this.orderToCancel);
+    } else {
+      this.orderToCancel = null;
+    }
   }
 }
