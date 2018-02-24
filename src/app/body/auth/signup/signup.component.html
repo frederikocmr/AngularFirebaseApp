@@ -64,14 +64,14 @@
             </div>
 
             <div class="form-group">
-              <label for="birthDate" class="cols-sm-2 control-label">Data de nascimento</label>
+              <label for="birthDate" class="cols-sm-2 control-label">Data de nascimento (dd/mm/aaaa)</label>
               <div class="cols-sm-10">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
                   </span>
-                  <input type="date" formControlName="birthDate" class="form-control" name="birthDate" id="birthDate" placeholder="DIGITE SUA DATA DE NASCIMENTO"
-                    max="1979-12-31" min="2000-01-02" required>
+                  <input type="text" formControlName="birthDate" class="form-control" name="birthDate" id="birthDate" placeholder="DD/MM/AAAA"
+                    required>
                   <span *ngIf="!signUpForm.get('birthDate').valid && signUpForm.get('birthDate').touched" class="help-block alert alert-danger"
                     role="alert">Por favor, digite uma data válida!</span>
 
@@ -101,7 +101,7 @@
             </div>
 
             <div class="form-group">
-              <label for="phoneNumber" class="cols-sm-2 control-label">Telefone</label>
+              <label for="phoneNumber" class="cols-sm-2 control-label">Telefone (DDD + número)</label>
               <div class="cols-sm-10">
                 <div class="input-group">
                   <span class="input-group-addon">

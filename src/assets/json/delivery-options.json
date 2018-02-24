@@ -1,9 +1,9 @@
 [
     {
         "id": "caa93bc4-d69a-4788-aff6-4a6fb538ace8",
-        "name": "Padrão",
-        "description": "A entrega padrão é feita apenas as sextas-feiras da semana.",
-        "price": 5.99
+        "name": "Entrega as Sextas",
+        "description": "A entrega padrão é grátis e será feita apenas as sextas-feiras da semana.",
+        "price": 0
     },
     {
         "id": "c272fc43-28e4-4ffd-ae61-0cfdec565f6f",

@@ -65,7 +65,7 @@
 .jumbotron {
     margin-bottom: 0; 
     background-image: url('/assets/images/background/bg-header.jpg'); 
-    background-position: center bottom;
+    background-position: 10% 90%;
     background-attachment: fixed;
     background-size: cover;
     background-color: white;

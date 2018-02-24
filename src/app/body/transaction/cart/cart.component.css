@@ -47,6 +47,11 @@
     box-shadow:         1px 1px 1px 0px rgba(50, 50, 50, 0.75);
 }
 
+.min-quantity {
+    width: 100%;
+    text-align: center;
+}
+
 #total {
     width: 100%;
     font-size: 19px;

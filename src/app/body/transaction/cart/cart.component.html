@@ -6,6 +6,7 @@
       <h2 class="text-center">Carrinho de Compras</h2>
       <hr>
       <br>
+      <label class="min-quantity alert alert-danger">ATENÇÃO: A QUANTIDADE MÍNIMA PARA REALIZAÇÃO DA COMPRA É DE 10 UNIDADES!</label>
       <div class="emptyCart" *ngIf="vazio">
         <label class=" alert alert-danger">{{message}}</label>
         <hr>
@@ -37,7 +38,7 @@
         <tbody>
           <!-- produto -->
           <tr *ngFor="let item of cartItems">
-            <td data-th="Product">
+            <td data-th="Produto">
               <div class="row">
                 <div class="col-sm-2 hidden-xs">
                   <img src="{{item.product.img}}" alt="..." class="img-responsive" />
@@ -48,10 +49,10 @@
                 </div>
               </div>
             </td>
-            <td data-th="Price">
+            <td data-th="Preço">
               R$ {{item.product.price | number:'1.2-2'}} / {{item.product.measure}}
             </td>
-            <td data-th="Quantity">
+            <td data-th="Quantidade">
               <button class="btn btn-sm fa fa-minus" (click)="removeProductFromCart(item.product, item.quantity)" [attr.disabled]="item.quantity === 1 ? true : null"></button>
               <button class="btn btn-sm fa fa-plus" (click)="addProductToCart(item.product)"></button>
 

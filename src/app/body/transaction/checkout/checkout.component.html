@@ -25,7 +25,8 @@
       <div class="row">
         <div class="col-xs-12 text-center">
           <span class="alert alert-danger ">
-            AVISO: Atualmente estamos fazendo entrega somente em Goiânia e região.
+            AVISO: Atualmente, as entregas serão feitas apenas as sextas feiras, e somente nas cidades de Goiânia, Aparecida de Goiânia
+            e Piracanjuba.
           </span>
         </div>
       </div>
@@ -48,9 +49,10 @@
           <form [formGroup]="checkoutForm">
             <h4>Metodo de Pagamento</h4>
             <select formControlName="payment_option" class="form-control">
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Credito">Cartão - Crédito</option>
+              <option value="Dinheiro">Dinheiro - À Vista</option>
+              <option value="Credito">Cartão - Crédito (em até 2x)</option>
               <option value="Debito">Cartão - Débito</option>
+              <option value="Boleto">Boleto - Negociável</option>
             </select>
             <label class="warn-payment">* O pagamento será feito no local de entrega.</label>
           </form>
@@ -135,7 +137,8 @@
         <div *ngIf="validInfo">
           <h4 style="font-family: 'Frederick-Regular' ;">
             <strong>
-              * Atualmente, as entregas serão feitas apenas as sextas feiras, e somente na região de Goiânia.
+              * Atualmente, as entregas serão feitas apenas as sextas feiras, e somente nas cidades de Goiânia, Aparecida de Goiânia e
+              Piracanjuba.
             </strong>
           </h4>
           <h4 style="font-family: 'Frederick-Regular' ;">

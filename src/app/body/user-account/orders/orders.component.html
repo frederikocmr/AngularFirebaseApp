@@ -17,11 +17,12 @@
                 <h4>#{{order.id}}</h4>
                 <h4>Status:</h4>
                 <span class="label" [class.label-warning]="(order.status == 1)" [class.label-info]="(order.status == 2)" [class.label-success]="(order.status == 3)"
-                  [class.label-danger]="(order.status == 4)">
-                  {{(order.status == 1 ? 'Processando' : (order.status == 2 ? 'Em trânsito' : (order.status == 3 ? 'Entregue': 'Cancelado')))}}
+                  [class.label-default]="(order.status == 4)" [class.label-danger]="(order.status == 5)">
+                  {{(order.status == 1 ? 'Processando' : (order.status == 2 ? 'Confirmado' : (order.status == 3 ? 'Em trânsito': (order.status
+                  == 4 ? 'Entregue': 'Cancelado'))))}}
                 </span>
 
-                <button *ngIf="(order.status != 4)" class="btn btn-link cancelOrder" (click)="onCancelOrder(order)">
+                <button *ngIf="(order.status != 5 && order.status != 4)" class="btn btn-link cancelOrder" (click)="onCancelOrder(order)">
                   Cancelar Pedido
                 </button>
               </td>

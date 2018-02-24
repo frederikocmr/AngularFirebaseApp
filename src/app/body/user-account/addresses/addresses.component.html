@@ -27,10 +27,10 @@
                 <td>Nome do Destinatário:</td>
                 <td>{{ad.personName}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>Tipo endereço:</td>
                 <td>{{ad.type}}</td>
-              </tr>
+              </tr> -->
               <tr>
                 <td>CEP:</td>
                 <td>{{ad.postalCode}}</td>
@@ -106,14 +106,13 @@
 
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>Tipo endereço:</td>
                   <td>
                     <input type="text" formControlName="type" class="form-control" name="type" id="type" placeholder="CASA, APARTAMENTO..." required>
                     <span *ngIf="!editAddrForm.get('type').valid && editAddrForm.get('type').touched" class="help-block alert alert-danger" role="alert">Por favor, digite um tipo de endereço válido!</span>
-
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td>CEP:</td>
                   <td>

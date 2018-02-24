@@ -110,4 +110,10 @@ export class CartService {
                 }
             });
     }
+
+    public checkQuantity(): boolean {
+        const cart = this.retrieve();
+        const itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+        return (itemCount >= 10);
+    }
 }

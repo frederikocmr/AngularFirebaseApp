@@ -61,7 +61,9 @@ export class AuthService {
             this.uiService.loadingStateChanged.next(false);
 
         }).catch(error => {
-            this.uiService.errorMsgStateChanged.next(error.message);
+            this.uiService.errorMsgStateChanged.next(
+                this.uiService.printErrorByCode(error.code)
+            );
             this.uiService.loadingStateChanged.next(false);
         });
     }
@@ -76,7 +78,9 @@ export class AuthService {
             this.uiService.errorMsgStateChanged.next('');
             this.uiService.loadingStateChanged.next(false);
         }).catch(error => {
-            this.uiService.errorMsgStateChanged.next(error.message);
+            this.uiService.errorMsgStateChanged.next(
+                this.uiService.printErrorByCode(error.code)
+            );
             this.uiService.loadingStateChanged.next(false);
         });
 
@@ -120,7 +124,9 @@ export class AuthService {
                 this.uiService.loadingStateChanged.next(false);
 
             }).catch(error => {
-                this.uiService.errorMsgStateChanged.next(error.message);
+                this.uiService.errorMsgStateChanged.next(
+                    this.uiService.printErrorByCode(error.code)
+                );
                 this.uiService.loadingStateChanged.next(false);
             });
     }

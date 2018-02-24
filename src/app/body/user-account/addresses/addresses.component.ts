@@ -24,7 +24,7 @@ export class AddressesComponent implements OnInit {
     this.editAddrForm = new FormGroup(
       {
         'personName': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[A-zÀ-ÿ ]+$')]),
-        'type': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[A-zÀ-ÿ ]+$')]),
+        'type': new FormControl(''),
         'postalCode': new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(8),
         Validators.pattern('^[0-9]+$')]),
         'addressLine': new FormControl(null, [Validators.required, Validators.minLength(3)]),

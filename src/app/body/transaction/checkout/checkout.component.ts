@@ -71,8 +71,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           this.contactName = address.personName;
 
           this.adressLine = address.addressLine + ', ' +
-            address.complement + ', ' +
-            address.type + ', nº ' +
+            address.complement + ', nº ' +
             address.number + ', ' +
             address.district + ', ' +
             address.city + ' - ' +
@@ -143,12 +142,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   }
 
   public openModal(): void {
-    if (this.optionChecked) {
-      this.myModal.open();
-      this.trService.setPayment(this.checkoutForm.get('payment_option').value);
-      this.trService.setItensString(this.productsString);
+    if (this.shoppingCartService.checkQuantity()) {
+      if (this.optionChecked) {
+        this.myModal.open();
+        this.trService.setPayment(this.checkoutForm.get('payment_option').value);
+        this.trService.setItensString(this.productsString);
+      } else {
+        alert('É necessário escolher um método de entrega antes de continuar');
+      }
     } else {
-      alert('É necessário escolher um método de entrega antes de continuar');
+      alert('Impossível continuar, pois a quantidade mínima para entrega é de 10 unidades.');
     }
   }
 

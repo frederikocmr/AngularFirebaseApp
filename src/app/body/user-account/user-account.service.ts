@@ -92,7 +92,7 @@ export class UserAccountService {
         // para a collection orders
 
         const ordersRefs = this.afs.collection('orders').doc(uniqueKey);
-        ordersRefs.update({ status: 4 }).then(() => { }).catch((error) => { });
+        ordersRefs.update({ status: 5 }).then(() => { }).catch((error) => { });
 
         // para a o array orders que estao na collection users
 
@@ -107,13 +107,10 @@ export class UserAccountService {
 
                 while (i--) {
                     if (order.id === docData[i].id) {
-                        docData[i].status = '4';
+                        docData[i].status = 5;
                         break;
                     }
                 }
-
-                console.log(docData);
-
 
                 docRefSave.update({
                     orders: docData

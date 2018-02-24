@@ -16,7 +16,11 @@ export class OrdersComponent implements OnInit {
   constructor(public auth: AuthService, private userService: UserAccountService) { }
 
   ngOnInit() {
-
+    // 1 - Processando
+    // 2 - Confirmado
+    // 3 - Em trânsito
+    // 4 - Entregue
+    // 5 - Cancelado
   }
 
   public hasOrder(): boolean {
