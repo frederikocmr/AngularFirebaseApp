@@ -28,6 +28,7 @@ hr {
     background-size: cover;
     height: 100%;
     margin-bottom: -5px;
+    padding-bottom: 5%;
 }
 
 .jumbotron {
@@ -69,7 +70,7 @@ hr {
 .main-content {
     font-family: 'Frederick-Regular';
     font-weight: bold !important; 
-    margin: 4% 4% 4% 4%;
+    margin: 4% 4% 0% 4%;
     color: #9d1e2e;
     background: white;
     height: 60%;

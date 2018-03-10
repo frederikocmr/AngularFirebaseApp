@@ -44,7 +44,7 @@
 
 .main-content {
     font-family: 'Frederick-Regular';
-    font-weight: bold !important; 
+    font-weight: bold; 
     margin: 4% 4% 4% 4%;
     color: #9d1e2e;
     background: white;
@@ -152,4 +152,21 @@ button:hover{
 
 input.ng-invalid.ng-touched {
     border: 1px solid #9d1e2e;
+}
+
+.help > p {
+    color: rgb(48, 47, 47);
+    font-weight: 390;
+}
+
+.read-more {
+    color: rgb(48, 47, 47);
+    font-weight: 390;
+}
+
+.badge {
+    cursor: pointer;
+    background-color: #c6c6c6;
+    color: #7d0505;
+    font-weight: 100;
 }

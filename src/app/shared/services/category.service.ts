@@ -4,23 +4,23 @@ export class CategoryService {
     private category: Category[] = [
         new Category(
             1,
-            'Categoria 1',
-            'Produtos como banha de porco, tolcinho e conservas.',
-            'tipo1',
+            'Linguiças Tradicionais',
+            'Linguiças deliciosas temperadas com alho e sal, acompanhando pimenta ou não.',
+            'linguicas-tradicionais',
             '/assets/images/background/basn.jpg'
         ),
         new Category(
             2,
-            'Categoria 2',
-            'Linguiças de vários tipos, com queijo, jiló e outros.',
-            'tipo2',
+            'Linguiças Recheadas',
+            'Linguiças de vários recheios, como pimenta Biquinho, queijo, jiló e azeitona.',
+            'linguicas-recheadas',
             '/assets/images/background/sausages.jpg'
         ),
         new Category(
             3,
-            'Categoria 3',
-            'Aqui você encontrará filé, picanha, etc.',
-            'tipo3',
+            'Derivados Suínos na Lata',
+            'Produtos como banha de porco na lata e carne suína de extremo sabor e qualidade.',
+            'derivados-suinos',
             '/assets/images/background/pork.jpg'
         )
     ];

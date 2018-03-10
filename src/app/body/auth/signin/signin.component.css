@@ -1,6 +1,7 @@
 .signin-form {
     height: 100%;
     padding-top: 0px;
+    padding-bottom: 10px;
     background: white url('/assets/images/background/bg-wood-ok.jpg');
     background-size: cover;
     border-top: 3px solid #9d1e2e;

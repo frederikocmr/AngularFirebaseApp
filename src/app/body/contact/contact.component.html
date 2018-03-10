@@ -40,8 +40,8 @@
                             <div class="card border-0">
                                 <div class="card-body text-center">
                                     <i class="fa fa-envelope fa-5x mb-3" aria-hidden="true"></i>
-                                    <h4 class="text-uppercase mb-5">email</h4>
-                                    <p style="font-size: 13px;">atendimento@linguicaspiracanjuba.com</p>
+                                    <h4 class="text-uppercase mb-5">Email</h4>
+                                    <p style="font-size: 13px;">linguicaspiracanjuba@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -61,35 +61,73 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="row">
-                                    <h3>DÚVIDAS FREQUENTES</h3>
-                                    <div class="col-sm-10">
-                                        <h4>PERGUNTA 1
-                                            <small>Sep 29, 2015, 9:12 PM</small>
+                                    <h3>PRECISA DE AJUDA?</h3>
+
+                                    <div class="col-sm-10 help">
+                                        <h4>Compra
+                                            <small>Loja &#8728; Carrinho &#8728; Checkout</small>
                                         </h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                            ut labore et dolore magna aliqua.</p>
+                                        <p>
+                                            Através da
+                                            <a routerLink="/loja">loja</a> você poderá escolher a categoria do produto para então visualizá-lo.
+                                            Feito isso, para adicionar um produto ao carrinho ou comprá-lo diretamente, você
+                                            primeiro precisa adicionar sua quantidade.
+                                        </p>
+                                        <span [style.display]="showMore[1] ? 'none' : 'inherit' " class="badge" (click)='chShowMore(1)'> (...) Leia mais
+                                            <span class="caret"></span>
+                                        </span>
+                                        <div *ngIf="(showMore[1])" class="read-more">
+                                            <p>
+                                                No
+                                                <a routerLink="/carrinho">carrinho</a>, é possível visualizar e editar os produtos escolhidos. Para
+                                                finalizar a compra, é necessário a confirmação no checkout, visualizando
+                                                o endereço de entrega que é cadastrado em sua
+                                                <a routerLink="/minha-conta">conta</a>, além de escolher o método de pagamento e entrega.
+                                            </p>
+                                            <p>
+                                                Feito tudo isso, o seu pedido pode ser concluído com sucesso!
+                                            </p>
+                                        </div>
                                         <br>
                                     </div>
 
-                                    <div class="col-sm-10">
-                                        <h4>PERGUNTA 2
-                                            <small>Sep 25, 2015, 8:25 PM</small>
+                                    <div class="col-sm-10 help">
+                                        <h4>Pagamento
+                                            <small>Quando &#8728; Como &#8728; Onde</small>
                                         </h4>
-                                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                            ut labore et dolore magna aliqua.</p>
-                                        <br>
-                                        <p>
-                                            <span class="badge">1</span> Texto:</p>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-xs-10">
-                                                <h4>OBSERVAÇÃO
-                                                    <small>Sep 25, 2015, 8:28 PM</small>
-                                                </h4>
-                                                <p>Lorem ipsum dolor sit amet!</p>
-                                                <br>
-                                            </div>
+                                        <p>O método de pagamento é escolhido na página de checkout...</p>
+                                        <span [style.display]="showMore[2] ? 'none' : 'inherit' " class="badge" (click)='chShowMore(2)'> (...) Leia mais
+                                            <span class="caret"></span>
+                                        </span>
+                                        <div *ngIf="(showMore[2])" class="read-more">
+                                            <p>As opções de pagamento incluem cartão de crédito (que pode ser dividido em duas
+                                                vezes), cartão de débito, dinheiro à vista e boleto a negociar.</p>
+                                            <p>O pagamento é feito no local de entrega, conforme opção selecionada de entrega.</p>
                                         </div>
+                                        <br>
+                                    </div>
+
+                                    <div class="col-sm-10 help">
+                                        <h4>Entrega
+                                            <small>Métodos &#8728; Preços &#8728; Tempo</small>
+                                        </h4>
+                                        <p>
+                                            As opções de entrega atualmente são limitadas à Goiânia, Aparecida de Goiânia e Piracanjuba.
+                                        </p>
+                                        <span [style.display]="showMore[3] ? 'none' : 'inherit' " class="badge" (click)='chShowMore(3)'> (...) Leia mais
+                                            <span class="caret"></span>
+                                        </span>
+                                        <div *ngIf="(showMore[3])" class="read-more">
+                                            <p>
+                                                Estas são escolhidas na página de checkout, onde pode ser visualizado o custo para cada uma.
+                                            </p>
+                                            <p>
+                                                As entregas atualmente estão sendo feitas apenas as sextas-feiras e somente para quem comprar mais de 10 produtos.
+                                            </p>
+                                        </div>
+
+                                        <br>
+
                                     </div>
                                 </div>
                             </div>

@@ -91,7 +91,7 @@ figcaption {
   margin-bottom: -5px;
 }
 
-jumbotron{
+.jumbotron{
   /* border-bottom: 2px solid #9d1e2e; */
   text-shadow: 5px 5px 5px black;
   color: #9d1e2e;

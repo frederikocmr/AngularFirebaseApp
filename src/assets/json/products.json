@@ -1,47 +1,74 @@
 [
     {
         "id": "9aa113b4-1e4e-4cde-bf9d-8358fc78ea4f",
-        "price": 3.50,
-        "name": "Greens",
-        "description": "Looking for simple, clean and green? Four of the most nutrient dense",
+        "price": 20.00,
+        "name": "Linguiça Suína Caipira sem Pimenta",
+        "description": "A mais comum e tradicional linguiça, que é deliciosa e bem temperada com alho e sal.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
-        "categoryPath": "tipo3"
+        "categoryPath": "linguicas-tradicionais"
     },
     {
         "id": "bdcbe438-ac85-4acf-8949-5627fd5b57df",
-        "price": 2.75,
-        "name": "Citrus",
-        "description": "This enzyme rich juice is filled with phytonutrients and bromelin ",
+        "price": 21.75,
+        "name": "Linguiça Suína Caipira com Pimenta Bode",
+        "description": "Linguiça tradicional com pimenta Bode, que traz mais sabor e um pouco de picância.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
-        "categoryPath": "tipo1"
+        "categoryPath": "linguicas-tradicionais"
     },
     {
         "id": "58552daa-30f6-46fa-a808-f1a1d7667561",
         "price": 3,
-        "name": "Nome do Produto",
-        "description": "Aqui ficará a descrição do produto.",
+        "name": "Linguiça Suína Caipira com Pimenta Malagueta",
+        "description": "Linguiça tradicional e dentro, pimenta Malagueta, que possui uma picância clássica.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
-        "categoryPath": "tipo2"
+        "categoryPath": "linguicas-tradicionais"
     },
     {
         "id": "d4666802-fd84-476f-9eea-c8dd29cfb633",
         "price": 1.99,
-        "name": "Orange",
-        "description": "Orange juice with a twist to boost you health! Two nutritional powe",
+        "name": "Linguiça Suína de Jiló Com Queijo",
+        "description": "Esta Linguiça, por ser recheada com jiló e possuir queijo, trazendo um ótimo sabor.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
-        "categoryPath": "tipo1"
+        "categoryPath": "linguicas-recheadas"
     },
     {
-        "id": "7ef3b9dd-5a95-4415-af37-6871d6ff0262",
+        "id": "7ef3b9dd-5a95-4415-af11-6871d6ff0262",
         "price": 2.50,
-        "name": "Coconut",
-        "description": "Cinnamon lovers - this is your blend! Two nutritional powerhouses ",
+        "name": "Linguiça Suína de Queijo mussarela",
+        "description": "Uma diferente e muito desejada Linguiça, contendo queijo que traz sabor e suculência.",
         "measure": "kg",
         "img": "http://placehold.it/500x400",
-        "categoryPath": "tipo3"
+        "categoryPath": "linguicas-recheadas"
+    },
+    {
+        "id": "7ef3b9dd-5a95-4415-af37-687116ff0262",
+        "price": 2.50,
+        "name": "Linguiça Suína com Azeitona e Pimenta Biquinho",
+        "description": "Possui azeitona e a famosa pimenta Biquinho, e ambos juntos dão um sabor excelente.",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "linguicas-recheadas"
+    },
+    {
+        "id": "7ef3b9dd-5a95-4415-ads7-6871d6f11262",
+        "price": 2.50,
+        "name": "Banha Suína na Lata",
+        "description": "A banha de porco é uma aliada poderosa na sua cozinha e possui diversos benefícios.",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "derivados-suinos"
+    },
+    {
+        "id": "7ef3b9dd-5a95-sss5-af37-6871d6ff0211",
+        "price": 2.50,
+        "name": "Carne Suína na Lata",
+        "description": "A carne suína na lata é bastante saborosa, sendo temperada com alho, sal e pimenta.",
+        "measure": "kg",
+        "img": "http://placehold.it/500x400",
+        "categoryPath": "derivados-suinos"
     }
 ]

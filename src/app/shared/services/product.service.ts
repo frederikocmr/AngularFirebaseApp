@@ -1,31 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http';
-import { Product } from '../models/product.model';
-import { CachingServiceBase } from './caching.service';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
-// tslint:disable-next-line:prefer-const
-let count = 0;
+import { Product } from '../models/product.model';
 
 @Injectable()
-export class ProductService extends CachingServiceBase {
+export class ProductService {
+    private productsCollection: AngularFirestoreCollection<Product>;
     private products: Observable<Product[]>;
 
-    public constructor(private http: Http) {
-        super();
-    }
+    public constructor(private afs: AngularFirestore) { }
 
     public all(): Observable<Product[]> {
-        return this.cache<Product[]>(() => this.products,
-            (val: Observable<Product[]>) => this.products = val,
-            () => this.http
-                .get('./assets/json/products.json')
-                .map((response) => response.json()
-                    .map((item) => {
-                        const model = new Product();
-                        model.updateFrom(item);
-                        return model;
-                    })));
-
+        this.productsCollection = this.afs.collection<Product>('products');
+        this.products = this.productsCollection.valueChanges();
+        return this.products;
     }
+
 }

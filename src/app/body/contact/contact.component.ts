@@ -12,6 +12,7 @@ import { ContactService } from './contact.service';
 export class ContactComponent implements OnInit {
   public contactForm: FormGroup;
   public errMsg = '';
+  public showMore = [false, false, false];
 
   constructor(private contactService: ContactService) { }
 
@@ -37,6 +38,11 @@ export class ContactComponent implements OnInit {
     } else {
       this.errMsg = 'Por favor, verifique os dados e tente novamente!';
     }
+  }
+
+  chShowMore(opt: number) {
+    this.showMore[opt] = !(this.showMore[opt]);
+    console.log(opt);
   }
 
 }

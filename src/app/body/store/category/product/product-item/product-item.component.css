@@ -71,7 +71,9 @@ p{
     box-shadow: 1px 2px 3px rgba(0,0,0,.625);
     font-weight: bold;
 }
-
+.prod-desc{
+    min-height: 90px;
+}
 
 
 

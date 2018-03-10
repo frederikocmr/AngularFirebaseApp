@@ -1,21 +1,29 @@
-import { Router, CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/take';
+
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private authService: AuthService, private router: Router) { }
+    constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        // return this.authService.isAuthenticated();
+    canActivate(
+        next: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot): Observable<boolean> {
 
-        if (this.authService.isAuthenticated()) {
-            return true;
-        }
-
-        this.router.navigate(['/entrar']); // com query params para mostrar mensagem de acesso somente logado
-        return false;
+        return this.afAuth.authState
+            .take(1)
+            .map(user => !!user)
+            .do(loggedIn => {
+                if (!loggedIn) {
+                    this.router.navigate(['/entrar']);
+                }
+            });
     }
 }
