@@ -7,21 +7,21 @@ export class CategoryService {
             'Linguiças Tradicionais',
             'Linguiças deliciosas temperadas com alho e sal, acompanhando pimenta ou não.',
             'linguicas-tradicionais',
-            '/assets/images/background/basn.jpg'
+            '/assets/images/background/tradicionais.JPG'
         ),
         new Category(
             2,
             'Linguiças Recheadas',
             'Linguiças de vários recheios, como pimenta Biquinho, queijo, jiló e azeitona.',
             'linguicas-recheadas',
-            '/assets/images/background/sausages.jpg'
+            '/assets/images/background/especiais.JPG'
         ),
         new Category(
             3,
             'Derivados Suínos na Lata',
             'Produtos como banha de porco na lata e carne suína de extremo sabor e qualidade.',
             'derivados-suinos',
-            '/assets/images/background/pork.jpg'
+            '/assets/images/background/derivados-suinos.JPG'
         )
     ];
 

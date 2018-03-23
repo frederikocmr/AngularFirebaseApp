@@ -1,23 +1,6 @@
 <div class="checkout">
   <div class="container-fluid bg-paper  animated fadeInDown">
 
-    <!-- 
- CADASTRAR "ESCREVA PARA NÓS" NO BANCO DE DADOS;
-
- CRIAR TRIGGERS PARA ENVIAR EMAIL QUANDO:
-  - USUÁRIO CRIA NOVA CONTA (envio usuario, bem vindo) ok
-  - CONFIRMAÇÃO NO CHECKOUT (envio para usuario e admin)
-  - CADASTRO NO FORM DO CONTATO (envio admin)
-  - MUDANÇA DE STATUS DA ENTREGA  (envio usuario)
-  
-  VERIFICAR INTEGRIDADE DAS FUNCIONALIDADES; 
-
-  ALTERAR FOTOS E TEXTOS.
-
-  IMPLEMENTAR RECUPERAÇÃO DE SENHA E 
-  VERIFICACAO DE EMAIL AO CADASTRAR (MSG SE NAO VERIFICADO)
--->
-
     <div class="first-container"></div>
     <div class="container-fluid bg-grey">
       <h2 class="text-center">Finalizar Compra</h2>
@@ -40,6 +23,17 @@
             <span *ngIf="!validInfo">
               <a [routerLink]="['/minha-conta', 'enderecos']">Clique aqui</a> para cadastrar um novo endereço!</span>
           </p>
+          <form *ngIf='showCitySelect' [formGroup]="confirmCityForm">
+            <p class="alert alert-warning">* CONFIRME A CIDADE</p>
+            <select formControlName="city_option" class="city_option form-control">
+              <option value="">Selecione...</option>
+              <option value="goiania">Goiânia</option>
+              <option value="apgoiania">Aparecida de Goiânia</option>
+              <option value="piracanjuba">Piracanjuba</option>
+              <option value="outra">Outra cidade</option>
+            </select>
+
+          </form>
         </div>
         <div class="col-xs-12 col-sm-3">
           <h4>Contato para Entrega</h4>

@@ -86,12 +86,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   public toCheckout(): void {
     if (this.authService.isAuthenticated()) {
-      // inserir aqui o validador de qtd itens
-      if (this.shoppingCartService.checkQuantity()) {
-        this.router.navigate(['/checkout']);
-      } else {
-        alert('Impossível continuar, pois a quantidade mínima para entrega é de 10 unidades.');
-      }
+      this.router.navigate(['/checkout']);
     } else {
       this.myModal2.open();
     }

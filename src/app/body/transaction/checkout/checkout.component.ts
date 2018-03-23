@@ -39,12 +39,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public optionChecked = false;
 
   public checkoutForm: FormGroup;
+  public showCitySelect: boolean;
+  public confirmCityForm: FormGroup;
 
   private productsString = '';
   private products: Product[];
   private cartSubscription: Subscription;
   private userSubs: Subscription;
   private deliverySubs: Subscription;
+  private deliveryOptionId: string;
 
   constructor(
     private productsService: ProductService,
@@ -59,6 +62,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.checkoutForm = new FormGroup(
       {
         'payment_option': new FormControl('Dinheiro')
+      }
+    );
+
+    this.confirmCityForm = new FormGroup(
+      {
+        'city_option': new FormControl('')
       }
     );
 
@@ -119,6 +128,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
       if (cart.deliveryOptionId) {
         this.optionChecked = true;
+        this.deliveryOptionId = cart.deliveryOptionId;
+        this.showCityConfirmation();
       }
     });
   }
@@ -135,23 +146,44 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     }
   }
 
+  public showCityConfirmation() {
+    if (this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
+      this.showCitySelect = true;
+    } else {
+      this.showCitySelect = false;
+    }
+  }
+
   public setDeliveryOption(option: DeliveryOption): void {
     this.shoppingCartService.setDeliveryOption(option);
+    this.deliveryOptionId = option.id;
     this.optionChecked = true;
     this.trService.setDeliveryOption(option.name);
+    this.showCityConfirmation();
   }
 
   public openModal(): void {
-    if (this.shoppingCartService.checkQuantity()) {
-      if (this.optionChecked) {
+    if (this.optionChecked) {
+      if (!this.shoppingCartService.checkQuantity() &&
+        this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
+        alert('IMPOSSÍVEL CONTINUAR: pois a quantidade mínima para entrega é de 10 unidades NO CASO DE FRETE AS SEXTAS.');
+
+      } else if (this.confirmCityForm.get('city_option').value === '' &&
+        this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
+        alert('IMPOSSÍVEL CONTINUAR: você deve confirmar a cidade (no novo campo abaixo do endereço) para entrega em domicílio!. ');
+
+      } else if (this.confirmCityForm.get('city_option').value === 'outra' &&
+        this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
+        alert('IMPOSSÍVEL CONTINUAR: atualmente fazemos entrega somente nas cidades de Goiânia' +
+          'Aparecida de Goiânia e Piracanjuba. \n Pedimos desculpas pelo transtorno! ');
+
+      } else {
         this.myModal.open();
         this.trService.setPayment(this.checkoutForm.get('payment_option').value);
         this.trService.setItensString(this.productsString);
-      } else {
-        alert('É necessário escolher um método de entrega antes de continuar');
       }
     } else {
-      alert('Impossível continuar, pois a quantidade mínima para entrega é de 10 unidades.');
+      alert('É necessário escolher um método de entrega antes de continuar');
     }
   }
 

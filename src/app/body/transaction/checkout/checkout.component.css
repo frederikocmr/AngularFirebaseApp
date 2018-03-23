@@ -83,6 +83,14 @@ hr{
 .warn-payment{
     font-size: 12px;
 }
+.alert-warning{
+    width: 190px;
+    padding: 0px;
+    margin-bottom: 4px;
+}
+.city_option{
+    width: 190px;
+}
 
 .btn{
     -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75) !important;
