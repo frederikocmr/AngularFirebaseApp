@@ -23,7 +23,7 @@ export class ContactService {
 
         userRef.set(form).
             then((ok) => {
-                console.log(ok);
+                alert('Mensagem enviada com sucesso!');
             })
             .catch((error) => {
                 console.log(error);

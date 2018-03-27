@@ -3,10 +3,24 @@
     margin: auto;
     min-height:200px;
     z-index: -1;
-    /* verificar: quando é mobile a barra do navbar está vindo só depois dessa img*/
+    -moz-box-shadow: inset 10px 10px 50px #fff;
+		-webkit-box-shadow: inset 10px 10px 50px #fff;
+		box-shadow: inset 10px 10px 50px #fff;
+}
+
+.carousel-caption{
+  color: #ffffff;
+  font-family: 'Frederick-Regular';
+  text-shadow: 2px 2px 1px #000000;
+  font-weight: 900;
 }
 
 h2 {
+  font-weight: bold;
+}
+
+h4 {
+  color:rgb(82, 77, 77);
   font-weight: bold;
 }
 
@@ -14,8 +28,6 @@ h2 {
   border-top: 2px solid #9d1e2e;
   font-family: 'Trebuchet MS';
 }
-
-/* Hide the carousel text when the screen is less than 600 pixels wide */
 @media (max-width: 600px) {
   .carousel-caption {
     display: none; 
@@ -83,6 +95,7 @@ figcaption {
 }
 
 .home2 {
+  box-shadow: inset 2px 3px 38px black;
   border-top: 1px solid #9d1e2e;
   position: relative;
   background: white url('/assets/images/background/bg-wood-ok.jpg') no-repeat center;
@@ -153,4 +166,8 @@ button:hover{
   border-top: 1px solid #ffffffe0;
   background: url('/assets/images/complement/white_top.png') repeat-x left top;
   
+}
+
+.panel {
+  box-shadow: 4px 3px 24px black;
 }

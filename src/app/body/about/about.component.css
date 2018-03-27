@@ -88,6 +88,7 @@ img{
 
 .first-image {
     padding: 2% 2% 0% 2%;
+    margin-top: 75px;
 }
 
 .first-container {
@@ -98,6 +99,17 @@ img{
     position: relative;
     top: 0px;
     background: url('/assets/images/complement/white_bottom.png') repeat-x left top;
+  }
+
+  .about_text{
+      padding-top: 10px;
+  }
+
+  h4 {
+    line-height: 1.6;
+    text-align: justify;
+    font-size: 20px;
+    text-shadow: none;
   }
 
   

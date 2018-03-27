@@ -1,3 +1,5 @@
+<div class="alt-container">
+</div>
 <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -8,18 +10,16 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item" [ngClass]="{active: carousel_active === 0}">
-      <img src="http://placehold.it/1300x500/fff" alt="Image" class="img-responsive animated fadeIn">
+      <img src="../../../assets/images/background/slide1.jpg" alt="Image" class="img-responsive animated fadeIn">
       <div class="carousel-caption">
-        <h3>Titulo 1</h3>
-        <p>Descrição 1</p>
+        <h3>Experimente nossa linguiça e conheça os diversos sabores!</h3>
       </div>
     </div>
 
     <div class="item" [ngClass]="{active: carousel_active === 1}">
-      <img src="//placehold.it/1300x500" alt="Image" class="img-responsive animated fadeIn">
+      <img src="../../../assets/images/background/slide2.jpg" alt="Image" class="img-responsive animated fadeIn">
       <div class="carousel-caption">
-        <h3>Titulo 2</h3>
-        <p>Descrição 2</p>
+        <h3>Uma ótima opção para servir várias pessoas!</h3>
       </div>
     </div>
   </div>
@@ -34,9 +34,10 @@
     <span class="sr-only">Proximo</span>
   </a>
 </div>
+<div class="first-container"></div>
 <div class="alt-container"></div>
 <div class="home2">
-  <div class="jumbotron" style="background: transparent; color: #9d1e2e; text-shadow: 5px 5px 5px black;">
+  <div class="jumbotron">
     <div class="container text-center animated fadeIn">
       <h1 class="animated zoomIn">A melhor linguiça da região</h1>
       <p class="animated zoomIn" style=" text-shadow: 5px 5px 5px black !important;">Experimente já a nossa linguiça, compre através de nossa loja virtual e tenha a linguiça em casa, acesse já!</p>
@@ -49,39 +50,42 @@
   </div>
 </div>
 
+
+
 <div class="first-container"></div>
 <div class="container text-center second-container">
   <br>
   <h2>Higiene e qualidade é a nossa marca!</h2>
   <div class="row" style="margin-bottom: 30px;margin-bottom: 30px;">
     <div class="col-sm-12">
-      <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. </h4>
+      <h4>Através dos diversos métodos de preparação das nossas linguiças, garantimos higiene e qualidade. Sendo assim, você
+        estará adquirindo uma linguiça de origem confiável.</h4>
+      <h4>Veja abaixo imagens de alguns de nossos produtos prontos para consumo... é de "dar água na boca"!</h4>
     </div>
   </div>
   <br>
   <div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="card ">
-        <img src="http://placehold.it/400x250" class="img-responsive" style="width:100%">
+        <img src="../../../assets/images/background/c.PNG" class="img-responsive" style="width:100%">
         <div class="card-container card-center" style="padding-top: 5px;">
-          <p>The Troll's tongue in Hardanger, Norway</p>
+          <p>Linguiça Suína Recheada com Jiló e Queijo</p>
         </div>
       </div>
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="card ">
-        <img src="http://placehold.it/400x250" class="img-responsive" style="width:100%">
+        <img src="../../../assets/images/background/a.jpg" class="img-responsive" style="width:100%">
         <div class="card-container card-center" style="padding-top: 5px;">
-          <p>The Troll's tongue in Hardanger, Norway</p>
+          <p>Linguiça Suína Tradicional preparada na brasa </p>
         </div>
       </div>
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="card ">
-        <img src="http://placehold.it/400x250" class="img-responsive" style="width:100%">
+        <img src="../../../assets/images/background/b.PNG" class="img-responsive" style="width:100%">
         <div class="card-container card-center" style="padding-top: 5px;">
-          <p>The Troll's tongue in Hardanger, Norway</p>
+          <p>Linguiça Suína acompanhada com farofa e limão</p>
         </div>
       </div>
     </div>
@@ -95,8 +99,12 @@
       </h4>
     </div>
     <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+      <div class="panel-body">Agora estamos fazendo encomenda pela
+        <a routerLink='/loja'>loja online
+        </a>, e as entregas podem ser feitas nas cidades de Piracanjuba, Goiânia e Aparecida de Goiânia apenas se o cliente
+        fizer encomenda de no mínimo 10 unidades. Em caso de menos unidades, o cliente deverá buscar na loja física,
+        <a routerLink='/contato'> clique aqui
+        </a> para saber onde estamos.</div>
     </div>
   </div>
 
