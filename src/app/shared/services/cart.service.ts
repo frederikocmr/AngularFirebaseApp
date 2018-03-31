@@ -111,9 +111,15 @@ export class CartService {
             });
     }
 
-    public checkQuantity(): boolean {
+    // public checkQuantity(): boolean {
+    //     const cart = this.retrieve();
+    //     const itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
+    //     return (itemCount >= 10);
+    // }
+
+    public checkPrice(): boolean {
         const cart = this.retrieve();
-        const itemCount = cart.items.map((x) => x.quantity).reduce((p, n) => p + n, 0);
-        return (itemCount >= 10);
+
+        return (cart.grossTotal >= 200);
     }
 }

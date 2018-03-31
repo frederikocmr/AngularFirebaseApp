@@ -1,8 +1,8 @@
 [
     {
         "id": "caa93bc4-d69a-4788-aff6-4a6fb538ace8",
-        "name": "Entrega as Sextas",
-        "description": "A entrega padrão é grátis e será feita apenas as sextas-feiras da semana.",
+        "name": "Entrega em até 4 dias úteis",
+        "description": "A entrega padrão (para compras acima de R$ 200) será feita em até 96 horas úteis após a confirmação do pedido.",
         "price": 0
     },
     {

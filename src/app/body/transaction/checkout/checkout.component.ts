@@ -164,17 +164,17 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   public openModal(): void {
     if (this.optionChecked) {
-      if (!this.shoppingCartService.checkQuantity() &&
+      if (!this.shoppingCartService.checkPrice() &&
         this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
-        alert('IMPOSSÍVEL CONTINUAR: pois a quantidade mínima para entrega é de 10 unidades NO CASO DE FRETE AS SEXTAS.');
+        alert('IMPOSSÍVEL CONTINUAR: \nPois a quantidade mínima para realizar a entrega é de R$ 200 em pedido!');
 
       } else if (this.confirmCityForm.get('city_option').value === '' &&
         this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
-        alert('IMPOSSÍVEL CONTINUAR: você deve confirmar a cidade (no novo campo abaixo do endereço) para entrega em domicílio!. ');
+        alert('IMPOSSÍVEL CONTINUAR: \nVocê deve confirmar a cidade (no novo campo abaixo do endereço) para entrega em domicílio!. ');
 
       } else if (this.confirmCityForm.get('city_option').value === 'outra' &&
         this.deliveryOptionId === 'caa93bc4-d69a-4788-aff6-4a6fb538ace8') {
-        alert('IMPOSSÍVEL CONTINUAR: atualmente fazemos entrega somente nas cidades de Goiânia' +
+        alert('IMPOSSÍVEL CONTINUAR: \nAtualmente fazemos entrega somente nas cidades de Goiânia' +
           'Aparecida de Goiânia e Piracanjuba. \n Pedimos desculpas pelo transtorno! ');
 
       } else {

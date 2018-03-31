@@ -21,70 +21,70 @@ const nodemailer = require('nodemailer');
 const gmailEmail = encodeURIComponent(functions.config().gmail.email);
 const gmailPassword = encodeURIComponent(functions.config().gmail.password);
 const mailTransport = nodemailer.createTransport(
-    `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
+  `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
 
 const APP_NAME = 'Linguiças Piracanjuba';
 const ADMIN_EMAIL = 'frederiko.cmr@gmail.com';
-const CC_EMAIL = 'linguicaspiracanjuba@gmail.com'
+const CC_EMAIL = 'linguicaspiracanjuba@hotmail.com'
 /* exports */
 
 exports.sendWelcomeEmail = functions.auth.user().onCreate(event => {
 
-    const user = event.data;
+  const user = event.data;
 
-    const email = user.email;
-    const displayName = (user.displayName ? user.displayName : '');
+  const email = user.email;
+  const displayName = (user.displayName ? user.displayName : '');
 
 
-    return sendWelcomeEmail(email, displayName);
+  return sendWelcomeEmail(email, displayName);
 });
 
 exports.sendByeEmail = functions.auth.user().onDelete(event => {
-    const user = event.data;
+  const user = event.data;
 
-    const email = user.email;
-    const displayName = user.displayName;
+  const email = user.email;
+  const displayName = user.displayName;
 
-    return sendGoodbyEmail(email, displayName);
+  return sendGoodbyEmail(email, displayName);
 });
 
 exports.sendContactEmail = functions.firestore.document('contactForms/{document=**}').onCreate(event => {
 
-    var values = event.data.data();
-    var email = ADMIN_EMAIL;
+  var values = event.data.data();
+  var email = ADMIN_EMAIL;
 
-    return sendContactedEmail(email, values);
+  return sendContactedEmail(email, values);
 });
 
 exports.sendNewOrderEmail = functions.firestore.document('orders/{document=**}').onCreate(event => {
 
-    var values = event.data.data();
-    var email = values.email;
+  var values = event.data.data();
+  var email = values.email;
 
-    return sendOrderEmails(email, values);
+  return sendOrderEmails(email, values);
 });
 
 exports.sendOrderStatusEmail = functions.firestore.document('orders/{document=**}').onUpdate(event => {
 
-    var values = event.data.data();
-    var email = values.email;
+  var values = event.data.data();
+  var email = values.email;
 
-    return sendOrderStatusEmailC(email, values);
+  return sendOrderStatusEmailC(email, values);
 });
 
 
 /* functions */
 
 function sendWelcomeEmail(email, displayName) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email
+  };
 
 
-    mailOptions.subject = `Seja bem vindo a nossa loja virtual ${APP_NAME}!`;
+  mailOptions.subject = `Seja bem vindo a nossa loja virtual ${APP_NAME}!`;
 
-    mailOptions.html = `
+  mailOptions.html = `
 <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
@@ -137,20 +137,20 @@ function sendWelcomeEmail(email, displayName) {
 </div>
   `;
 
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('New welcome email sent to:', email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New welcome email sent to:', email);
+  });
 }
 
 function sendGoodbyEmail(email, displayName) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email
+  };
 
 
-    mailOptions.subject = `Informação sobre sua conta no site ${APP_NAME}!`;
-    mailOptions.html = `
+  mailOptions.subject = `Informação sobre sua conta no site ${APP_NAME}!`;
+  mailOptions.html = `
 <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
@@ -202,20 +202,20 @@ function sendGoodbyEmail(email, displayName) {
 </div>
   `;
 
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('Account deletion confirmation email sent to:', email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Account deletion confirmation email sent to:', email);
+  });
 }
 
 function sendContactedEmail(email, values) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email + ", " + CC_EMAIL
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email + ", " + CC_EMAIL
+  };
 
 
-    mailOptions.subject = `Novo contato no site ${APP_NAME} - ${values.type}`;
-    mailOptions.html = `
+  mailOptions.subject = `Novo contato no site ${APP_NAME} - ${values.type}`;
+  mailOptions.html = `
 
 <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -251,26 +251,26 @@ function sendContactedEmail(email, values) {
   </table>
 </div>
   `;
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('New contacted email from:', values.email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New contacted email from:', values.email);
+  });
 }
 
 function sendOrderEmails(email, values) {
-    sendOrderEmail(ADMIN_EMAIL, values);
-    sendOrderConfirmationEmail(email, values);
-    return 0;
+  sendOrderEmail(ADMIN_EMAIL, values);
+  sendOrderConfirmationEmail(email, values);
+  return 0;
 }
 
 function sendOrderEmail(email, values) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email + ", " + CC_EMAIL
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email + ", " + CC_EMAIL
+  };
 
 
-    mailOptions.subject = `Novo pedido realizado no site - ${APP_NAME}`;
-    mailOptions.html = `
+  mailOptions.subject = `Novo pedido realizado no site - ${APP_NAME}`;
+  mailOptions.html = `
   <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
@@ -314,20 +314,20 @@ function sendOrderEmail(email, values) {
 </div>
 `;
 
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('New order email from:', values.email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New order email from:', values.email);
+  });
 }
 
 function sendOrderConfirmationEmail(email, values) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email
+  };
 
 
-    mailOptions.subject = `Pedido realizado com sucesso! - ${APP_NAME}`;
-    mailOptions.html = `
+  mailOptions.subject = `Pedido realizado com sucesso! - ${APP_NAME}`;
+  mailOptions.html = `
  <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
@@ -386,20 +386,20 @@ function sendOrderConfirmationEmail(email, values) {
   </table>
 </div>`;
 
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('New order confirmation email from:', values.email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New order confirmation email from:', values.email);
+  });
 }
 
 function sendOrderStatusEmailC(email, values) {
-    const mailOptions = {
-        from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
-        to: email
-    };
+  const mailOptions = {
+    from: '"Linguiças Piracanjuba" <suporte.linguicaspiracanjuba@gmail.com>',
+    to: email
+  };
 
-    const statusName = ((values.status == 1 ? 'Processando' : (values.status == 2 ? 'Confirmado' : (values.status == 3 ? 'Em trânsito' : (values.status == 4 ? 'Entregue' : 'Cancelado')))));
-    mailOptions.subject = `Pedido ${statusName}! - ${APP_NAME}`;
-    mailOptions.html = `
+  const statusName = ((values.status == 1 ? 'Processando' : (values.status == 2 ? 'Confirmado' : (values.status == 3 ? 'Em trânsito' : (values.status == 4 ? 'Entregue' : 'Cancelado')))));
+  mailOptions.subject = `Pedido ${statusName}! - ${APP_NAME}`;
+  mailOptions.html = `
 <div style="margin:0;padding:0" marginheight="0" marginwidth="0" style="border: 1px dashed #af272d">
   <table border="0" cellspacing="0" cellpadding="0" width="100%">
     <tbody>
@@ -456,7 +456,7 @@ function sendOrderStatusEmailC(email, values) {
   </table>
 </div>`;
 
-    return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('New order status email to:', values.email);
-    });
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('New order status email to:', values.email);
+  });
 }
