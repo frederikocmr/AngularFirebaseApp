@@ -55,10 +55,8 @@ export class UIService {
     // https://firebase.google.com/docs/auth/admin/errors?hl=pt-br
 
     public printErrorByCode(code: string): string {
-        console.log(code);
         code = code.split('/')[1];
         if (this.params[code]) {
-            console.log(this.params[code]);
             return (this.params[code]);
         } else {
             return ('Ocorreu algum erro desconhecido! \n Codigo erro: ' + code);

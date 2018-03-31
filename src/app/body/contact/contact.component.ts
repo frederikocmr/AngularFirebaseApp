@@ -42,7 +42,6 @@ export class ContactComponent implements OnInit {
 
   chShowMore(opt: number) {
     this.showMore[opt] = !(this.showMore[opt]);
-    console.log(opt);
   }
 
 }
